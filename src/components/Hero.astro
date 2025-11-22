@@ -1,0 +1,81 @@
+---
+import VideoEmbed from "./VideoEmbed.astro";
+import { motion } from "motion/react";
+---
+
+<section class="relative bg-primary text-white overflow-hidden">
+  <!-- Background Pattern -->
+  <div
+    class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"
+  >
+  </div>
+
+  <div
+    class="container mx-auto px-4 py-20 md:py-32 flex flex-col md:flex-row items-center gap-12 relative z-10"
+  >
+    <div class="md:w-1/2 space-y-6">
+      <div
+        class="inline-block bg-accent/20 text-accent-hover px-4 py-1 rounded-full text-sm font-semibold tracking-wide uppercase mb-2 border border-accent/20"
+      >
+        Especialistas en ART y Laboral
+      </div>
+      <h1 class="text-4xl md:text-6xl font-serif font-bold leading-tight">
+        Defendemos sus derechos <span class="text-accent">laborales</span> con experiencia.
+      </h1>
+      <p class="text-lg text-gray-300 max-w-lg">
+        Si sufrió un accidente de trabajo o padece una enfermedad profesional,
+        nuestro equipo de expertos le garantiza la máxima indemnización.
+        Consulta gratuita y confidencial.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 pt-4">
+        <a
+          href="/contacto"
+          class="bg-accent hover:bg-accent-hover text-white px-8 py-4 rounded-md font-bold text-center transition-all shadow-lg hover:shadow-accent/50"
+        >
+          Solicitar Consulta Gratuita
+        </a>
+        <a
+          href="/servicios"
+          class="bg-transparent border border-white/30 hover:bg-white/10 text-white px-8 py-4 rounded-md font-medium text-center transition-colors"
+        >
+          Nuestros Servicios
+        </a>
+      </div>
+
+      <div class="pt-8 flex items-center gap-8 text-sm text-gray-400">
+        <div class="flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 text-accent"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clip-rule="evenodd"></path>
+          </svg>
+          <span>Sin gastos adelantados</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 text-accent"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clip-rule="evenodd"></path>
+          </svg>
+          <span>Atención en todo el país</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="md:w-1/2 w-full">
+      <VideoEmbed />
+    </div>
+  </div>
+</section>

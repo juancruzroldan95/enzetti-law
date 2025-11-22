@@ -1,0 +1,72 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-primary text-white py-12">
+  <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div>
+      <h3 class="text-xl font-serif font-bold mb-4">Estudio Enzetti</h3>
+      <p class="text-gray-300 mb-4">
+        Especialistas en accidentes laborales y enfermedades profesionales.
+        Defendemos tus derechos con compromiso y experiencia.
+      </p>
+    </div>
+
+    <div>
+      <h4 class="text-lg font-bold mb-4">Contacto</h4>
+      <ul class="space-y-2 text-gray-300">
+        <li>Av. Corrientes 1234, Piso 5, CABA</li>
+        <li>Buenos Aires, Argentina</li>
+        <li>
+          <a
+            href="tel:+541112345678"
+            class="hover:text-accent transition-colors">+54 11 1234-5678</a
+          >
+        </li>
+        <li>
+          <a
+            href="mailto:contacto@estudioenzetti.com.ar"
+            class="hover:text-accent transition-colors"
+            >contacto@estudioenzetti.com.ar</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="text-lg font-bold mb-4">Enlaces Rápidos</h4>
+      <ul class="space-y-2">
+        <li>
+          <a
+            href="/servicios"
+            class="text-gray-300 hover:text-accent transition-colors"
+            >Servicios</a>
+        </li>
+        <li>
+          <a
+            href="/nosotros"
+            class="text-gray-300 hover:text-accent transition-colors"
+            >Sobre Nosotros</a>
+        </li>
+        <li>
+          <a
+            href="/preguntas-frecuentes"
+            class="text-gray-300 hover:text-accent transition-colors"
+            >Preguntas Frecuentes</a>
+        </li>
+        <li>
+          <a
+            href="/contacto"
+            class="text-gray-300 hover:text-accent transition-colors"
+            >Solicitar Consulta</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div
+    class="container mx-auto px-4 mt-8 pt-8 border-t border-gray-700 text-center text-gray-400 text-sm"
+  >
+    <p>&copy; {currentYear} Estudio Enzetti. Todos los derechos reservados.</p>
+  </div>
+</footer>

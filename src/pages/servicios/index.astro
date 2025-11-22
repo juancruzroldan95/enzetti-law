@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ServicesGrid from "../../components/ServicesGrid.astro";
+import ContactForm from "../../components/ContactForm.astro";
+
+const title = "Nuestros Servicios | Estudio Enzetti";
+const description =
+  "Especialistas en Accidentes Laborales, Enfermedades Profesionales, Rechazos de ART y más. Asesoramiento legal gratuito.";
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="bg-primary text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-serif font-bold mb-4">
+        Nuestros Servicios
+      </h1>
+      <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+        Defensa integral para el trabajador. Conocemos sus derechos y sabemos
+        cómo hacerlos valer.
+      </p>
+    </div>
+  </section>
+
+  <ServicesGrid />
+
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row gap-12 items-center">
+        <div class="md:w-1/2">
+          <h2 class="text-3xl font-serif font-bold text-primary mb-6">
+            ¿No encuentra lo que busca?
+          </h2>
+          <p class="text-gray-600 mb-4">
+            El derecho laboral es amplio y cada caso es único. Si su situación
+            no encuadra exactamente en los servicios listados, no dude en
+            consultarnos.
+          </p>
+          <p class="text-gray-600 mb-4">
+            Analizamos la viabilidad de su reclamo sin costo alguno. Si hubo un
+            daño en ocasión del trabajo, es muy probable que le corresponda una
+            indemnización.
+          </p>
+          <a
+            href="/contacto"
+            class="inline-block bg-accent hover:bg-accent-hover text-white px-8 py-3 rounded-md font-bold transition-colors mt-4"
+          >
+            Contactar Ahora
+          </a>
+        </div>
+        <div class="md:w-1/2">
+          <img
+            src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80"
+            alt="Abogado trabajando"
+            class="rounded-xl shadow-lg"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-serif font-bold text-primary mb-8">
+        Consulta Gratuita
+      </h2>
+      <div class="max-w-2xl mx-auto">
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

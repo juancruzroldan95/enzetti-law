@@ -1,0 +1,54 @@
+---
+interface Props {
+  videoId?: string; // YouTube ID or similar
+  title?: string;
+}
+
+const { videoId = "dQw4w9WgXcQ", title = "Video Institucional" } = Astro.props;
+---
+
+<div
+  class="relative w-full aspect-video rounded-xl overflow-hidden shadow-2xl bg-black group"
+>
+  <!-- Placeholder Image / Overlay -->
+  <div
+    class="absolute inset-0 flex items-center justify-center bg-primary/20 group-hover:bg-primary/10 transition-colors z-10 pointer-events-none"
+  >
+    <div
+      class="w-16 h-16 bg-accent rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-8 w-8 text-white ml-1"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+          clip-rule="evenodd"></path>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Actual Embed (Using a placeholder image for now to avoid heavy iframe load on dev, but structure for iframe is here) -->
+  <!-- In production, replace the img with the iframe below -->
+  <img
+    src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
+    alt={title}
+    class="w-full h-full object-cover"
+  />
+
+  <!-- 
+    <iframe 
+        width="100%" 
+        height="100%" 
+        src={`https://www.youtube.com/embed/${videoId}`} 
+        title={title} 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen
+        class="absolute inset-0 w-full h-full"
+    ></iframe> 
+    -->
+</div>

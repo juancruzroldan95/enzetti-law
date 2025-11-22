@@ -1,0 +1,105 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactForm from "../components/ContactForm.astro";
+
+const title = "Nosotros | Estudio Enzetti";
+const description =
+  "Conozca al equipo de abogados especialistas en ART y derecho laboral del Estudio Enzetti.";
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="bg-primary text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-serif font-bold mb-4">
+        Sobre Nosotros
+      </h1>
+      <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+        Compromiso, ética y resultados en la defensa de los derechos del
+        trabajador.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row gap-12 items-center mb-20">
+        <div class="md:w-1/2">
+          <img
+            src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80"
+            alt="Sala de reuniones Estudio Enzetti"
+            class="rounded-xl shadow-lg"
+          />
+        </div>
+        <div class="md:w-1/2">
+          <h2 class="text-3xl font-serif font-bold text-primary mb-6">
+            Nuestra Historia
+          </h2>
+          <p class="text-gray-600 mb-4">
+            Fundado en 2005, el Estudio Enzetti nació con una misión clara:
+            equilibrar la balanza entre los trabajadores y las grandes
+            aseguradoras de riesgos del trabajo.
+          </p>
+          <p class="text-gray-600 mb-4">
+            A lo largo de los años, hemos representado a miles de trabajadores
+            en Buenos Aires, logrando sentencias ejemplares y asegurando que
+            cada cliente reciba la indemnización justa que le corresponde por
+            ley.
+          </p>
+          <p class="text-gray-600">
+            Nos especializamos únicamente en la parte actora (el trabajador), lo
+            que nos permite mantener una independencia total y un compromiso
+            inquebrantable con sus intereses.
+          </p>
+        </div>
+      </div>
+
+      <div class="mb-20">
+        <h2
+          class="text-3xl font-serif font-bold text-primary mb-12 text-center"
+        >
+          Nuestros Valores
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div
+            class="bg-gray-50 p-8 rounded-xl border-t-4 border-accent text-center"
+          >
+            <h3 class="text-xl font-bold text-primary mb-4">Transparencia</h3>
+            <p class="text-gray-600">
+              Hablamos claro. Sin tecnicismos innecesarios. Usted sabrá siempre
+              el estado real de su causa.
+            </p>
+          </div>
+          <div
+            class="bg-gray-50 p-8 rounded-xl border-t-4 border-accent text-center"
+          >
+            <h3 class="text-xl font-bold text-primary mb-4">Agilidad</h3>
+            <p class="text-gray-600">
+              Sabemos que su tiempo vale. Trabajamos para obtener resultados en
+              el menor tiempo posible.
+            </p>
+          </div>
+          <div
+            class="bg-gray-50 p-8 rounded-xl border-t-4 border-accent text-center"
+          >
+            <h3 class="text-xl font-bold text-primary mb-4">Empatía</h3>
+            <p class="text-gray-600">
+              Entendemos que detrás de cada expediente hay una persona y una
+              familia que necesita respuestas.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-serif font-bold text-primary mb-8">
+        ¿Listo para defender sus derechos?
+      </h2>
+      <div class="max-w-2xl mx-auto">
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
