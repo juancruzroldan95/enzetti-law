@@ -1,5 +1,5 @@
 {
-  "name": "zany-zero",
+  "name": "enzetti-law",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.16.0"
+    "astro": "^5.16.0",
+    "motion": "^12.23.24"
   }
 }
