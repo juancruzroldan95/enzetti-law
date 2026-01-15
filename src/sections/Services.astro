@@ -1,0 +1,86 @@
+---
+const SERVICES = [
+  {
+    id: 1,
+    title: "Accidentes de Trabajo",
+    description:
+      "Reclamamos la indemnización que merecés tras lesiones sufridas en el ámbito laboral. Te asistimos en cada etapa del proceso.",
+    image:
+      "https://images.unsplash.com/photo-1530099486328-e021101a494a?w=600&h=400&fit=crop",
+  },
+  {
+    id: 2,
+    title: "Enfermedades Profesionales",
+    description:
+      "Te ayudamos a obtener lo justo por dolencias como hernias, tendinitis u otras lesiones relacionadas al esfuerzo laboral.",
+    image:
+      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop",
+  },
+  {
+    id: 3,
+    title: "Accidentes de Tránsito",
+    description:
+      "Gestionamos tu indemnización por lesiones, daños materiales y perjuicios sufridos en cualquier accidente vial.",
+    image:
+      "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600&h=400&fit=crop",
+  },
+];
+---
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+  {/* Header */}
+  <div class="text-center max-w-3xl mx-auto mb-16">
+    <h2 class="text-sm font-bold text-accent uppercase tracking-wider mb-3">
+      Áreas de Práctica
+    </h2>
+    <h3 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+      ¿En qué te podemos ayudar?
+    </h3>
+    <p class="text-lg text-gray-600">
+      Especializados en defender tus derechos y obtener la máxima indemnización
+    </p>
+  </div>
+
+  {/* Services Grid */}
+  <div class="grid md:grid-cols-3 gap-8">
+    {
+      SERVICES.map((service) => {
+        return (
+          <div class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden">
+            {/* Image */}
+            <div class="relative h-56 overflow-hidden">
+              <img
+                src={service.image}
+                alt={service.title}
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            </div>
+
+            {/* Content */}
+            <div class="p-6 space-y-4">
+              <h4 class="text-2xl font-bold text-primary group-hover:text-accent transition-colors duration-300">
+                {service.title}
+              </h4>
+              <p class="text-gray-600 leading-relaxed">{service.description}</p>
+              {/* <a
+                href="https://wa.me/5491143711602"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center text-accent hover:text-accent-hover font-semibold transition-colors group/btn"
+              >
+                Consulta sin cargo
+                <span class="ml-2 group-hover/btn:translate-x-1 transition-transform">
+                  ➡️
+                </span>
+              </a> */}
+            </div>
+
+            {/* Hover border effect */}
+            <div class="absolute inset-0 border-2 border-transparent group-hover:border-accent/20 rounded-2xl transition-colors duration-300" />
+          </div>
+        );
+      })
+    }
+  </div>
+</div>

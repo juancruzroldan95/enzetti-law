@@ -6,7 +6,7 @@ export const GET = async () => {
     JSON.stringify({
       followers: "12.5k",
       posts: 342,
-      username: "@estudioenzetti"
+      username: "@abogadosart_"
     }),
     {
       status: 200,

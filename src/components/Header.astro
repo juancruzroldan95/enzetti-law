@@ -1,25 +1,34 @@
 ---
+import { Image } from "astro:assets";
+import logo from "../assets/logo.webp";
+
 const navItems = [
-  { name: "Inicio", href: "/" },
-  { name: "Nosotros", href: "/nosotros" },
-  { name: "Servicios", href: "/servicios" },
-  { name: "Preguntas Frecuentes", href: "/preguntas-frecuentes" },
-  { name: "Contacto", href: "/contacto" },
+  { name: "Nosotros", href: "#nosotros" },
+  { name: "Servicios", href: "#servicios" },
+  { name: "Proceso", href: "#proceso" },
+  { name: "Reseñas", href: "#resenas" },
 ];
 ---
 
-<header class="bg-white shadow-md sticky top-0 z-50">
-  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-    <a href="/" class="text-2xl font-serif font-bold text-primary">
-      Estudio Enzetti
+<header class="bg-white backdrop-blur-md shadow-sm sticky top-0 z-50">
+  <div
+    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center"
+  >
+    <a href="#inicio" class="flex items-center">
+      <Image
+        src={logo}
+        alt="Estudio Enzetti"
+        class="h-15 w-auto"
+        quality="max"
+      />
     </a>
 
-    <nav class="hidden md:flex space-x-8">
+    <nav class="hidden md:flex space-x-6 lg:space-x-8">
       {
         navItems.map((item) => (
           <a
             href={item.href}
-            class="text-primary-light hover:text-accent transition-colors font-medium"
+            class="text-primary hover:text-accent transition-colors font-medium text-sm lg:text-base"
           >
             {item.name}
           </a>
@@ -27,28 +36,32 @@ const navItems = [
       }
     </nav>
 
-    <a
-      href="/contacto"
-      class="hidden md:inline-block bg-accent hover:bg-accent-hover text-white px-6 py-2 rounded-md font-medium transition-colors"
-    >
-      Consulta Gratuita
-    </a>
-
-    <!-- Mobile Menu Button (Placeholder for interactivity) -->
-    <button class="md:hidden text-primary" aria-label="Menu">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
+    <div class="flex items-center space-x-4">
+      <a
+        href="https://wa.me/5491143711602"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden sm:inline-block bg-accent hover:bg-accent-hover text-white px-5 py-2 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 text-sm lg:text-base"
       >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg>
-    </button>
+        Consulta Gratuita
+      </a>
+
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden text-primary p-2" aria-label="Menu">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
   </div>
 </header>

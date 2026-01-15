@@ -1,72 +1,165 @@
 ---
+import { Image } from "astro:assets";
+import logoBlack from "../assets/logo-black.png";
+import Phone from "../icons/Phone.astro";
+import WhatsApp from "../icons/WhatsApp.astro";
+import Mail from "../icons/Mail.astro";
+import MapPin from "../icons/MapPin.astro";
+import Instagram from "../icons/Instagram.astro";
+import TikTok from "../icons/TikTok.astro";
+
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-primary text-white py-12">
-  <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-    <div>
-      <h3 class="text-xl font-serif font-bold mb-4">Estudio Enzetti</h3>
-      <p class="text-gray-300 mb-4">
-        Especialistas en accidentes laborales y enfermedades profesionales.
-        Defendemos tus derechos con compromiso y experiencia.
+<footer id="contacto" class="bg-black text-white border-t border-zinc-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+      {/* Brand Column */}
+      <div class="space-y-6">
+        <Image
+          src={logoBlack}
+          alt="Estudio Enzetti"
+          class="h-12 w-auto"
+          quality="max"
+        />
+        <p class="text-zinc-400 text-sm leading-relaxed max-w-xs">
+          Excelencia jurídica con más de 30 años de trayectoria defendiendo los
+          derechos de los trabajadores en todo el país.
+        </p>
+      </div>
+
+      {/* Contact Section */}
+      <div class="space-y-6">
+        <h4 class="text-white font-bold text-lg flex items-center gap-2">
+          Contacto
+          <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+        </h4>
+        <div class="space-y-4">
+          <a
+            href="tel:+541143711602"
+            class="group flex items-center gap-4 text-zinc-400 hover:text-white transition-colors duration-300"
+          >
+            <div
+              class="w-10 h-10 rounded-lg bg-zinc-900 flex items-center justify-center group-hover:bg-accent/10 group-hover:text-accent transition-all"
+            >
+              <Phone class="w-5 h-5" />
+            </div>
+            <div class="text-sm">
+              <p>(011) 4371-1602</p>
+            </div>
+          </a>
+          <a
+            href="https://wa.me/5491143711602"
+            target="_blank"
+            class="group flex items-center gap-4 text-zinc-400 hover:text-white transition-colors duration-300"
+          >
+            <div
+              class="w-10 h-10 rounded-lg bg-zinc-900 flex items-center justify-center group-hover:bg-green-500/10 group-hover:text-green-500 transition-all"
+            >
+              <WhatsApp class="w-5 h-5" />
+            </div>
+            <div class="text-sm">
+              <p>+54 9 11 4371-1602</p>
+            </div>
+          </a>
+          <a
+            href="mailto:ple@estudioenzetti.com.ar"
+            class="group flex items-center gap-4 text-zinc-400 hover:text-white transition-colors duration-300"
+          >
+            <div
+              class="w-10 h-10 rounded-lg bg-zinc-900 flex items-center justify-center group-hover:bg-accent/10 group-hover:text-accent transition-all"
+            >
+              <Mail class="w-5 h-5" />
+            </div>
+            <div class="text-sm">ple@estudioenzetti.com.ar</div>
+          </a>
+        </div>
+      </div>
+
+      {/* Location Section */}
+      <div class="space-y-6">
+        <h4 class="text-white font-bold text-lg flex items-center gap-2">
+          Ubicación
+          <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+        </h4>
+        <div class="space-y-4">
+          <div class="flex items-start gap-4">
+            <div
+              class="w-10 h-10 rounded-lg bg-zinc-900 flex items-center justify-center text-accent"
+            >
+              <MapPin class="w-5 h-5" />
+            </div>
+            <div class="text-sm text-zinc-400 leading-relaxed">
+              <p class="text-white font-medium">CABA, Buenos Aires</p>
+              <p>Lavalle 1710 - Piso 2 Of. 3</p>
+              <p class="text-zinc-500 text-xs mt-1">
+                Lunes a Viernes: 09:00 - 18:00 hs
+              </p>
+            </div>
+          </div>
+          <a
+            href="https://maps.app.goo.gl/..."
+            target="_blank"
+            class="inline-block text-accent hover:text-accent-light text-sm font-semibold transition-colors pt-2"
+          >
+            Cómo llegar →
+          </a>
+        </div>
+      </div>
+
+      {/* Social Media Section */}
+      <div class="space-y-6">
+        <h4 class="text-white font-bold text-lg flex items-center gap-2">
+          Redes Sociales
+          <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+        </h4>
+        <p class="text-zinc-400 text-sm leading-relaxed">
+          Seguinos en nuestras redes para estar al tanto de las últimas
+          novedades y casos de éxito.
+        </p>
+        <div class="flex flex-col gap-3">
+          <a
+            href="https://www.instagram.com/abogadosart_/"
+            target="_blank"
+            class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-all duration-300"
+          >
+            <div
+              class="w-10 h-10 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center group-hover:bg-gradient-to-tr group-hover:from-purple-600 group-hover:to-orange-500 group-hover:border-transparent transition-all"
+            >
+              <Instagram class="w-5 h-5 text-white" />
+            </div>
+            <span class="text-sm font-medium">Instagram</span>
+          </a>
+          <a
+            href="https://www.tiktok.com/@abogadosart_"
+            target="_blank"
+            class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-all duration-300"
+          >
+            <div
+              class="w-10 h-10 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center group-hover:bg-white group-hover:text-black group-hover:border-transparent transition-all"
+            >
+              <TikTok class="w-5 h-5" />
+            </div>
+            <span class="text-sm font-medium">TikTok</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    {/* Bottom Bar */}
+    <div
+      class="mt-20 pt-8 border-t border-zinc-900 flex justify-center items-center"
+    >
+      <p class="text-zinc-500 text-xs text-center">
+        © {currentYear} Estudio Jurídico Enzetti | Hecho por
+        <a
+          href="https://jcroldan.dev"
+          target="_blank"
+          class="hover:text-accent transition-colors font-medium"
+        >
+          jcroldan.dev</a
+        >
       </p>
     </div>
-
-    <div>
-      <h4 class="text-lg font-bold mb-4">Contacto</h4>
-      <ul class="space-y-2 text-gray-300">
-        <li>Av. Corrientes 1234, Piso 5, CABA</li>
-        <li>Buenos Aires, Argentina</li>
-        <li>
-          <a
-            href="tel:+541112345678"
-            class="hover:text-accent transition-colors">+54 11 1234-5678</a
-          >
-        </li>
-        <li>
-          <a
-            href="mailto:contacto@estudioenzetti.com.ar"
-            class="hover:text-accent transition-colors"
-            >contacto@estudioenzetti.com.ar</a
-          >
-        </li>
-      </ul>
-    </div>
-
-    <div>
-      <h4 class="text-lg font-bold mb-4">Enlaces Rápidos</h4>
-      <ul class="space-y-2">
-        <li>
-          <a
-            href="/servicios"
-            class="text-gray-300 hover:text-accent transition-colors"
-            >Servicios</a>
-        </li>
-        <li>
-          <a
-            href="/nosotros"
-            class="text-gray-300 hover:text-accent transition-colors"
-            >Sobre Nosotros</a>
-        </li>
-        <li>
-          <a
-            href="/preguntas-frecuentes"
-            class="text-gray-300 hover:text-accent transition-colors"
-            >Preguntas Frecuentes</a>
-        </li>
-        <li>
-          <a
-            href="/contacto"
-            class="text-gray-300 hover:text-accent transition-colors"
-            >Solicitar Consulta</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <div
-    class="container mx-auto px-4 mt-8 pt-8 border-t border-gray-700 text-center text-gray-400 text-sm"
-  >
-    <p>&copy; {currentYear} Estudio Enzetti. Todos los derechos reservados.</p>
   </div>
 </footer>

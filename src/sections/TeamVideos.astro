@@ -1,0 +1,104 @@
+---
+const VIDEOS = [
+  {
+    id: 1,
+    title: "Cómo trabajamos en Enzetti",
+    thumbnail:
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=700&fit=crop",
+    duration: "0:45",
+    views: 1234,
+    author: "María - Secretaria",
+    video_url: "#",
+  },
+  {
+    id: 2,
+    title: "Tu primera consulta",
+    thumbnail:
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=700&fit=crop",
+    duration: "1:12",
+    views: 2341,
+    author: "Sofía - Asistente Legal",
+    video_url: "#",
+  },
+  {
+    id: 3,
+    title: "Proceso de tu caso",
+    thumbnail:
+      "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=700&fit=crop",
+    duration: "0:58",
+    views: 1876,
+    author: "Laura - Coordinadora",
+    video_url: "#",
+  },
+  {
+    id: 4,
+    title: "Nuestro compromiso",
+    thumbnail:
+      "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=400&h=700&fit=crop",
+    duration: "1:05",
+    views: 3102,
+    author: "Ana - Abogada",
+    video_url: "#",
+  },
+];
+---
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+  {/* Header */}
+  <div class="text-center max-w-3xl mx-auto mb-16">
+    <h2 class="text-sm font-bold text-accent uppercase tracking-wider mb-3">
+      Nuestro Equipo
+    </h2>
+    <h3 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+      Conocé cómo trabajamos
+    </h3>
+    <p class="text-lg text-gray-600">
+      Nuestro equipo te cuenta el proceso y compromiso que tenemos con cada caso
+    </p>
+  </div>
+
+  {/* Videos Grid - Instagram style */}
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+    {
+      VIDEOS.map((video) => (
+        <div class="relative group cursor-pointer">
+          {/* Video Container - Instagram format (9:16 ratio) */}
+          <div class="relative aspect-[9/16] rounded-2xl overflow-hidden shadow-lg">
+            <img
+              src={video.thumbnail}
+              alt={video.title}
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+
+            {/* Dark overlay */}
+            <div class="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-300" />
+
+            {/* Play button */}
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-xl text-accent text-2xl">
+                ▶️
+              </div>
+            </div>
+
+            {/* Duration badge */}
+            <div class="absolute top-3 right-3 bg-black/70 backdrop-blur-sm text-white text-xs font-semibold px-2 py-1 rounded">
+              {video.duration}
+            </div>
+
+            {/* Views badge */}
+            <div class="absolute top-3 left-3 bg-black/70 backdrop-blur-sm text-white text-xs font-semibold px-2 py-1 rounded flex items-center space-x-1">
+              <span>👁️</span>
+              <span>{video.views.toLocaleString()}</span>
+            </div>
+
+            {/* Info overlay on hover */}
+            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <p class="text-white font-bold text-sm mb-1">{video.title}</p>
+              <p class="text-white/80 text-xs">{video.author}</p>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>

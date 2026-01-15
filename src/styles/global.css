@@ -1,25 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  /* Enzetti Brand Colors */
-  --color-primary: #0f172a;
-  /* Slate 900 */
-  --color-primary-light: #334155;
-  /* Slate 700 */
+  /* Estudio Enzetti Brand Colors */
 
-  --color-accent: #c2410c;
-  /* Orange 700 */
-  --color-accent-hover: #9a3412;
-  /* Orange 800 */
+  --color-primary: var(--color-zinc-600);
+  --color-primary-light: var(--color-zinc-500);
+  --color-primary-dark: var(--color-zinc-700);
 
-  --color-background: #f8fafc;
-  /* Slate 50 */
-  --color-surface: #ffffff;
+  --color-accent: var(--color-red-600);
+  --color-accent-light: var(--color-red-400);
+  --color-accent-dark: var(--color-red-700);
+
+  --color-background: var(--color-slate-50);
+  --color-surface: var(--color-white);
 
   /* Fonts */
   --font-sans: "Inter", sans-serif;
-  --font-serif: "Playfair Display", serif;
 }
 
 @layer base {
@@ -37,6 +34,6 @@
   h4,
   h5,
   h6 {
-    @apply font-serif;
+    @apply font-sans;
   }
 }

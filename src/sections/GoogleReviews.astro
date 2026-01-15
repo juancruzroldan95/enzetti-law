@@ -1,0 +1,155 @@
+---
+const googleReviews = {
+  rating: 5.0,
+  total_reviews: 320,
+  reviews: [
+    {
+      id: 1,
+      author: "Joaquin Alonso",
+      rating: 5,
+      text: "Me solucionaron la vida! Tuve un accidente en mi trabajo y la aseguradora no me quería pagar. Terminé cobrando varios millones. Lo mínimo que se merecen es esta reseña. ¡Gracias!",
+      date: "2024-12-15",
+      avatar: "https://i.pravatar.cc/150?img=12",
+    },
+    {
+      id: 2,
+      author: "Claudia Villanueva",
+      rating: 5,
+      text: "Asesoramiento eficiente y gran responsabilidad por parte de cada uno de los integrantes del estudio. MUY RECOMENDABLE.",
+      date: "2024-11-28",
+      avatar: "https://i.pravatar.cc/150?img=45",
+    },
+    {
+      id: 3,
+      author: "Natanael Alfonso",
+      rating: 5,
+      text: "Muy recomendable y super confiable sacaron el caso en menos de 4 meses personas muy amables siempre en la atención 100 de 100",
+      date: "2024-11-10",
+      avatar: "https://i.pravatar.cc/150?img=33",
+    },
+    {
+      id: 4,
+      author: "Daniel Ayala",
+      rating: 5,
+      text: "La verdad 10 puntos en todo !!! Asesoramiento, rapidez .. ellos se encargaron de todo, muy atentos !!! 100 % recomendables",
+      date: "2024-10-22",
+      avatar: "https://i.pravatar.cc/150?img=68",
+    },
+    {
+      id: 5,
+      author: "Madkrane H.L",
+      rating: 5,
+      text: "Excelente Estudio Jurídico. Equipo responsable y muy comprometido. Resultados 100% garantizados!!! Muchas gracias. Sin duda los vuelvo a consultar. Que sigan los éxitos!!",
+      date: "2024-10-05",
+      avatar: "https://i.pravatar.cc/150?img=51",
+    },
+    {
+      id: 6,
+      author: "Pablo Cesar Lastra",
+      rating: 5,
+      text: "Excelente la prestación, con explicaciones fácil y sin ningún tipo de problemas. Totalmente satisfecho con el servicio prestado",
+      date: "2024-09-18",
+      avatar: "https://i.pravatar.cc/150?img=14",
+    },
+  ],
+};
+---
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+  {/* Header */}
+  <div class="text-center max-w-3xl mx-auto mb-16">
+    <h2 class="text-sm font-bold text-accent uppercase tracking-wider mb-3">
+      Reseñas de Clientes
+    </h2>
+    <h3 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+      Lo que dicen nuestros clientes
+    </h3>
+
+    {/* Google rating badge */}
+    <div
+      class="inline-flex items-center space-x-4 bg-white border-2 border-gray-200 rounded-full px-6 py-3 shadow-lg"
+    >
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
+        alt="Google"
+        class="h-6"
+      />
+      <div class="flex items-center space-x-2">
+        <span class="text-3xl font-bold text-primary"
+          >{googleReviews.rating}</span
+        >
+        <div class="flex text-yellow-400">
+          {Array.from({ length: 5 }).map(() => <span>⭐</span>)}
+        </div>
+      </div>
+      <div class="text-sm text-gray-600 border-l pl-4 text-left">
+        <div class="font-bold text-primary">
+          {googleReviews.total_reviews}
+        </div>
+        <div>reseñas</div>
+      </div>
+    </div>
+  </div>
+
+  {/* Reviews Grid */}
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {
+      googleReviews.reviews.map((review) => (
+        <div class="bg-white border-2 border-gray-100 rounded-2xl p-6 hover:border-accent/30 hover:shadow-xl transition-all duration-300 group flex flex-col">
+          {/* Stars */}
+          <div class="flex mb-4 text-yellow-400">
+            {Array.from({ length: review.rating }).map(() => (
+              <span>⭐</span>
+            ))}
+          </div>
+
+          {/* Review text */}
+          <p class="text-gray-700 leading-relaxed mb-6 flex-grow">
+            "{review.text}"
+          </p>
+
+          {/* Author info */}
+          <div class="flex items-center space-x-3 pt-4 border-t border-gray-100">
+            <img
+              src={review.avatar}
+              alt={review.author}
+              class="w-12 h-12 rounded-full object-cover"
+            />
+            <div class="text-left">
+              <div class="font-bold text-primary group-hover:text-accent transition-colors">
+                {review.author}
+              </div>
+              <div class="text-sm text-gray-500">
+                {new Date(review.date).toLocaleDateString("es-AR", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  {/* Bottom CTA */}
+  <div
+    class="mt-16 bg-gradient-to-r from-primary to-primary rounded-3xl p-12 text-center text-white shadow-2xl"
+  >
+    <h4 class="text-3xl font-bold mb-4">
+      No pagás nada hasta que cobres tu indemnización
+    </h4>
+    <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+      Trabajamos con honorarios de resultado. Tu éxito es nuestro éxito.
+    </p>
+    <a
+      href="https://wa.me/5491143711602"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-block bg-accent hover:bg-accent-hover text-white font-bold px-10 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg text-lg"
+    >
+      Empezar mi caso ahora
+    </a>
+  </div>
+</div>

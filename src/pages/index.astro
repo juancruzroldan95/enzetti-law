@@ -1,193 +1,59 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Hero from "../components/Hero.astro";
-import ServicesGrid from "../components/ServicesGrid.astro";
-import TestimoniosCarousel from "../components/TestimoniosCarousel.astro";
-import GoogleReviewsCarousel from "../components/GoogleReviewsCarousel.astro";
-import InstagramFollowers from "../components/InstagramFollowers.astro";
-import ContactForm from "../components/ContactForm.astro";
-import GoogleMapsEmbed from "../components/GoogleMapsEmbed.astro";
+import Layout from "../layouts/Layout.astro";
+import SectionContainer from "../components/SectionContainer.astro";
+import Hero from "../sections/Hero.astro";
+import AboutUs from "../sections/AboutUs.astro";
+import Services from "../sections/Services.astro";
+import TeamVideos from "../sections/TeamVideos.astro";
+import ProcessSection from "../sections/ProcessSection.astro";
+import SocialMedia from "../sections/SocialMedia.astro";
+import GoogleReviews from "../sections/GoogleReviews.astro";
 
 const title = "Estudio Enzetti | Abogados Laborales y ART";
 const description =
-	"Estudio Jurídico especializado en Accidentes de Trabajo, Enfermedades Profesionales y Reclamos a ART en Buenos Aires. Consulta Gratuita.";
+  "Estudio Jurídico especializado en Accidentes de Trabajo, Enfermedades Profesionales y Reclamos a ART en Buenos Aires. Consulta Gratuita.";
 ---
 
-<BaseLayout title={title} description={description}>
-	<Hero />
+<Layout title={title} description={description}>
+  <main>
+    <SectionContainer
+      id="inicio"
+      class="relative min-h-screen flex items-center overflow-hidden"
+    >
+      <Hero />
+    </SectionContainer>
 
-	<ServicesGrid />
+    <SectionContainer id="nosotros" class="bg-white">
+      <AboutUs />
+    </SectionContainer>
 
-	<section class="py-20 bg-white">
-		<div class="container mx-auto px-4">
-			<div class="flex flex-col md:flex-row gap-12 items-center">
-				<div class="md:w-1/2">
-					<h2
-						class="text-3xl md:text-4xl font-serif font-bold text-primary mb-6"
-					>
-						¿Por qué elegirnos?
-					</h2>
-					<div class="space-y-6">
-						<div class="flex gap-4">
-							<div
-								class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0"
-							>
-								<span class="text-accent font-bold text-xl">1</span>
-							</div>
-							<div>
-								<h3 class="text-xl font-bold text-primary mb-2">
-									Experiencia Comprobada
-								</h3>
-								<p class="text-gray-600">
-									Más de 15 años defendiendo exclusivamente a trabajadores.
-									Conocemos cada detalle del sistema de riesgos del trabajo.
-								</p>
-							</div>
-						</div>
-						<div class="flex gap-4">
-							<div
-								class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0"
-							>
-								<span class="text-accent font-bold text-xl">2</span>
-							</div>
-							<div>
-								<h3 class="text-xl font-bold text-primary mb-2">
-									Trato Personalizado
-								</h3>
-								<p class="text-gray-600">
-									No somos una fábrica de juicios. Usted hablará directamente
-									con su abogado, quien lo mantendrá informado en cada paso.
-								</p>
-							</div>
-						</div>
-						<div class="flex gap-4">
-							<div
-								class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0"
-							>
-								<span class="text-accent font-bold text-xl">3</span>
-							</div>
-							<div>
-								<h3 class="text-xl font-bold text-primary mb-2">Resultados</h3>
-								<p class="text-gray-600">
-									Nuestro objetivo es maximizar su indemnización. No aceptamos
-									acuerdos insuficientes.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="md:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-6">
-					<div class="bg-primary text-white p-6 rounded-xl text-center">
-						<p class="text-4xl font-bold text-accent mb-2">+1500</p>
-						<p class="text-sm uppercase tracking-wider">Casos Ganados</p>
-					</div>
-					<div
-						class="bg-gray-50 p-6 rounded-xl text-center border border-gray-100"
-					>
-						<p class="text-4xl font-bold text-primary mb-2">98%</p>
-						<p class="text-sm uppercase tracking-wider text-gray-600">
-							Clientes Satisfechos
-						</p>
-					</div>
-					<div class="col-span-1 sm:col-span-2">
-						<InstagramFollowers />
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+    <SectionContainer
+      id="servicios"
+      class="bg-gradient-to-b from-white to-gray-50"
+    >
+      <Services />
+    </SectionContainer>
 
-	<TestimoniosCarousel />
+    <SectionContainer id="equipo" class="bg-white">
+      <TeamVideos />
+    </SectionContainer>
 
-	<section class="py-20 bg-gray-50">
-		<div class="container mx-auto px-4">
-			<div class="text-center mb-12">
-				<h2 class="text-3xl md:text-4xl font-serif font-bold text-primary mb-4">
-					Lo que opinan en Google
-				</h2>
-				<p class="text-gray-600">La transparencia es nuestro pilar.</p>
-			</div>
-			<div class="max-w-4xl mx-auto">
-				<GoogleReviewsCarousel />
-			</div>
-		</div>
-	</section>
+    <SectionContainer
+      id="proceso"
+      class="bg-gradient-to-b from-gray-50 to-white"
+    >
+      <ProcessSection />
+    </SectionContainer>
 
-	<section class="py-20 bg-white" id="contacto">
-		<div class="container mx-auto px-4">
-			<div class="flex flex-col lg:flex-row gap-12">
-				<div class="lg:w-1/2">
-					<h2
-						class="text-3xl md:text-4xl font-serif font-bold text-primary mb-6"
-					>
-						Visítenos en Buenos Aires
-					</h2>
-					<p class="text-gray-600 mb-8">
-						Estamos ubicados en pleno centro de la Ciudad Autónoma de Buenos
-						Aires, con fácil acceso desde todos los puntos.
-					</p>
-					<GoogleMapsEmbed />
+    <SectionContainer
+      id="comunidad"
+      class="bg-gradient-to-b from-gray-50 to-white"
+    >
+      <SocialMedia />
+    </SectionContainer>
 
-					<div class="mt-8 space-y-4">
-						<div class="flex items-center gap-4">
-							<div
-								class="w-10 h-10 bg-primary/5 rounded-full flex items-center justify-center text-primary"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									class="h-5 w-5"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke="currentColor"
-								>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-									></path>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-								</svg>
-							</div>
-							<div>
-								<p class="font-bold text-primary">Dirección</p>
-								<p class="text-gray-600">Av. Corrientes 1234, Piso 5, CABA</p>
-							</div>
-						</div>
-						<div class="flex items-center gap-4">
-							<div
-								class="w-10 h-10 bg-primary/5 rounded-full flex items-center justify-center text-primary"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									class="h-5 w-5"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke="currentColor"
-								>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-									></path>
-								</svg>
-							</div>
-							<div>
-								<p class="font-bold text-primary">Teléfono</p>
-								<p class="text-gray-600">+54 11 1234-5678</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="lg:w-1/2">
-					<ContactForm />
-				</div>
-			</div>
-		</div>
-	</section>
-</BaseLayout>
+    <SectionContainer id="resenas" class="bg-white">
+      <GoogleReviews />
+    </SectionContainer>
+  </main>
+</Layout>

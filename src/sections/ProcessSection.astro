@@ -1,0 +1,86 @@
+---
+import Zoom from "../icons/Zoom.astro";
+import FileDescription from "../icons/FileDescription.astro";
+import ClipboardCheck from "../icons/ClipboardCheck.astro";
+import Trophy from "../icons/Trophy.astro";
+
+const PROCESS_STEPS = [
+  {
+    id: 1,
+    title: "Evaluación Inicial del Caso",
+    description:
+      "En menos de 24 horas, analizamos tu situación y definimos la mejor estrategia legal para garantizar el máximo resultado.",
+    icon: Zoom,
+  },
+  {
+    id: 2,
+    title: "Recolección de Documentación",
+    description:
+      "Reunimos y organizamos toda la información necesaria para construir un reclamo sólido, respaldado por argumentos legales y pruebas contundentes.",
+    icon: FileDescription,
+  },
+  {
+    id: 3,
+    title: "Seguimiento Médico y Legal",
+    description:
+      "Supervisamos tu tratamiento médico y gestionamos los trámites legales con dedicación absoluta, manteniéndote informado en cada paso.",
+    icon: ClipboardCheck,
+  },
+  {
+    id: 4,
+    title: "Resolución Exitosa",
+    description:
+      "Negociamos o litigamos hasta alcanzar el mejor resultado posible. Vos no pagás nada hasta que recibís tu indemnización.",
+    icon: Trophy,
+  },
+];
+---
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+  {/* Header */}
+  <div class="text-center max-w-3xl mx-auto mb-16">
+    <h2 class="text-sm font-bold text-accent uppercase tracking-wider mb-3">
+      Nuestro Método
+    </h2>
+    <h3 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+      ¿Cómo trabajamos?
+    </h3>
+    <p class="text-lg text-gray-600">
+      Un proceso simple y transparente para obtener tu indemnización
+    </p>
+  </div>
+
+  {/* Process steps */}
+  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+    {
+      PROCESS_STEPS.map((step, index) => {
+        const Icon = step.icon;
+        return (
+          <div class="relative">
+            {/* Connector line (hidden on last item) */}
+            {index < PROCESS_STEPS.length - 1 && (
+              <div class="hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r from-accent to-gray-200 -z-10" />
+            )}
+
+            <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 group h-full">
+              {/* Step number badge */}
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 bg-accent text-white rounded-full flex items-center justify-center font-bold text-lg group-hover:scale-110 transition-transform duration-300">
+                  {step.id}
+                </div>
+              </div>
+
+              {/* Content */}
+              <h4 class="text-xl font-bold text-primary mb-3 group-hover:text-accent transition-colors duration-300">
+                {step.title}
+              </h4>
+              <p class="text-gray-600 leading-relaxed text-sm">
+                {step.description}
+              </p>
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
+</div>
