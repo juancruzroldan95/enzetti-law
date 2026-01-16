@@ -22,10 +22,13 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-background text-primary font-sans antialiased;
+    width: 100%;
+    position: relative;
   }
 
   h1,
