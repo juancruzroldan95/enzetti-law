@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import logo from "../assets/logo.webp";
+import WhatsApp from "../icons/WhatsApp.astro";
 
 const navItems = [
   { name: "Nosotros", href: "#nosotros" },
@@ -12,7 +13,7 @@ const navItems = [
 
 <header class="bg-white backdrop-blur-md shadow-sm sticky top-0 z-50">
   <div
-    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center"
+    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center"
   >
     <a href="#inicio" class="flex items-center">
       <Image
@@ -41,9 +42,14 @@ const navItems = [
         href="https://wa.me/5491143711602"
         target="_blank"
         rel="noopener noreferrer"
-        class="hidden sm:inline-block bg-accent hover:bg-accent-hover text-white px-5 py-2 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 text-sm lg:text-base"
+        class="hidden sm:block"
       >
-        Consulta Gratuita
+        <button
+          class="bg-accent hover:bg-accent-dark text-white px-5 py-2 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 text-sm lg:text-base flex items-center gap-2 cursor-pointer"
+        >
+          <WhatsApp class="w-5 h-5" />
+          Consulta Gratuita
+        </button>
       </a>
 
       <!-- Mobile Menu Button -->

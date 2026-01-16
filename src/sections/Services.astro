@@ -1,28 +1,30 @@
 ---
+import { Image } from "astro:assets";
+import accidenteTrabajo from "../assets/images/accidente-de-trabajo.jpg";
+import accidenteTransito from "../assets/images/accidente-de-transito.jpg";
+import enfermedadesProfesionales from "../assets/images/enfermedades-profesionales.jpg";
+
 const SERVICES = [
   {
     id: 1,
     title: "Accidentes de Trabajo",
     description:
       "Reclamamos la indemnización que merecés tras lesiones sufridas en el ámbito laboral. Te asistimos en cada etapa del proceso.",
-    image:
-      "https://images.unsplash.com/photo-1530099486328-e021101a494a?w=600&h=400&fit=crop",
+    image: accidenteTrabajo,
   },
   {
     id: 2,
     title: "Enfermedades Profesionales",
     description:
       "Te ayudamos a obtener lo justo por dolencias como hernias, tendinitis u otras lesiones relacionadas al esfuerzo laboral.",
-    image:
-      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop",
+    image: enfermedadesProfesionales,
   },
   {
     id: 3,
     title: "Accidentes de Tránsito",
     description:
       "Gestionamos tu indemnización por lesiones, daños materiales y perjuicios sufridos en cualquier accidente vial.",
-    image:
-      "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600&h=400&fit=crop",
+    image: accidenteTransito,
   },
 ];
 ---
@@ -49,7 +51,7 @@ const SERVICES = [
           <div class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden">
             {/* Image */}
             <div class="relative h-56 overflow-hidden">
-              <img
+              <Image
                 src={service.image}
                 alt={service.title}
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
