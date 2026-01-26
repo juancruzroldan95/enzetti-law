@@ -63,7 +63,7 @@ const VIDEOS = [
           <div class="relative aspect-[9/16] rounded-2xl overflow-hidden shadow-lg bg-gray-900">
             <video
               id={`video-${video.id}`}
-              src={video.video_url}
+              src={`${video.video_url}#t=0.001`}
               class="w-full h-full object-cover"
               playsinline
               preload="metadata"
