@@ -1,11 +1,46 @@
 ---
-const { class: className, id } = Astro.props;
+const { class: className, id, enableAnimation = true } = Astro.props;
 ---
 
 <section
   id={id}
   data-section={id}
-  class={`w-full scroll-m-20 overflow-hidden ${className}`}
+  class={`w-full scroll-m-20 overflow-hidden ${enableAnimation ? "scrolling-section opacity-0 translate-y-8" : ""} ${className}`}
 >
   <slot />
 </section>
+
+<script>
+  import { animate, stagger, inView } from "motion";
+
+  inView(
+    ".scrolling-section",
+    (element) => {
+      // Animate the section itself
+      animate(
+        element,
+        { opacity: [0, 1], y: [50, 0] },
+        { ease: [0.39, 0.24, 0.3, 1], duration: 0.8 },
+      );
+
+      // Animate cards if they exist within the section
+      // We look for common card selectors or grid items
+      const cards = element.querySelectorAll(
+        ".card, .video-card, .review-card, .service-card, .feature-card",
+      );
+      if (cards.length > 0) {
+        animate(
+          cards,
+          { opacity: [0, 1], y: [30, 0] },
+          {
+            type: "spring",
+            stiffness: 100,
+            damping: 15,
+            delay: stagger(0.2, { startDelay: 0.1 }),
+          },
+        );
+      }
+    },
+    { amount: 0.2 }, // Trigger when 20% is visible
+  );
+</script>

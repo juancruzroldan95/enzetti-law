@@ -1,18 +1,12 @@
-export const GET = async () => {
-  // Placeholder for real Instagram API logic
-  // In a real app, you would fetch from the Instagram Graph API here
+import { getInstagramData } from "../../utils/instagram";
 
-  return new Response(
-    JSON.stringify({
-      followers: "12.5k",
-      posts: 342,
-      username: "@abogadosart_"
-    }),
-    {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }
-  );
+export const GET = async () => {
+  const data = await getInstagramData();
+
+  return new Response(JSON.stringify(data), {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 };

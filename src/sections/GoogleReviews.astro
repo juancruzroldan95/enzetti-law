@@ -1,4 +1,6 @@
 ---
+import WhatsApp from "../icons/WhatsApp.astro";
+
 const googleReviews = {
   rating: 5.0,
   total_reviews: 320,
@@ -95,7 +97,7 @@ const googleReviews = {
   <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
     {
       googleReviews.reviews.map((review) => (
-        <div class="bg-white border-2 border-gray-100 rounded-2xl p-6 hover:border-accent/30 hover:shadow-xl transition-all duration-300 group flex flex-col">
+        <div class="bg-white border-2 border-gray-100 rounded-2xl p-6 hover:border-accent/30 hover:shadow-xl transition-all duration-300 group flex flex-col review-card">
           {/* Stars */}
           <div class="flex mb-4 text-yellow-400">
             {Array.from({ length: review.rating }).map(() => (
@@ -147,8 +149,9 @@ const googleReviews = {
       href="https://wa.me/5491143711602"
       target="_blank"
       rel="noopener noreferrer"
-      class="inline-block bg-accent hover:bg-accent-hover text-white font-bold px-10 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg text-lg"
+      class="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent-hover text-white font-bold px-10 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg text-lg"
     >
+      <WhatsApp />
       Empezar mi caso ahora
     </a>
   </div>

@@ -1,44 +1,38 @@
 ---
+import PlayerPlay from "../icons/PlayerPlay.astro";
+
 const VIDEOS = [
   {
     id: 1,
-    title: "Cómo trabajamos en Enzetti",
-    thumbnail:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=700&fit=crop",
-    duration: "0:45",
-    views: 1234,
+    title: "Derechos laborales",
+    thumbnail: "/videos/11.1_small.mp4",
+    duration: "0:22",
     author: "María - Secretaria",
-    video_url: "#",
+    video_url: "/videos/11.1_small.mp4",
   },
   {
     id: 2,
-    title: "Tu primera consulta",
-    thumbnail:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=700&fit=crop",
-    duration: "1:12",
-    views: 2341,
-    author: "Sofía - Asistente Legal",
-    video_url: "#",
+    title: "Denunciar correctamente",
+    thumbnail: "/videos/11.5_small.mp4",
+    duration: "0:38",
+    author: "Juan - Abogado",
+    video_url: "/videos/11.5_small.mp4",
   },
   {
     id: 3,
-    title: "Proceso de tu caso",
-    thumbnail:
-      "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=700&fit=crop",
-    duration: "0:58",
-    views: 1876,
+    title: "Iniciar un reclamo",
+    thumbnail: "/videos/12.7_small.mp4",
+    duration: "0:25",
     author: "Laura - Coordinadora",
-    video_url: "#",
+    video_url: "/videos/12.7_small.mp4",
   },
   {
     id: 4,
-    title: "Nuestro compromiso",
-    thumbnail:
-      "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=400&h=700&fit=crop",
-    duration: "1:05",
-    views: 3102,
-    author: "Ana - Abogada",
-    video_url: "#",
+    title: "Accidente in itinere",
+    thumbnail: "/videos/12.8_small.mp4",
+    duration: "0:25",
+    author: "Ana - Asistente Legal",
+    video_url: "/videos/12.8_small.mp4",
   },
 ];
 ---
@@ -61,40 +55,44 @@ const VIDEOS = [
   <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
     {
       VIDEOS.map((video) => (
-        <div class="relative group cursor-pointer">
+        <div
+          class="relative group cursor-pointer video-card"
+          data-video-id={`video-${video.id}`}
+        >
           {/* Video Container - Instagram format (9:16 ratio) */}
-          <div class="relative aspect-[9/16] rounded-2xl overflow-hidden shadow-lg">
-            <img
-              src={video.thumbnail}
-              alt={video.title}
-              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          <div class="relative aspect-[9/16] rounded-2xl overflow-hidden shadow-lg bg-gray-900">
+            <video
+              id={`video-${video.id}`}
+              src={video.video_url}
+              class="w-full h-full object-cover"
+              playsinline
+              preload="metadata"
+              disablepictureinpicture
+              disableRemotePlayback
             />
 
-            {/* Dark overlay */}
-            <div class="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-300" />
+            {/* Overlays Container */}
+            <div class="absolute inset-0 transition-opacity duration-300 video-overlay">
+              {/* Dark overlay */}
+              <div class="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-300" />
 
-            {/* Play button */}
-            <div class="absolute inset-0 flex items-center justify-center">
-              <div class="w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-xl text-accent text-2xl">
-                ▶️
+              {/* Play button */}
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-xl text-accent text-2xl play-button">
+                  <PlayerPlay />
+                </div>
               </div>
-            </div>
 
-            {/* Duration badge */}
-            <div class="absolute top-3 right-3 bg-black/70 backdrop-blur-sm text-white text-xs font-semibold px-2 py-1 rounded">
-              {video.duration}
-            </div>
+              {/* Duration badge */}
+              <div class="absolute top-3 right-3 bg-black/70 backdrop-blur-sm text-white text-xs font-semibold px-2 py-1 rounded">
+                {video.duration}
+              </div>
 
-            {/* Views badge */}
-            <div class="absolute top-3 left-3 bg-black/70 backdrop-blur-sm text-white text-xs font-semibold px-2 py-1 rounded flex items-center space-x-1">
-              <span>👁️</span>
-              <span>{video.views.toLocaleString()}</span>
-            </div>
-
-            {/* Info overlay on hover */}
-            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <p class="text-white font-bold text-sm mb-1">{video.title}</p>
-              <p class="text-white/80 text-xs">{video.author}</p>
+              {/* Info overlay on hover */}
+              <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <p class="text-white font-bold text-sm mb-1">{video.title}</p>
+                <p class="text-white/80 text-xs">{video.author}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -102,3 +100,32 @@ const VIDEOS = [
     }
   </div>
 </div>
+
+<script>
+  // Simple script to handle video playback interactions
+  document.querySelectorAll(".video-card").forEach((card) => {
+    const video = card.querySelector("video");
+    const overlay = card.querySelector(".video-overlay");
+
+    if (!video || !overlay) return;
+
+    // Toggle play on click
+    card.addEventListener("click", () => {
+      if (video.paused) {
+        video.play();
+        video.controls = true;
+        overlay.classList.add("opacity-0", "pointer-events-none");
+      } else {
+        video.pause();
+        video.controls = false;
+        overlay.classList.remove("opacity-0", "pointer-events-none");
+      }
+    });
+
+    // Also handle pause event correctly if user uses native controls
+    video.addEventListener("pause", () => {
+      video.controls = false;
+      overlay.classList.remove("opacity-0", "pointer-events-none");
+    });
+  });
+</script>

@@ -12,11 +12,11 @@ import WhatsApp from "../icons/WhatsApp.astro";
 
 {/* Decorative elements */}
 <div
-  class="absolute top-40 right-10 w-72 h-72 bg-accent/5 rounded-full blur-3xl"
+  class="absolute top-40 right-10 w-72 h-72 bg-accent/5 rounded-full blur-3xl opacity-0 animate-blob"
 >
 </div>
 <div
-  class="absolute bottom-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
+  class="absolute bottom-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl opacity-0 animate-blob animation-delay-2000"
 >
 </div>
 
@@ -25,28 +25,35 @@ import WhatsApp from "../icons/WhatsApp.astro";
     {/* Left Content */}
     <div class="relative z-10 space-y-8">
       <div
-        class="inline-flex items-center space-x-2 bg-accent/10 text-accent ring-1 ring-accent px-4 py-2 rounded-full text-sm font-semibold"
+        class="inline-flex items-center space-x-2 bg-accent/10 text-accent ring-1 ring-accent px-4 py-2 rounded-full text-sm font-semibold opacity-0 translate-y-4 hero-badge"
       >
         <Shield />
         <span>Más de 30 años de experiencia</span>
       </div>
 
       <h1
-        class="text-5xl sm:text-6xl lg:text-7xl font-bold text-primary leading-tight"
+        class="text-5xl sm:text-6xl lg:text-7xl font-bold text-primary leading-tight opacity-0 translate-y-4 hero-title"
       >
         ¿Tuviste un <span class="text-accent">accidente de trabajo</span>?
       </h1>
 
-      <p class="text-2xl sm:text-3xl font-semibold text-primary">
-        Cobrá la indemnización que te corresponde
-      </p>
+      <div class="space-y-4">
+        <p
+          class="text-2xl sm:text-3xl font-semibold text-primary opacity-0 translate-y-4 hero-desc-1"
+        >
+          Cobrá la indemnización que te corresponde
+        </p>
 
-      <p class="text-lg text-gray-600 leading-relaxed max-w-xl">
-        Somos especialistas en Accidentes de Trabajo, Enfermedades Profesionales
-        y Accidentes de Tránsito. <span class="font-semibold text-primary"
-          >Tu empleador queda al margen</span
-        > del reclamo.
-      </p>
+        <p
+          class="text-lg text-gray-600 leading-relaxed max-w-xl opacity-0 translate-y-4 hero-desc-2"
+        >
+          Somos especialistas en Accidentes de Trabajo, Enfermedades
+          Profesionales y Accidentes de Tránsito. <span
+            class="font-semibold text-primary"
+            >Tu empleador queda al margen</span
+          > del reclamo.
+        </p>
+      </div>
 
       {/* CTA Buttons */}
       <div class="flex flex-col sm:flex-row gap-4 pt-4">
@@ -54,7 +61,7 @@ import WhatsApp from "../icons/WhatsApp.astro";
           href="https://wa.me/5491143711602"
           target="_blank"
           rel="noopener noreferrer"
-          class="w-full sm:w-auto"
+          class="w-full sm:w-auto opacity-0 translate-y-4 hero-btn-1"
         >
           <button
             class="w-full md:w-[260px] h-[64px] bg-accent border-2 border-transparent hover:bg-accent-dark text-white font-bold text-lg px-6 rounded-xl shadow-md hover:shadow-accent/20 hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3 cursor-pointer group"
@@ -65,7 +72,10 @@ import WhatsApp from "../icons/WhatsApp.astro";
             Consulta sin cargo
           </button>
         </a>
-        <a href="#servicios" class="w-full sm:w-auto">
+        <a
+          href="#servicios"
+          class="w-full sm:w-auto opacity-0 translate-y-4 hero-btn-2"
+        >
           <button
             class="w-full md:w-[260px] h-[64px] border-2 border-primary text-primary hover:bg-primary-dark hover:text-white font-bold text-lg px-6 rounded-xl shadow-md hover:shadow-primary/10 hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3 text-center cursor-pointer group"
           >
@@ -77,15 +87,15 @@ import WhatsApp from "../icons/WhatsApp.astro";
 
       {/* Stats */}
       <div class="grid grid-cols-3 gap-6 pt-8 border-t border-gray-200">
-        <div>
+        <div class="opacity-0 translate-y-4 hero-stat">
           <div class="text-3xl font-bold text-accent">30+</div>
           <div class="text-sm text-gray-600 mt-1">Años de experiencia</div>
         </div>
-        <div>
+        <div class="opacity-0 translate-y-4 hero-stat">
           <div class="text-3xl font-bold text-accent">5.0</div>
           <div class="text-sm text-gray-600 mt-1">Calificación Google</div>
         </div>
-        <div>
+        <div class="opacity-0 translate-y-4 hero-stat">
           <div class="text-3xl font-bold text-accent">320+</div>
           <div class="text-sm text-gray-600 mt-1">Reseñas positivas</div>
         </div>
@@ -93,7 +103,7 @@ import WhatsApp from "../icons/WhatsApp.astro";
     </div>
 
     {/* Right Column (Desktop Image) */}
-    <div class="relative hidden lg:block z-20">
+    <div class="relative hidden lg:block z-20 opacity-0 scale-95 hero-image">
       <img
         src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=900&fit=crop"
         alt="Abogados profesionales"
@@ -115,3 +125,95 @@ import WhatsApp from "../icons/WhatsApp.astro";
     </div>
   </div>
 </div>
+
+<script>
+  import { animate, stagger } from "motion";
+
+  // Sequence of animations
+  const sequence = [
+    // 1. Badge & Title
+    [
+      ".hero-badge, .hero-title",
+      { opacity: [0, 1], y: [20, 0] },
+      { duration: 0.8 },
+    ],
+    // 2. Paragraphs (staggered)
+    [
+      ".hero-desc-1, .hero-desc-2",
+      { opacity: [0, 1], y: [20, 0] },
+      { duration: 0.6, at: "-0.4", delay: stagger(0.2) },
+    ],
+    // 3. Buttons (staggered spring)
+    [
+      ".hero-btn-1, .hero-btn-2",
+      { opacity: [0, 1], y: [20, 0] },
+      { type: "spring", stiffness: 100, at: "-0.3", delay: stagger(0.1) },
+    ],
+    // 4. Stats (staggered)
+    [
+      ".hero-stat",
+      { opacity: [0, 1], y: [20, 0] },
+      { duration: 0.5, at: "-0.2", delay: stagger(0.1) },
+    ],
+    // 5. Image & Blobs
+    [
+      ".hero-image, .animate-blob",
+      { opacity: [0, 1], scale: [0.95, 1] },
+      { duration: 1.2, at: "-0.8" },
+    ],
+  ];
+
+  // We check if the section is the hero (likely initially in view)
+  // But strictly, we can just run this animation immediately as it's the hero
+  // Using timeline for complex sequences isn't directly exposed in the mini 'animate' function
+  // So we use standard animate chaining or just delays.
+  // Let's use simple separate animate calls with delays for simplicity and robustness.
+
+  animate(
+    ".hero-badge",
+    { opacity: [0, 1], y: [20, 0] },
+    { duration: 0.6, delay: 0.2 },
+  );
+
+  animate(
+    ".hero-title",
+    { opacity: [0, 1], y: [20, 0] },
+    { duration: 0.8, delay: 0.4 },
+  );
+
+  animate(
+    ".hero-desc-1",
+    { opacity: [0, 1], y: [20, 0] },
+    { duration: 0.6, delay: 0.6 },
+  );
+
+  animate(
+    ".hero-desc-2",
+    { opacity: [0, 1], y: [20, 0] },
+    { duration: 0.6, delay: 0.8 },
+  );
+
+  animate(
+    ".hero-btn-1",
+    { opacity: [0, 1], y: [20, 0] },
+    { type: "spring", delay: 1.0 },
+  );
+
+  animate(
+    ".hero-btn-2",
+    { opacity: [0, 1], y: [20, 0] },
+    { type: "spring", delay: 1.2 },
+  );
+
+  animate(
+    ".hero-stat",
+    { opacity: [0, 1], y: [20, 0] },
+    { delay: stagger(0.2, { startDelay: 1.4 }), duration: 0.5 },
+  );
+
+  animate(
+    ".hero-image",
+    { opacity: [0, 1], scale: [0.95, 1] },
+    { duration: 1, delay: 0.5 },
+  );
+</script>
