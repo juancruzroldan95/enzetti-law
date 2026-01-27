@@ -37,97 +37,102 @@ const tiktokData = {
 
   <div class="grid lg:grid-cols-2 gap-8">
     {/* Instagram Widget */}
-    <div
-      class="bg-white rounded-3xl shadow-xl p-8 hover:shadow-2xl transition-shadow duration-300"
-    >
-      {/* Header */}
-      <div class="flex items-center justify-between mb-6">
-        <div class="flex items-center space-x-4">
-          <div
-            class="w-16 h-16 rounded-full bg-gradient-to-tr from-purple-600 via-pink-600 to-orange-500 p-0.5"
-          >
-            <div class="w-full h-full rounded-full bg-white p-0.5">
-              <img
-                src={instagramData.profile_picture}
-                alt="Instagram profile"
-                class="w-full h-full rounded-full object-cover"
-              />
-            </div>
-          </div>
-          <div>
-            <h4 class="text-xl font-bold text-primary">
-              {instagramData.username}
-            </h4>
-            <p class="text-sm text-gray-500">Estudio Jurídico Enzetti</p>
-          </div>
-        </div>
-        <span class="text-4xl">
-          <Instagram class="size-10 ig-colors" />
-        </span>
-      </div>
-
-      {/* Stats */}
-      <div class="grid grid-cols-3 gap-4 mb-6 py-6 border-y border-gray-100">
-        <div class="text-center">
-          <div class="text-2xl font-bold text-primary">
-            {instagramData.posts.toLocaleString()}
-          </div>
-          <div class="text-sm text-gray-500">Posts</div>
-        </div>
-        <div class="text-center">
-          <div class="text-2xl font-bold text-accent">
-            {instagramData.followers.toLocaleString()}
-          </div>
-          <div class="text-sm text-gray-500">Seguidores</div>
-        </div>
-        <div class="text-center">
-          <div class="text-2xl font-bold text-primary">
-            {instagramData.following.toLocaleString()}
-          </div>
-          <div class="text-sm text-gray-500">Siguiendo</div>
-        </div>
-      </div>
-
-      {/* Recent posts grid */}
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6">
-        {
-          instagramData.recent_posts.map((post) => (
-            <a
-              href={post.permalink}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="relative aspect-square rounded-lg overflow-hidden group cursor-pointer block"
-            >
-              <img
-                src={post.image}
-                alt={post.caption || "Instagram post"}
-                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-              />
-              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
-                <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-xs flex items-center space-x-2">
-                  <span>❤️</span>
-                  <span>{post.likes}</span>
+    {
+      instagramData && (
+        <div class="bg-white rounded-3xl shadow-xl p-8 hover:shadow-2xl transition-shadow duration-300 card">
+          {/* Header */}
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center space-x-4">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-purple-600 via-pink-600 to-orange-500 p-0.5 shrink-0">
+                <div class="w-full h-full rounded-full bg-white p-0.5">
+                  <img
+                    src={instagramData.profile_picture}
+                    alt="Instagram profile"
+                    class="w-full h-full rounded-full object-cover"
+                  />
                 </div>
               </div>
-            </a>
-          ))
-        }
-      </div>
+              <div>
+                <h4 class="text-xl font-bold text-primary">
+                  {instagramData.name}
+                </h4>
+                <p class="text-sm text-gray-500">@{instagramData.username}</p>
+              </div>
+            </div>
+            <span class="text-4xl">
+              <Instagram class="size-10 ig-colors" />
+            </span>
+          </div>
 
-      {/* Follow button */}
-      <a
-        href="https://www.instagram.com/abogadosart_/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="block w-full text-center bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 hover:from-purple-700 hover:via-pink-700 hover:to-orange-600 text-white font-bold py-3 rounded-lg transition-all duration-300 transform hover:scale-105"
-      >
-        Seguir en Instagram
-      </a>
-    </div>
+          {/* Stats */}
+          <div class="grid grid-cols-3 gap-4 mb-6 py-6 border-y border-gray-100">
+            <div class="text-center">
+              <div class="text-2xl font-bold text-primary">
+                {instagramData.posts.toLocaleString()}
+              </div>
+              <div class="text-sm text-gray-500">Posts</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold text-accent">
+                {instagramData.followers.toLocaleString()}
+              </div>
+              <div class="text-sm text-gray-500">Seguidores</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold text-primary">
+                {instagramData.following.toLocaleString()}
+              </div>
+              <div class="text-sm text-gray-500">Siguiendo</div>
+            </div>
+          </div>
+
+          {/* Bio */}
+          <p class="text-gray-600 mb-6 text-center italic text-sm whitespace-pre-wrap">
+            "{instagramData.bio}"
+          </p>
+
+          {/* Recent posts grid */}
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6">
+            {instagramData.recent_posts.map((post) => (
+              <a
+                href={post.permalink}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="relative aspect-square rounded-lg overflow-hidden group cursor-pointer block"
+              >
+                <img
+                  src={post.image}
+                  alt={post.caption || "Instagram post"}
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
+                  <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-xs flex items-center space-x-2">
+                    <span>
+                      <HeartFilled />
+                    </span>
+                    <span>{post.likes}</span>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          {/* Follow button */}
+          <a
+            href="https://www.instagram.com/abogadosart_/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full text-center bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 hover:from-purple-700 hover:via-pink-700 hover:to-orange-600 text-white font-bold py-3 rounded-lg transition-all duration-300 transform hover:scale-105"
+          >
+            Seguir en Instagram
+          </a>
+        </div>
+      )
+    }
 
     {/* TikTok Widget */}
     <div
-      class="bg-white rounded-3xl shadow-xl p-8 hover:shadow-2xl transition-shadow duration-300"
+      class="bg-white rounded-3xl shadow-xl p-8 hover:shadow-2xl transition-shadow duration-300 card"
     >
       {/* Header */}
       <div class="flex items-center justify-between mb-6">

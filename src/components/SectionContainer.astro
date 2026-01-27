@@ -41,6 +41,6 @@ const { class: className, id, enableAnimation = true } = Astro.props;
         );
       }
     },
-    { amount: 0.2 }, // Trigger when 20% is visible
+    { margin: "0px 0px -30% 0px" }, // Trigger when element enters the viewport (20% up from bottom)
   );
 </script>
