@@ -4,13 +4,15 @@ import logo from "../assets/logo.webp";
 import WhatsApp from "../icons/WhatsApp.astro";
 import IconX from "../icons/IconX.astro";
 
+const { pathname } = Astro.url;
+
 const navItems = [
-  { name: "Inicio", href: "#inicio" },
-  { name: "Nosotros", href: "#nosotros" },
   { name: "Servicios", href: "#servicios" },
+  { name: "Equipo", href: "#equipo" },
+  { name: "Redes", href: "#redes" },
   { name: "Proceso", href: "#proceso" },
   { name: "Reseñas", href: "#resenas" },
-  { name: "Redes Sociales", href: "#comunidad" },
+  { name: "Nosotros", href: "/nosotros" },
 ];
 ---
 
@@ -37,7 +39,7 @@ const navItems = [
     </div>
 
     <div class="flex justify-between items-center mb-12">
-      <a href="#inicio" id="mobile-menu-logo">
+      <a href="/" id="mobile-menu-logo">
         <Image
           src={logo}
           alt="Estudio Enzetti"
@@ -56,16 +58,22 @@ const navItems = [
 
     <nav class="flex flex-col space-y-7">
       {
-        navItems.map((item, index) => (
-          <a
-            href={item.href}
-            class="text-xl font-bold text-primary hover:text-accent transition-all duration-300 mobile-nav-item flex items-center justify-between group opacity-0 -translate-x-8"
-            style={`transition-delay: ${index * 80 + 100}ms`}
-          >
-            {item.name}
-            <span class="w-2 h-2 rounded-full bg-accent opacity-0 group-hover:opacity-100 transition-opacity" />
-          </a>
-        ))
+        navItems.map((item, index) => {
+          const href =
+            item.href.startsWith("#") && pathname !== "/"
+              ? `/${item.href}`
+              : item.href;
+          return (
+            <a
+              href={href}
+              class="text-xl font-bold text-primary hover:text-accent transition-all duration-300 mobile-nav-item flex items-center justify-between group opacity-0 -translate-x-8"
+              style={`transition-delay: ${index * 80 + 100}ms`}
+            >
+              {item.name}
+              <span class="w-2 h-2 rounded-full bg-accent opacity-0 group-hover:opacity-100 transition-opacity" />
+            </a>
+          );
+        })
       }
     </nav>
 
@@ -77,7 +85,7 @@ const navItems = [
         class="block"
       >
         <button
-          class="w-full bg-accent hover:bg-accent-dark text-white py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3 shadow-lg shadow-accent/20 transition-all duration-300"
+          class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3 shadow-lg shadow-[#25D366]/20 transition-all duration-300"
         >
           <WhatsApp class="w-6 h-6" />
           Consulta Gratuita

@@ -2,6 +2,7 @@
 import ArrowRight from "../icons/ArrowRight.astro";
 import Shield from "../icons/Shield.astro";
 import WhatsApp from "../icons/WhatsApp.astro";
+import Check from "../icons/Check.astro";
 ---
 
 {/* Background with subtle pattern */}
@@ -21,44 +22,70 @@ import WhatsApp from "../icons/WhatsApp.astro";
 </div>
 
 <div
-  class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 pt-0 lg:py-20"
+  class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 pt-10 lg:pb-20"
 >
   <div class="grid lg:grid-cols-2 gap-12 items-center">
     {/* Left Content */}
-    <div class="relative z-10 space-y-8">
-      <div
+    <div class="relative z-10 space-y-8 text-center lg:text-left">
+      <!-- <div
         class="inline-flex items-center space-x-2 bg-accent/10 text-accent ring-1 ring-accent px-4 py-2 rounded-full text-sm font-semibold opacity-0 translate-y-4 hero-badge"
       >
         <Shield />
         <span>Más de 30 años de experiencia</span>
-      </div>
+      </div> -->
 
       <h1
-        class="text-5xl sm:text-6xl lg:text-7xl font-bold text-primary leading-tight opacity-0 translate-y-4 hero-title"
+        class="text-5xl lg:text-6xl font-bold text-primary leading-tight opacity-0 translate-y-4 hero-title"
       >
         ¿Tuviste un <span class="text-accent">accidente de trabajo</span>?
       </h1>
 
       <div class="space-y-4">
         <p
-          class="text-2xl sm:text-3xl font-semibold text-primary opacity-0 translate-y-4 hero-desc-1"
+          class="text-3xl lg:text-4xl font-semibold text-primary opacity-0 translate-y-4 hero-desc-1"
         >
           Cobrá la indemnización que te corresponde
         </p>
 
-        <p
-          class="text-lg text-gray-600 leading-relaxed max-w-xl opacity-0 translate-y-4 hero-desc-2"
-        >
-          Somos especialistas en Accidentes de Trabajo, Enfermedades
-          Profesionales y Accidentes de Tránsito. <span
-            class="font-semibold text-primary"
-            >Tu empleador queda al margen</span
-          > del reclamo.
-        </p>
+        <div class="space-y-3 max-w-xl mx-auto lg:mx-0">
+          <p
+            class="text-lg text-gray-600 leading-relaxed opacity-0 translate-y-4 hero-desc-2"
+          >
+            Somos especialistas en:
+          </p>
+          <ul class="space-y-2">
+            <li
+              class="flex items-center justify-center lg:justify-start gap-3 text-lg text-gray-600 opacity-0 translate-y-4 hero-list-item"
+            >
+              <div class="text-red-600 flex-shrink-0">
+                <Check class="w-6 h-6" />
+              </div>
+              <span>Accidentes de Trabajo</span>
+            </li>
+            <li
+              class="flex items-center justify-center lg:justify-start gap-3 text-lg text-gray-600 opacity-0 translate-y-4 hero-list-item"
+            >
+              <div class="text-red-600 flex-shrink-0">
+                <Check class="w-6 h-6" />
+              </div>
+              <span>Accidentes de Tránsito</span>
+            </li>
+            <li
+              class="flex items-center justify-center lg:justify-start gap-3 text-lg text-gray-600 opacity-0 translate-y-4 hero-list-item"
+            >
+              <div class="text-red-600 flex-shrink-0">
+                <Check class="w-6 h-6" />
+              </div>
+              <span>Enfermedades Profesionales</span>
+            </li>
+          </ul>
+        </div>
       </div>
 
       {/* CTA Buttons */}
-      <div class="flex flex-col sm:flex-row gap-4 pt-4">
+      <div
+        class="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start"
+      >
         <a
           href="https://wa.me/5491143711602"
           target="_blank"
@@ -66,7 +93,7 @@ import WhatsApp from "../icons/WhatsApp.astro";
           class="w-full sm:w-auto opacity-0 translate-y-4 hero-btn-1"
         >
           <button
-            class="w-full md:w-[260px] h-[64px] bg-accent border-2 border-transparent hover:bg-accent-dark text-white font-bold text-lg px-6 rounded-xl shadow-md hover:shadow-accent/20 hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3 cursor-pointer group"
+            class="w-full md:w-[260px] h-[64px] bg-green-500 hover:bg-green-600 border-2 border-transparent text-white font-bold text-lg px-6 rounded-xl shadow-md hover:shadow-[#25D366]/20 hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3 cursor-pointer group"
           >
             <WhatsApp
               class="w-6 h-6 group-hover:rotate-12 transition-transform"
@@ -81,7 +108,7 @@ import WhatsApp from "../icons/WhatsApp.astro";
           <button
             class="w-full md:w-[260px] h-[64px] border-2 border-primary text-primary hover:bg-primary-dark hover:text-white font-bold text-lg px-6 rounded-xl shadow-md hover:shadow-primary/10 hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3 text-center cursor-pointer group"
           >
-            Conocé nuestros servicios
+            Nuestros servicios
             <ArrowRight />
           </button>
         </a>
@@ -104,13 +131,92 @@ import WhatsApp from "../icons/WhatsApp.astro";
       </div>
     </div>
 
-    {/* Right Column (Desktop Image) */}
-    <div class="relative hidden lg:block z-20 opacity-0 scale-95 hero-image">
-      <img
-        src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=900&fit=crop"
-        alt="Abogados profesionales"
-        class="w-full h-auto object-cover rounded-2xl shadow-2xl transition-all duration-700"
-      />
+    {/* Right Column (Video) */}
+    <div class="relative z-20 opacity-0 scale-95 hero-image mt-8 lg:mt-0">
+      <div
+        id="video-container"
+        class="aspect-square rounded-2xl overflow-hidden shadow-2xl relative group cursor-pointer"
+      >
+        <video
+          id="hero-video"
+          src="/videos/11.1_small.mp4"
+          class="w-full h-full object-cover"
+          autoplay
+          loop
+          muted
+          playsinline></video>
+
+        {/* Custom Controls Overlay */}
+        <div
+          id="play-overlay"
+          class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center opacity-0 hover:opacity-100"
+        >
+          <div
+            id="play-button"
+            class="w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300 scale-90 group-hover:scale-100"
+          >
+            {/* Play Icon (Initial State: Hidden/Pause because it autoplays) */}
+            <svg
+              id="icon-pause"
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-8 h-8 text-primary"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"></path>
+            </svg>
+            <svg
+              id="icon-play"
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-8 h-8 text-primary hidden ml-1"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M8 5v14l11-7z"></path>
+            </svg>
+          </div>
+        </div>
+
+        {/* Mute Button */}
+        <button
+          id="mute-button"
+          class="absolute bottom-4 right-4 p-2 bg-black/50 hover:bg-black/70 backdrop-blur-md rounded-full text-white transition-all duration-300 z-30"
+        >
+          {/* Muted Icon (Initial State) */}
+          <svg
+            id="icon-muted"
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
+          {/* Sound On Icon */}
+          <svg
+            id="icon-sound"
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5 hidden"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+            <path
+              d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"
+            ></path>
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -196,21 +302,27 @@ import WhatsApp from "../icons/WhatsApp.astro";
   );
 
   animate(
+    ".hero-list-item",
+    { opacity: [0, 1], y: [20, 0] },
+    { delay: stagger(0.1, { startDelay: 1.0 }), duration: 0.5 },
+  );
+
+  animate(
     ".hero-btn-1",
     { opacity: [0, 1], y: [20, 0] },
-    { type: "spring", delay: 1.0 },
+    { type: "spring", delay: 1.4 },
   );
 
   animate(
     ".hero-btn-2",
     { opacity: [0, 1], y: [20, 0] },
-    { type: "spring", delay: 1.2 },
+    { type: "spring", delay: 1.6 },
   );
 
   animate(
     ".hero-stat",
     { opacity: [0, 1], y: [20, 0] },
-    { delay: stagger(0.2, { startDelay: 1.4 }), duration: 0.5 },
+    { delay: stagger(0.2, { startDelay: 1.8 }), duration: 0.5 },
   );
 
   animate(
@@ -218,4 +330,74 @@ import WhatsApp from "../icons/WhatsApp.astro";
     { opacity: [0, 1], scale: [0.95, 1] },
     { duration: 1, delay: 0.5 },
   );
+
+  // Video Custom Controls Logic
+  const video = document.getElementById("hero-video") as HTMLVideoElement;
+  const videoContainer = document.getElementById("video-container");
+  const playOverlay = document.getElementById("play-overlay");
+  const muteButton = document.getElementById("mute-button");
+
+  const iconPlay = document.getElementById("icon-play");
+  const iconPause = document.getElementById("icon-pause");
+  const iconMuted = document.getElementById("icon-muted");
+  const iconSound = document.getElementById("icon-sound");
+
+  if (video && videoContainer && playOverlay && muteButton) {
+    // 1. Play/Pause Handler
+    const togglePlay = (e: MouseEvent) => {
+      // Don't toggle play if clicking mute button
+      if (muteButton.contains(e.target as Node)) return;
+
+      if (video.paused) {
+        video.play();
+        updatePlayIcon(true);
+      } else {
+        video.pause();
+        updatePlayIcon(false);
+      }
+    };
+
+    videoContainer.addEventListener("click", togglePlay);
+
+    // 2. Mute/Unmute Handler
+    muteButton.addEventListener("click", (e: MouseEvent) => {
+      e.stopPropagation(); // Prevent triggering play/pause
+      video.muted = !video.muted;
+      updateMuteIcon(video.muted);
+    });
+
+    // 3. UI Updaters
+    function updatePlayIcon(isPlaying: boolean) {
+      if (isPlaying) {
+        iconPlay?.classList.add("hidden");
+        iconPause?.classList.remove("hidden");
+        // When playing, overlay works on hover (default class behavior)
+        playOverlay?.classList.remove("opacity-100", "bg-black/30");
+        playOverlay?.classList.add("opacity-0", "hover:opacity-100");
+      } else {
+        iconPlay?.classList.remove("hidden");
+        iconPause?.classList.add("hidden");
+        // When paused, show overlay permanently
+        playOverlay?.classList.remove("opacity-0", "hover:opacity-100");
+        playOverlay?.classList.add("opacity-100", "bg-black/30");
+      }
+    }
+
+    function updateMuteIcon(isMuted: boolean) {
+      if (isMuted) {
+        iconMuted?.classList.remove("hidden");
+        iconSound?.classList.add("hidden");
+      } else {
+        iconMuted?.classList.add("hidden");
+        iconSound?.classList.remove("hidden");
+      }
+    }
+
+    // Initialize state
+    updateMuteIcon(video.muted);
+    // Add listener for video end to reset UI
+    video.addEventListener("ended", () => {
+      updatePlayIcon(false);
+    });
+  }
 </script>

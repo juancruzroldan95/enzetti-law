@@ -2,12 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 import SectionContainer from "../components/SectionContainer.astro";
 import Hero from "../sections/Hero.astro";
-import AboutUs from "../sections/AboutUs.astro";
 import Services from "../sections/Services.astro";
 import TeamVideos from "../sections/TeamVideos.astro";
 import ProcessSection from "../sections/ProcessSection.astro";
 import SocialMedia from "../sections/SocialMedia.astro";
 import GoogleReviews from "../sections/GoogleReviews.astro";
+import QuoteSection from "../sections/QuoteSection.astro";
+import FinalCTA from "../sections/FinalCTA.astro";
 
 const title = "Estudio Enzetti | Abogados Laborales y ART";
 const description =
@@ -18,14 +19,14 @@ const description =
   <main>
     <SectionContainer
       id="inicio"
-      class="relative flex items-center overflow-hidden"
+      class="relative overflow-hidden"
       enableAnimation={false}
     >
       <Hero />
     </SectionContainer>
 
-    <SectionContainer id="nosotros" class="bg-white">
-      <AboutUs />
+    <SectionContainer id="quote" class="bg-primary" enableAnimation={false}>
+      <QuoteSection />
     </SectionContainer>
 
     <SectionContainer
@@ -39,6 +40,10 @@ const description =
       <TeamVideos />
     </SectionContainer>
 
+    <SectionContainer id="redes" class="bg-gradient-to-b from-gray-50 to-white">
+      <SocialMedia />
+    </SectionContainer>
+
     <SectionContainer
       id="proceso"
       class="bg-gradient-to-b from-gray-50 to-white"
@@ -46,15 +51,12 @@ const description =
       <ProcessSection />
     </SectionContainer>
 
-    <SectionContainer
-      id="comunidad"
-      class="bg-gradient-to-b from-gray-50 to-white"
-    >
-      <SocialMedia />
-    </SectionContainer>
-
     <SectionContainer id="resenas" class="bg-white">
       <GoogleReviews />
+    </SectionContainer>
+
+    <SectionContainer id="final-cta" class="bg-white">
+      <FinalCTA />
     </SectionContainer>
   </main>
 </Layout>

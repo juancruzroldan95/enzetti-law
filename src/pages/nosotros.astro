@@ -1,0 +1,22 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionContainer from "../components/SectionContainer.astro";
+import AboutUs from "../sections/AboutUs.astro";
+import FinalCTA from "../sections/FinalCTA.astro";
+
+const title = "Estudio Enzetti | Sobre Nosotros";
+const description =
+  "Conoce a nuestro equipo de abogados especializados en derecho laboral y accidentes de trabajo. Más de 30 años de experiencia defendiendo tus derechos.";
+---
+
+<Layout title={title} description={description}>
+  <main>
+    <SectionContainer id="nosotros" class="bg-white">
+      <AboutUs />
+    </SectionContainer>
+
+    <SectionContainer id="final-cta" class="bg-white">
+      <FinalCTA />
+    </SectionContainer>
+  </main>
+</Layout>

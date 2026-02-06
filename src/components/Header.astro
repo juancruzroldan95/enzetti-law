@@ -4,11 +4,15 @@ import logo from "../assets/logo.webp";
 import WhatsApp from "../icons/WhatsApp.astro";
 import Menu from "../icons/Menu.astro";
 
+const { pathname } = Astro.url;
+
 const navItems = [
-  { name: "Nosotros", href: "#nosotros" },
   { name: "Servicios", href: "#servicios" },
+  { name: "Equipo", href: "#equipo" },
+  { name: "Redes", href: "#redes" },
   { name: "Proceso", href: "#proceso" },
   { name: "Reseñas", href: "#resenas" },
+  { name: "Nosotros", href: "/nosotros" },
 ];
 ---
 
@@ -16,7 +20,7 @@ const navItems = [
   <div
     class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center"
   >
-    <a href="#inicio" class="flex items-center">
+    <a href="/" class="flex items-center">
       <Image
         src={logo}
         alt="Estudio Enzetti"
@@ -27,14 +31,20 @@ const navItems = [
 
     <nav class="hidden md:flex space-x-6 lg:space-x-8">
       {
-        navItems.map((item) => (
-          <a
-            href={item.href}
-            class="text-primary hover:text-accent transition-colors font-medium text-sm lg:text-base"
-          >
-            {item.name}
-          </a>
-        ))
+        navItems.map((item) => {
+          const href =
+            item.href.startsWith("#") && pathname !== "/"
+              ? `/${item.href}`
+              : item.href;
+          return (
+            <a
+              href={href}
+              class="text-primary hover:text-accent transition-colors font-medium text-sm lg:text-base"
+            >
+              {item.name}
+            </a>
+          );
+        })
       }
     </nav>
 
@@ -46,7 +56,7 @@ const navItems = [
         class="hidden sm:block"
       >
         <button
-          class="bg-accent hover:bg-accent-dark text-white px-5 py-2 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 text-sm lg:text-base flex items-center gap-2 cursor-pointer"
+          class="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 text-sm lg:text-base flex items-center gap-2 cursor-pointer"
         >
           <WhatsApp class="w-5 h-5" />
           Consulta Gratuita

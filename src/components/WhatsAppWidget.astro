@@ -1,0 +1,27 @@
+---
+import WhatsApp from "../icons/WhatsApp.astro";
+---
+
+<a
+  href="https://wa.me/5491143711602"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="fixed bottom-6 right-6 z-50 group"
+  aria-label="Contactar por WhatsApp"
+>
+  <div class="relative flex items-center justify-center">
+    {/* Main Button */}
+    <button
+      class="relative w-14 h-14 bg-green-500 hover:bg-green-600 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center transform hover:-translate-y-1 hover:scale-110"
+    >
+      <WhatsApp class="w-8 h-8 text-white" />
+    </button>
+
+    {/* Tooltip (optional, hidden on mobile for cleaner look) */}
+    <span
+      class="absolute right-full mr-4 bg-white text-gray-800 px-3 py-1.5 rounded-lg text-sm font-semibold shadow-lg opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none"
+    >
+      ¡Hablemos!
+    </span>
+  </div>
+</a>

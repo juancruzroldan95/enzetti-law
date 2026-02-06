@@ -1,0 +1,148 @@
+---
+
+---
+
+<div
+  class="relative overflow-hidden flex items-center justify-center min-h-[50vh]"
+>
+  {/* Background decorative elements */}
+  <div class="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5"></div>
+  <div
+    class="absolute top-0 left-0 w-64 h-64 bg-accent/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"
+  >
+  </div>
+  <div
+    class="absolute bottom-0 right-0 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"
+  >
+  </div>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+    <div class="text-center">
+      <h2
+        class="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight min-h-[120px] md:min-h-[160px] flex flex-col justify-center items-center gap-4"
+      >
+        {/* Container for the typewriter text */}
+        <div class="typewriter-container inline-block relative">
+          <span id="typewriter-text" class="whitespace-pre-wrap"></span><span
+            id="cursor"
+            class="inline-block w-1 h-8 md:h-12 bg-accent ml-1 align-middle animate-pulse"
+          ></span>
+        </div>
+      </h2>
+
+      {
+        /* Hidden container to hold the structure for the typewriter to replicate/target or purely for SEO/accessibility */
+      }
+      <div class="sr-only">
+        "Defender tus derechos es nuestra prioridad, obtener la Máxima
+        Indemnización es nuestro compromiso."
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { animate, inView } from "motion";
+
+  const text1 = "Defender tus derechos es nuestra prioridad, ";
+  const text2 = "obtener la Máxima Indemnización ";
+  const text3 = "es nuestro compromiso.";
+
+  const textElement = document.getElementById("typewriter-text");
+  const cursorElement = document.getElementById("cursor");
+
+  // Speed of typing (ms per char)
+  const typeSpeed = 40;
+
+  async function typeWriter(text: string, element: HTMLElement, speed = 40) {
+    if (!element) return;
+    for (const char of text) {
+      // Check if we stumbled into a weird state where element is gone
+      if (!document.body.contains(element)) return;
+
+      element.textContent += char;
+      // Randomize speed slightly for realism
+      const randomSpeed = speed + Math.random() * 20 - 10;
+      await new Promise((resolve) => setTimeout(resolve, randomSpeed));
+    }
+  }
+
+  let hasRun = false;
+
+  // We use a specific ID selector for inView to ensure we target this section
+  // But since the script is inside the component, we can just rely on the elements
+  if (textElement && cursorElement) {
+    inView(textElement, () => {
+      if (hasRun) return;
+      hasRun = true;
+
+      const runSequence = async () => {
+        // Clear initial content safely
+        textElement.innerHTML = "";
+
+        // Part 1
+        await typeWriter(text1, textElement, typeSpeed);
+
+        // Pause for comma
+        await new Promise((r) => setTimeout(r, 400));
+
+        // Part 2
+        await typeWriter(text2, textElement, typeSpeed);
+
+        // Part 3 - Special Span
+        const span = document.createElement("span");
+        span.className = "relative inline-block px-1 text-white";
+        // Fix for 'es nuestro compromiso' duplication - ensure span is empty first
+        span.textContent = "";
+        textElement.appendChild(span);
+
+        await typeWriter(text3, span, typeSpeed);
+
+        // Hide cursor
+        if (cursorElement) {
+          cursorElement.style.display = "none";
+        }
+
+        // Add SVG Underline
+        const svg = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "svg",
+        );
+        svg.setAttribute(
+          "class",
+          "absolute left-0 bottom-0 w-full h-4 sm:h-5 text-accent -z-10 translate-y-2",
+        );
+        svg.setAttribute("viewBox", "0 0 200 9");
+        svg.setAttribute("preserveAspectRatio", "none");
+        svg.style.overflow = "visible";
+
+        const path = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "path",
+        );
+        path.setAttribute(
+          "d",
+          "M2.00025 6.99997C28.5269 3.52046 80.5986 1.34139 120.5 2.50005C150.932 3.38379 175.5 4.99999 198 7.50002",
+        );
+        path.setAttribute("fill", "none");
+        path.setAttribute("stroke", "currentColor");
+        path.setAttribute("stroke-width", "3");
+        path.setAttribute("stroke-linecap", "round");
+        path.setAttribute("stroke-dasharray", "1");
+        path.setAttribute("pathLength", "1");
+        path.style.opacity = "0.8";
+
+        svg.appendChild(path);
+        span.appendChild(svg);
+
+        animate(
+          path,
+          { pathLength: [0, 1] },
+          { duration: 0.8, ease: "easeOut" },
+        );
+      };
+
+      runSequence();
+    });
+  }
+</script>
