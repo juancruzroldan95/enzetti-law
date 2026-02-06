@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import logoBlack from "../assets/logo-black.png";
+import logo from "../assets/logo.webp";
 import Phone from "../icons/Phone.astro";
 import WhatsApp from "../icons/WhatsApp.astro";
 import Mail from "../icons/Mail.astro";
@@ -11,18 +11,18 @@ import TikTok from "../icons/TikTok.astro";
 const currentYear = new Date().getFullYear();
 ---
 
-<footer id="contacto" class="bg-black text-white border-t border-zinc-900">
+<footer id="contacto" class="bg-white text-zinc-900 border-t border-zinc-200">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
       {/* Brand Column */}
       <div class="space-y-6">
         <Image
-          src={logoBlack}
+          src={logo}
           alt="Estudio Enzetti"
           class="h-12 w-auto"
           quality="max"
         />
-        <p class="text-zinc-400 text-sm leading-relaxed max-w-xs">
+        <p class="text-zinc-600 text-sm leading-relaxed max-w-xs">
           Excelencia jurídica con más de 30 años de trayectoria defendiendo los
           derechos de los trabajadores en todo el país.
         </p>
@@ -30,17 +30,17 @@ const currentYear = new Date().getFullYear();
 
       {/* Contact Section */}
       <div class="space-y-6">
-        <h4 class="text-white font-bold text-lg flex items-center gap-2">
+        <h4 class="text-zinc-900 font-bold text-lg flex items-center gap-2">
           Contacto
           <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
         </h4>
         <div class="space-y-4">
           <a
             href="tel:+541143711602"
-            class="group flex items-center gap-4 text-zinc-400 hover:text-white transition-colors duration-300"
+            class="group flex items-center gap-4 text-zinc-600 hover:text-zinc-900 transition-colors duration-300"
           >
             <div
-              class="w-10 h-10 rounded-lg bg-zinc-900 flex items-center justify-center group-hover:bg-accent/10 group-hover:text-accent transition-all"
+              class="w-10 h-10 rounded-lg bg-zinc-100 flex items-center justify-center group-hover:bg-accent/10 group-hover:text-accent transition-all"
             >
               <Phone class="w-5 h-5" />
             </div>
@@ -51,10 +51,10 @@ const currentYear = new Date().getFullYear();
           <a
             href="https://wa.me/5491143711602"
             target="_blank"
-            class="group flex items-center gap-4 text-zinc-400 hover:text-white transition-colors duration-300"
+            class="group flex items-center gap-4 text-zinc-600 hover:text-zinc-900 transition-colors duration-300"
           >
             <div
-              class="w-10 h-10 rounded-lg bg-zinc-900 flex items-center justify-center group-hover:bg-green-500/10 group-hover:text-green-500 transition-all"
+              class="w-10 h-10 rounded-lg bg-zinc-100 flex items-center justify-center group-hover:bg-green-500/10 group-hover:text-green-500 transition-all"
             >
               <WhatsApp class="w-5 h-5" />
             </div>
@@ -64,10 +64,10 @@ const currentYear = new Date().getFullYear();
           </a>
           <a
             href="mailto:ple@estudioenzetti.com.ar"
-            class="group flex items-center gap-4 text-zinc-400 hover:text-white transition-colors duration-300"
+            class="group flex items-center gap-4 text-zinc-600 hover:text-zinc-900 transition-colors duration-300"
           >
             <div
-              class="w-10 h-10 rounded-lg bg-zinc-900 flex items-center justify-center group-hover:bg-accent/10 group-hover:text-accent transition-all"
+              class="w-10 h-10 rounded-lg bg-zinc-100 flex items-center justify-center group-hover:bg-accent/10 group-hover:text-accent transition-all"
             >
               <Mail class="w-5 h-5" />
             </div>
@@ -78,19 +78,19 @@ const currentYear = new Date().getFullYear();
 
       {/* Location Section */}
       <div class="space-y-6">
-        <h4 class="text-white font-bold text-lg flex items-center gap-2">
+        <h4 class="text-zinc-900 font-bold text-lg flex items-center gap-2">
           Ubicación
           <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
         </h4>
         <div class="space-y-4">
           <div class="flex items-start gap-4">
             <div
-              class="w-10 h-10 rounded-lg bg-zinc-900 flex items-center justify-center text-accent"
+              class="w-10 h-10 rounded-lg bg-zinc-100 flex items-center justify-center text-accent"
             >
               <MapPin class="w-5 h-5" />
             </div>
-            <div class="text-sm text-zinc-400 leading-relaxed">
-              <p class="text-white font-medium">CABA, Buenos Aires</p>
+            <div class="text-sm text-zinc-600 leading-relaxed">
+              <p class="text-zinc-900 font-medium">CABA, Buenos Aires</p>
               <p>Lavalle 1710 - Piso 2 Of. 3</p>
               <p class="text-zinc-500 text-xs mt-1">
                 Lunes a Viernes: 09:00 - 18:00 hs
@@ -98,13 +98,13 @@ const currentYear = new Date().getFullYear();
             </div>
           </div>
           <div
-            class="w-full h-32 rounded-lg overflow-hidden border border-zinc-800 relative group mt-2"
+            class="w-full h-32 rounded-lg overflow-hidden border border-zinc-200 relative group mt-2"
           >
             <iframe
               width="100%"
               height="100%"
               src="https://maps.google.com/maps?q=Lavalle%201710%2C%20CABA%2C%20Buenos%20Aires&t=&z=15&ie=UTF8&iwloc=&output=embed"
-              style="border:0; filter: invert(100%) hue-rotate(180deg) brightness(85%) contrast(110%);"
+              style="border:0;"
               allowfullscreen=""
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -126,7 +126,7 @@ const currentYear = new Date().getFullYear();
 
       {/* Social Media Section */}
       <div class="space-y-6">
-        <h4 class="text-white font-bold text-lg flex items-center gap-2">
+        <h4 class="text-zinc-900 font-bold text-lg flex items-center gap-2">
           Redes Sociales
           <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
         </h4>
@@ -134,22 +134,22 @@ const currentYear = new Date().getFullYear();
           <a
             href="https://www.instagram.com/abogadosart_/"
             target="_blank"
-            class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-all duration-300"
+            class="group flex items-center gap-3 text-zinc-600 hover:text-zinc-900 transition-all duration-300"
           >
             <div
-              class="w-10 h-10 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center group-hover:bg-gradient-to-tr group-hover:from-purple-600 group-hover:to-orange-500 group-hover:border-transparent transition-all"
+              class="w-10 h-10 rounded-lg bg-zinc-100 border border-zinc-200 flex items-center justify-center group-hover:bg-gradient-to-tr group-hover:from-purple-600 group-hover:to-orange-500 group-hover:border-transparent transition-all"
             >
-              <Instagram class="w-5 h-5 text-white" />
+              <Instagram class="w-5 h-5 text-zinc-600 group-hover:text-white" />
             </div>
             <span class="text-sm font-medium">Instagram</span>
           </a>
           <a
             href="https://www.tiktok.com/@abogadosart_"
             target="_blank"
-            class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-all duration-300"
+            class="group flex items-center gap-3 text-zinc-600 hover:text-zinc-900 transition-all duration-300"
           >
             <div
-              class="w-10 h-10 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center group-hover:bg-white group-hover:text-black group-hover:border-transparent transition-all"
+              class="w-10 h-10 rounded-lg bg-zinc-100 border border-zinc-200 flex items-center justify-center group-hover:bg-black group-hover:text-white group-hover:border-transparent transition-all"
             >
               <TikTok class="w-5 h-5" />
             </div>
@@ -161,7 +161,7 @@ const currentYear = new Date().getFullYear();
 
     {/* Bottom Bar */}
     <div
-      class="mt-20 pt-8 border-t border-zinc-900 flex justify-center items-center"
+      class="mt-20 pt-8 border-t border-zinc-200 flex justify-center items-center"
     >
       <p class="text-zinc-500 text-xs text-center">
         © {currentYear} Estudio Jurídico Enzetti | Hecho por
