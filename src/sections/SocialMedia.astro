@@ -7,18 +7,10 @@ import TrendingUp from "../icons/TrendingUp.astro";
 import Users from "../icons/Users.astro";
 
 import { getInstagramData } from "../services/instagram";
+import { getTikTokData } from "../services/tiktok";
 
 const instagramData = await getInstagramData();
-
-const tiktokData = {
-  username: "@abogadosart_",
-  followers: 12500,
-  likes: 89400,
-  videos: 143,
-  profile_picture:
-    "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=150&h=150&fit=crop",
-  bio: "Abogados Especialistas ART",
-};
+const tiktokData = await getTikTokData();
 ---
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
@@ -133,107 +125,100 @@ const tiktokData = {
       )
     }
 
-    {/* TikTok Widget */}
-    <div
-      class="bg-white rounded-3xl shadow-xl p-8 hover:shadow-2xl transition-shadow duration-300 card"
-    >
-      {/* Header */}
-      <div class="flex items-center justify-between mb-6">
-        <div class="flex items-center space-x-4">
-          <div class="w-16 h-16 rounded-full bg-black p-0.5">
-            <div class="w-full h-full rounded-full bg-white p-0.5">
-              <img
-                src={tiktokData.profile_picture}
-                alt="TikTok profile"
-                width="64"
-                height="64"
-                loading="lazy"
-                class="w-full h-full rounded-full object-cover"
-              />
-            </div>
-          </div>
-          <div>
-            <h4 class="text-xl font-bold text-primary">
-              {tiktokData.username}
-            </h4>
-            <p class="text-sm text-gray-500">Abogados ART</p>
-          </div>
-        </div>
-        <TikTok class="size-9" />
-      </div>
-
-      {/* Stats */}
-      <div class="space-y-6 mb-6 py-6 border-y border-gray-100">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center space-x-3">
-            <div
-              class="w-12 h-12 bg-black rounded-full flex items-center justify-center"
-            >
-              <span class="text-white text-xl">
-                <Users />
-              </span>
-            </div>
-            <div>
-              <div class="text-sm text-gray-500">Seguidores</div>
-              <div class="text-2xl font-bold text-accent">
-                {tiktokData.followers.toLocaleString()}
+    {
+      tiktokData && (
+        <div class="bg-white rounded-3xl shadow-xl p-8 hover:shadow-2xl transition-shadow duration-300 card">
+          {/* Header */}
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center space-x-4">
+              <div class="w-16 h-16 rounded-full bg-black p-0.5">
+                <div class="w-full h-full rounded-full bg-white p-0.5">
+                  <img
+                    src={tiktokData.profile_picture}
+                    alt="TikTok profile"
+                    width="64"
+                    height="64"
+                    loading="lazy"
+                    class="w-full h-full rounded-full object-cover"
+                  />
+                </div>
+              </div>
+              <div>
+                <h4 class="text-xl font-bold text-primary">
+                  {tiktokData.username}
+                </h4>
+                <p class="text-sm text-gray-500">Abogados ART</p>
               </div>
             </div>
+            <span class="text-4xl text-black">
+              <TikTok class="size-9" />
+            </span>
           </div>
-          <span class="text-2xl text-green-500">
-            <TrendingUp />
-          </span>
-        </div>
 
-        <div class="flex items-center justify-between">
-          <div class="flex items-center space-x-3">
-            <div
-              class="w-12 h-12 bg-accent rounded-full flex items-center justify-center"
-            >
-              <span class="text-white text-xl">
-                <HeartFilled />
-              </span>
-            </div>
-            <div>
-              <div class="text-sm text-gray-500">Me Gusta</div>
-              <div class="text-2xl font-bold text-primary">
-                {tiktokData.likes.toLocaleString()}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex items-center justify-between">
-          <div class="flex items-center space-x-3">
-            <div
-              class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center"
-            >
-              <span class="text-primary text-xl">
-                <PlayerPlay />
-              </span>
-            </div>
-            <div>
-              <div class="text-sm text-gray-500">Videos</div>
+          {/* Stats */}
+          <div class="grid grid-cols-3 gap-4 mb-6 py-6 border-y border-gray-100">
+            <div class="text-center">
               <div class="text-2xl font-bold text-primary">
                 {tiktokData.videos.toLocaleString()}
               </div>
+              <div class="text-sm text-gray-500">Videos</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold text-accent">
+                {tiktokData.followers.toLocaleString()}
+              </div>
+              <div class="text-sm text-gray-500">Seguidores</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold text-primary">
+                {tiktokData.likes.toLocaleString()}
+              </div>
+              <div class="text-sm text-gray-500">Me Gusta</div>
             </div>
           </div>
+
+          {/* Bio */}
+          <p class="text-gray-600 mb-6 text-center italic text-sm whitespace-pre-wrap">
+            "{tiktokData.bio}"
+          </p>
+
+          {/* Recent posts grid */}
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6">
+            {tiktokData.recent_posts.map((post) => (
+              <a
+                href={post.permalink}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="relative aspect-[9/16] rounded-lg overflow-hidden group cursor-pointer block"
+              >
+                <img
+                  src={post.image}
+                  alt={post.title || "TikTok video"}
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
+                  <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-xs flex items-center space-x-2">
+                    <span>
+                      <HeartFilled />
+                    </span>
+                    <span>{post.likes}</span>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          {/* Follow button */}
+          <a
+            href="https://www.tiktok.com/@abogadosart_"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full text-center bg-black hover:bg-gray-800 text-white font-bold py-3 rounded-lg transition-all duration-300 transform hover:scale-105"
+          >
+            Seguir en TikTok
+          </a>
         </div>
-      </div>
-
-      {/* Bio */}
-      <p class="text-gray-600 mb-6 text-center italic">"{tiktokData.bio}"</p>
-
-      {/* Follow button */}
-      <a
-        href="https://www.tiktok.com/@abogadosart_"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="block w-full text-center bg-black hover:bg-gray-800 text-white font-bold py-3 rounded-lg transition-all duration-300 transform hover:scale-105"
-      >
-        Seguir en TikTok
-      </a>
-    </div>
+      )
+    }
   </div>
 </div>

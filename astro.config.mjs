@@ -10,9 +10,10 @@ export default defineConfig({
   },
   site: "https://estudioenzetti.com",
   integrations: [sitemap()],
+  output: 'server',
   adapter: vercel({
     webAnalytics: {
-      enabled: true,
+      enabled: false,
     },
     isr: {
       expiration: 60 * 60 * 24,

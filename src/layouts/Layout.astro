@@ -5,6 +5,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import MobileMenu from "../components/MobileMenu.astro";
 import WhatsAppWidget from "../components/WhatsAppWidget.astro";
+import Analytics from "@vercel/analytics/astro";
 
 interface Props {
   title: string;
@@ -79,6 +80,7 @@ const schema = {
       type="application/ld+json"
       set:html={JSON.stringify(schema)}
     />
+    <Analytics />
   </head>
   <body
     class="antialiased text-primary selection:bg-accent selection:text-white"
