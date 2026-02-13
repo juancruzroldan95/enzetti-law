@@ -77,8 +77,10 @@ export const getInstagramData = async (): Promise<InstagramProfileDTO | null> =>
       return null;
     }
 
-    const userData: InstagramUserAPI = await userRes.json();
-    const mediaData: InstagramMediaAPI = await mediaRes.json();
+    const [userData, mediaData] = await Promise.all([
+      userRes.json() as Promise<InstagramUserAPI>,
+      mediaRes.json() as Promise<InstagramMediaAPI>,
+    ]);
 
     // Map to DTO
     return {
