@@ -2,10 +2,13 @@ import type { APIRoute } from "astro";
 import { getTikTokAccessToken } from "@utils/tiktok-auth";
 
 export const GET: APIRoute = async ({ request }) => {
-  const url = new URL(request.url);
+  // Provide a base URL in case request.url is relative (common in some serverless environments)
+  const url = new URL(request.url, "http://localhost");
   const code = url.searchParams.get("code");
   const error = url.searchParams.get("error");
 
+  console.log("Raw Request URL:", request.url);
+  console.log("Parsed Search Params:", Object.fromEntries(url.searchParams));
   console.log("TikTok Callback received:", { code, error });
 
   if (error) {
