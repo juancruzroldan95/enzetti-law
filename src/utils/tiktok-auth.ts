@@ -7,14 +7,18 @@ export const getTikTokAuthUrl = (state: string) => {
     throw new Error("TIKTOK_CLIENT_KEY or TIKTOK_REDIRECT_URI not set in environment variables");
   }
 
-  const url = new URL("https://www.tiktok.com/v2/auth/authorize/");
-  url.searchParams.append("client_key", clientKey);
-  url.searchParams.append("scope", scope);
-  url.searchParams.append("response_type", "code");
-  url.searchParams.append("redirect_uri", redirectUri);
-  url.searchParams.append("state", state);
+  const rootUrl = "https://www.tiktok.com/v2/auth/authorize/";
+  
+  // Manually construct params to control encoding perfectly
+  const params = [
+    `client_key=${clientKey}`,
+    `scope=${scope}`, // TikTok often prefers commas not encoded in the initial request or handled specifically
+    `response_type=code`,
+    `redirect_uri=${encodeURIComponent(redirectUri)}`,
+    `state=${state}`
+  ];
 
-  return url.toString();
+  return `${rootUrl}?${params.join("&")}`;
 };
 
 export const getTikTokAccessToken = async (code: string) => {
