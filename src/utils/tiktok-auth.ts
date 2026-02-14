@@ -1,7 +1,7 @@
 export const getTikTokAuthUrl = (state: string) => {
   const clientKey = import.meta.env.TIKTOK_CLIENT_KEY;
   const redirectUri = import.meta.env.TIKTOK_REDIRECT_URI;
-  const scope = "user.info.basic,video.list";
+  const scope = "user.info.basic,user.info.profile,user.info.stats,video.list";
   
   if (!clientKey || !redirectUri) {
     throw new Error("TIKTOK_CLIENT_KEY or TIKTOK_REDIRECT_URI not set in environment variables");
