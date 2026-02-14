@@ -1,11 +1,10 @@
 import type { APIRoute } from "astro";
 import { getTikTokAccessToken } from "@utils/tiktok-auth";
 
-export const GET: APIRoute = async ({ request, cookies }) => {
+export const GET: APIRoute = async ({ request }) => {
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
   const error = url.searchParams.get("error");
-  const codeVerifier = cookies.get("tiktok_code_verifier")?.value;
 
   if (error) {
     return new Response(`Error from TikTok: ${error}`, { status: 400 });
@@ -15,15 +14,8 @@ export const GET: APIRoute = async ({ request, cookies }) => {
     return new Response("No code provided", { status: 400 });
   }
 
-  if (!codeVerifier) {
-    return new Response("No code verifier found in cookies. Please try logging in again.", { status: 400 });
-  }
-
   try {
-    const data = await getTikTokAccessToken(code, codeVerifier);
-    
-    // Clean up cookie
-    cookies.delete("tiktok_code_verifier", { path: "/" });
+    const data = await getTikTokAccessToken(code);
     
     // Display the token to the user
     return new Response(

@@ -161,10 +161,29 @@ const currentYear = new Date().getFullYear();
 
     {/* Bottom Bar */}
     <div
-      class="mt-20 pt-8 border-t border-zinc-200 flex justify-center items-center"
+      class="mt-20 pt-8 border-t border-zinc-200 flex flex-col md:flex-row justify-between items-center gap-4"
     >
+      <div class="flex flex-col md:flex-row gap-4 items-center">
+        <p class="text-zinc-500 text-xs text-center md:text-left">
+          © {currentYear} Estudio Jurídico Enzetti
+        </p>
+        <div class="hidden md:block w-1 h-1 rounded-full bg-zinc-300"></div>
+        <div class="flex gap-4 text-xs text-zinc-500">
+          <a
+            href="/terminos-y-condiciones"
+            class="hover:text-zinc-900 transition-colors"
+            >Términos y Condiciones</a
+          >
+          <a
+            href="/politica-de-privacidad"
+            class="hover:text-zinc-900 transition-colors"
+            >Política de Privacidad</a
+          >
+        </div>
+      </div>
+
       <p class="text-zinc-500 text-xs text-center">
-        © {currentYear} Estudio Jurídico Enzetti | Hecho por
+        Hecho por
         <a
           href="https://jcroldan.dev"
           target="_blank"
