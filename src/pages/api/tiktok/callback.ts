@@ -6,16 +6,22 @@ export const GET: APIRoute = async ({ request }) => {
   const code = url.searchParams.get("code");
   const error = url.searchParams.get("error");
 
+  console.log("TikTok Callback received:", { code, error });
+
   if (error) {
+    console.error("TikTok Error:", error);
     return new Response(`Error from TikTok: ${error}`, { status: 400 });
   }
 
   if (!code) {
+    console.error("No code provided");
     return new Response("No code provided", { status: 400 });
   }
 
   try {
+    console.log("Exchanging code for token...");
     const data = await getTikTokAccessToken(code);
+    console.log("Token exchange successful:", data);
     
     // Display the token to the user
     return new Response(
@@ -36,6 +42,7 @@ export const GET: APIRoute = async ({ request }) => {
       }
     );
   } catch (err: any) {
+    console.error("Error in callback:", err);
     return new Response(`Error exchanging code: ${err.message}`, { status: 500 });
   }
 };
