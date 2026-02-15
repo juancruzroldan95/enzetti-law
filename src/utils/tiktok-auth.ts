@@ -53,3 +53,46 @@ export const getTikTokAccessToken = async (code: string) => {
 
   return response.json();
 };
+
+/**
+ * Exchanges a refresh token for a fresh access token.
+ * Used by getTikTokData() on every ISR cache miss (~once/day).
+ * The refresh token itself is valid for 365 days from initial issuance.
+ */
+export const refreshAccessToken = async (refreshToken: string): Promise<string> => {
+  const clientKey = import.meta.env.TIKTOK_CLIENT_KEY;
+  const clientSecret = import.meta.env.TIKTOK_CLIENT_SECRET;
+
+  if (!clientKey || !clientSecret) {
+    throw new Error("TIKTOK_CLIENT_KEY or TIKTOK_CLIENT_SECRET not set in environment variables");
+  }
+
+  const params = new URLSearchParams();
+  params.append("client_key", clientKey);
+  params.append("client_secret", clientSecret);
+  params.append("grant_type", "refresh_token");
+  params.append("refresh_token", refreshToken);
+
+  const response = await fetch("https://open.tiktokapis.com/v2/oauth/token/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Cache-Control": "no-cache",
+    },
+    body: params,
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`TikTok Refresh Token Error: ${errorText}`);
+  }
+
+  const data = await response.json();
+  
+  if (!data.access_token) {
+    throw new Error(`TikTok Refresh failed: ${JSON.stringify(data)}`);
+  }
+
+  console.log("TikTok access token refreshed successfully");
+  return data.access_token;
+};

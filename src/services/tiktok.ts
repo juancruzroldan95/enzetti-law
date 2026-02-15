@@ -62,22 +62,25 @@ export interface TikTokProfileDTO {
   recent_posts: TikTokPostDTO[];
 }
 
-export const getTikTokData = async (): Promise<TikTokProfileDTO | null> => {
-  const accessToken = import.meta.env.TIKTOK_ACCESS_TOKEN;
+import { refreshAccessToken } from "@utils/tiktok-auth";
 
-  // If no token, return null to hide the section
-  if (!accessToken) {
-    // console.warn("TikTok credentials not found.");
+export const getTikTokData = async (): Promise<TikTokProfileDTO | null> => {
+  const refreshToken = import.meta.env.TIKTOK_REFRESH_TOKEN;
+
+  // If no refresh token, return null to hide the section
+  if (!refreshToken) {
     return null;
   }
 
   try {
-    // 1. Fetch User Info
-    // Fields based on TikTok Display API v2
+    // Get a fresh access token using the refresh token
+    const accessToken = await refreshAccessToken(refreshToken);
+
+    // User Info fields (requires user.info.basic, user.info.profile, user.info.stats scopes)
     const userFields = "avatar_url,display_name,bio_description,follower_count,likes_count,video_count";
     const userUrl = `https://open.tiktokapis.com/v2/user/info/?fields=${userFields}`;
 
-    // 2. Fetch Recent Videos
+    // Recent Videos
     const videoFields = "id,title,cover_image_url,embed_link,like_count,share_url,view_count";
     const videoUrl = `https://open.tiktokapis.com/v2/video/list/?fields=${videoFields}`;
 
@@ -96,11 +99,10 @@ export const getTikTokData = async (): Promise<TikTokProfileDTO | null> => {
     ]);
 
     if (!userRes.ok || !videoRes.ok) {
-      console.error(
-        "TikTok API Error:",
-        await userRes.text(),
-        await videoRes.text()
-      );
+      console.error("TikTok API HTTP Error:", {
+        userStatus: userRes.status,
+        videoStatus: videoRes.status,
+      });
       return null;
     }
 
@@ -109,12 +111,11 @@ export const getTikTokData = async (): Promise<TikTokProfileDTO | null> => {
       videoRes.json() as Promise<TikTokVideoAPIResponse>,
     ]);
 
+    console.log("TikTok User Data:", JSON.stringify(userData, null, 2));
+    console.log("TikTok Video Data:", JSON.stringify(videoData, null, 2));
+
     if (userData.error.code !== "ok" || videoData.error.code !== "ok") {
-       console.error(
-        "TikTok API Logic Error:",
-        userData.error,
-        videoData.error
-      );
+      console.error("TikTok API Logic Error:", userData.error, videoData.error);
       return null;
     }
 
@@ -122,13 +123,13 @@ export const getTikTokData = async (): Promise<TikTokProfileDTO | null> => {
     const videos = videoData.data.videos || [];
 
     // Map to DTO
-    return {
+    const result: TikTokProfileDTO = {
       username: user.display_name,
       followers: user.follower_count || 0,
       likes: user.likes_count || 0,
       videos: user.video_count || videos.length,
       profile_picture: user.avatar_url,
-      bio: user.bio_description,
+      bio: user.bio_description || "",
       recent_posts: videos.map((video) => ({
         id: video.id,
         image: video.cover_image_url,
@@ -137,6 +138,9 @@ export const getTikTokData = async (): Promise<TikTokProfileDTO | null> => {
         permalink: video.share_url || video.embed_link,
       })),
     };
+
+    console.log("TikTok DTO Result:", JSON.stringify(result, null, 2));
+    return result;
 
   } catch (error) {
     console.error("Failed to fetch TikTok data:", error);
