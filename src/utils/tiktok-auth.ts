@@ -93,6 +93,5 @@ export const refreshAccessToken = async (refreshToken: string): Promise<string> 
     throw new Error(`TikTok Refresh failed: ${JSON.stringify(data)}`);
   }
 
-  console.log("TikTok access token refreshed successfully");
   return data.access_token;
 };

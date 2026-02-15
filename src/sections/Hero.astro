@@ -7,8 +7,12 @@ import Check from "../icons/Check.astro";
 
 {/* Background with subtle pattern */}
 <div
-  class="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100 z-0"
+  class="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"
 >
+  <div
+    class="absolute inset-0 bg-white/40 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"
+  >
+  </div>
 </div>
 
 {/* Decorative elements */}
@@ -115,17 +119,34 @@ import Check from "../icons/Check.astro";
       </div>
 
       {/* Stats */}
-      <div class="grid grid-cols-3 gap-6 pt-8 border-t border-gray-200">
+      <div
+        id="hero-stats"
+        class="grid grid-cols-3 gap-6 pt-8 border-t border-gray-200"
+      >
         <div class="opacity-0 translate-y-4 hero-stat">
-          <div class="text-3xl font-bold text-accent">30+</div>
+          <div
+            class="text-3xl font-bold text-accent flex items-center justify-center lg:justify-start"
+          >
+            <span class="counter-value" data-target="30">0</span>
+            <span>+</span>
+          </div>
           <div class="text-sm text-gray-600 mt-1">Años de experiencia</div>
         </div>
         <div class="opacity-0 translate-y-4 hero-stat">
-          <div class="text-3xl font-bold text-accent">5.0</div>
+          <div
+            class="text-3xl font-bold text-accent flex items-center justify-center lg:justify-start"
+          >
+            <span class="counter-value" data-target="5.0">0.0</span>
+          </div>
           <div class="text-sm text-gray-600 mt-1">Calificación Google</div>
         </div>
         <div class="opacity-0 translate-y-4 hero-stat">
-          <div class="text-3xl font-bold text-accent">320+</div>
+          <div
+            class="text-3xl font-bold text-accent flex items-center justify-center lg:justify-start"
+          >
+            <span class="counter-value" data-target="320">0</span>
+            <span>+</span>
+          </div>
           <div class="text-sm text-gray-600 mt-1">Reseñas positivas</div>
         </div>
       </div>
@@ -219,23 +240,10 @@ import Check from "../icons/Check.astro";
       </div>
     </div>
   </div>
-
-  {/* Mobile Background Only Layer (Push to back) */}
-  <div class="absolute inset-0 z-0 lg:hidden pointer-events-none">
-    <img
-      src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=900&fit=crop"
-      alt="Abogados profesionales"
-      class="w-full h-full object-cover opacity-25"
-    />
-    <div
-      class="absolute inset-0 bg-gradient-to-r from-gray-50/70 via-gray-50/30 to-transparent"
-    >
-    </div>
-  </div>
 </div>
 
 <script>
-  import { animate, stagger } from "motion";
+  import { animate, stagger, inView } from "motion";
 
   // Sequence of animations
   const sequence = [
@@ -324,6 +332,31 @@ import Check from "../icons/Check.astro";
     { opacity: [0, 1], y: [20, 0] },
     { delay: stagger(0.2, { startDelay: 1.8 }), duration: 0.5 },
   );
+
+  // Stats Counter Animation
+  const counterStats = document.querySelectorAll(".counter-value");
+  inView("#hero-stats", () => {
+    counterStats.forEach((counter) => {
+      const targetStr = counter.getAttribute("data-target");
+      if (!targetStr) return;
+      const target = parseFloat(targetStr);
+      const isFloat = targetStr.includes(".");
+
+      // @ts-expect-error - Motion's type defs don't match this valid overload
+      animate(0, target, {
+        duration: 1.5,
+        delay: 1.8, // Match the visual appearance delay
+        easing: "ease-out",
+        onUpdate: (latest) => {
+          if (isFloat) {
+            counter.textContent = latest.toFixed(1);
+          } else {
+            counter.textContent = Math.round(latest).toString();
+          }
+        },
+      });
+    });
+  });
 
   animate(
     ".hero-image",

@@ -38,7 +38,7 @@ const tiktokData = await getTikTokData();
               <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-purple-600 via-pink-600 to-orange-500 p-0.5 shrink-0">
                 <div class="w-full h-full rounded-full bg-white p-0.5">
                   <img
-                    src={instagramData.profile_picture}
+                    src={instagramData.profilePicture}
                     alt="Instagram profile"
                     width="64"
                     height="64"
@@ -88,7 +88,7 @@ const tiktokData = await getTikTokData();
 
           {/* Recent posts grid */}
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6">
-            {instagramData.recent_posts.map((post) => (
+            {instagramData.recentPosts.map((post) => (
               <a
                 href={post.permalink}
                 target="_blank"
@@ -131,10 +131,10 @@ const tiktokData = await getTikTokData();
           {/* Header */}
           <div class="flex items-center justify-between mb-6">
             <div class="flex items-center space-x-4">
-              <div class="w-16 h-16 rounded-full bg-black p-0.5">
+              <div class="w-16 h-16 rounded-full bg-black p-0.5 shrink-0">
                 <div class="w-full h-full rounded-full bg-white p-0.5">
                   <img
-                    src={tiktokData.profile_picture}
+                    src={tiktokData.profilePicture}
                     alt="TikTok profile"
                     width="64"
                     height="64"
@@ -184,12 +184,12 @@ const tiktokData = await getTikTokData();
 
           {/* Recent posts grid */}
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6">
-            {tiktokData.recent_posts.map((post) => (
+            {tiktokData.recentPosts.map((post) => (
               <a
                 href={post.permalink}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="relative aspect-[9/16] rounded-lg overflow-hidden group cursor-pointer block"
+                class="relative aspect-square rounded-lg overflow-hidden group cursor-pointer block"
               >
                 <img
                   src={post.image}
@@ -197,11 +197,15 @@ const tiktokData = await getTikTokData();
                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
                 <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
-                  <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-xs flex items-center space-x-2">
-                    <span>
+                  <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-xs flex flex-col items-center space-y-1">
+                    <span class="flex items-center space-x-1">
                       <HeartFilled />
+                      <span>{post.likes}</span>
                     </span>
-                    <span>{post.likes}</span>
+                    <span class="flex items-center space-x-1">
+                      <PlayerPlay />
+                      <span>{post.views}</span>
+                    </span>
                   </div>
                 </div>
               </a>

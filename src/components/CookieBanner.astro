@@ -1,0 +1,73 @@
+<!-- Cookie Consent Banner -->
+<div
+  id="cookie-banner"
+  class="fixed bottom-4 left-4 z-50 max-w-xs bg-white/90 backdrop-blur-md border border-gray-200 rounded-xl shadow-lg p-4 translate-y-8 opacity-0 transition-all duration-500 ease-out pointer-events-none"
+>
+  <p class="text-sm text-gray-600 leading-relaxed">
+    Usamos cookies para mejorar tu experiencia.
+    <a
+      href="/politica-de-privacidad"
+      class="text-accent hover:underline font-medium"
+    >
+      Más info
+    </a>
+  </p>
+  <div class="flex gap-2 mt-3">
+    <button
+      id="cookie-accept"
+      class="flex-1 bg-primary text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-primary-dark transition-colors duration-200 cursor-pointer"
+    >
+      Aceptar
+    </button>
+    <button
+      id="cookie-reject"
+      class="flex-1 border border-gray-300 text-gray-600 text-sm font-semibold py-2 px-4 rounded-lg hover:bg-gray-100 transition-colors duration-200 cursor-pointer"
+    >
+      Rechazar
+    </button>
+  </div>
+</div>
+
+<script>
+  const banner = document.getElementById("cookie-banner");
+  const acceptBtn = document.getElementById("cookie-accept");
+  const rejectBtn = document.getElementById("cookie-reject");
+
+  const consent = localStorage.getItem("cookie-consent");
+
+  function hideBanner() {
+    if (!banner) return;
+    banner.classList.remove(
+      "translate-y-0",
+      "opacity-100",
+      "pointer-events-auto",
+    );
+    banner.classList.add("translate-y-8", "opacity-0", "pointer-events-none");
+  }
+
+  function showBanner() {
+    if (!banner) return;
+    banner.classList.remove(
+      "translate-y-8",
+      "opacity-0",
+      "pointer-events-none",
+    );
+    banner.classList.add("translate-y-0", "opacity-100", "pointer-events-auto");
+  }
+
+  if (!consent) {
+    setTimeout(() => {
+      showBanner();
+    }, 1500);
+  }
+
+  acceptBtn?.addEventListener("click", () => {
+    localStorage.setItem("cookie-consent", "accepted");
+    hideBanner();
+  });
+
+  rejectBtn?.addEventListener("click", () => {
+    localStorage.setItem("cookie-consent", "rejected");
+    hideBanner();
+  });
+</script>

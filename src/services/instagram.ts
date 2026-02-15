@@ -42,9 +42,9 @@ export interface InstagramProfileDTO {
   followers: number;
   following: number;
   posts: number;
-  profile_picture: string;
+  profilePicture: string;
   bio: string;
-  recent_posts: InstagramPostDTO[];
+  recentPosts: InstagramPostDTO[];
 }
 
 export const getInstagramData = async (): Promise<InstagramProfileDTO | null> => {
@@ -90,8 +90,8 @@ export const getInstagramData = async (): Promise<InstagramProfileDTO | null> =>
       following: userData.follows_count,
       posts: userData.media_count,
       bio: userData.biography, 
-      profile_picture: userData.profile_picture_url,
-      recent_posts: mediaData.data.map((post) => ({
+      profilePicture: userData.profile_picture_url,
+      recentPosts: mediaData.data.map((post) => ({
         id: post.id,
         image: post.media_type === "VIDEO" && post.thumbnail_url ? post.thumbnail_url : post.media_url,
         likes: post.like_count || 0,

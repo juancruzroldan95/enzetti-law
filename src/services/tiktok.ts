@@ -48,6 +48,7 @@ export interface TikTokPostDTO {
   id: string;
   image: string;
   likes: number;
+  views: number;
   title: string;
   permalink: string;
 }
@@ -57,9 +58,9 @@ export interface TikTokProfileDTO {
   followers: number;
   likes: number;
   videos: number;
-  profile_picture: string;
+  profilePicture: string;
   bio: string;
-  recent_posts: TikTokPostDTO[];
+  recentPosts: TikTokPostDTO[];
 }
 
 import { refreshAccessToken } from "@utils/tiktok-auth";
@@ -69,6 +70,7 @@ export const getTikTokData = async (): Promise<TikTokProfileDTO | null> => {
 
   // If no refresh token, return null to hide the section
   if (!refreshToken) {
+    console.log("No refresh token found");
     return null;
   }
 
@@ -111,9 +113,6 @@ export const getTikTokData = async (): Promise<TikTokProfileDTO | null> => {
       videoRes.json() as Promise<TikTokVideoAPIResponse>,
     ]);
 
-    console.log("TikTok User Data:", JSON.stringify(userData, null, 2));
-    console.log("TikTok Video Data:", JSON.stringify(videoData, null, 2));
-
     if (userData.error.code !== "ok" || videoData.error.code !== "ok") {
       console.error("TikTok API Logic Error:", userData.error, videoData.error);
       return null;
@@ -128,18 +127,18 @@ export const getTikTokData = async (): Promise<TikTokProfileDTO | null> => {
       followers: user.follower_count || 0,
       likes: user.likes_count || 0,
       videos: user.video_count || videos.length,
-      profile_picture: user.avatar_url,
+      profilePicture: user.avatar_url,
       bio: user.bio_description || "",
-      recent_posts: videos.map((video) => ({
+      recentPosts: videos.map((video) => ({
         id: video.id,
         image: video.cover_image_url,
         likes: video.like_count || 0,
+        views: video.view_count || 0,
         title: video.title || "",
         permalink: video.share_url || video.embed_link,
       })),
     };
 
-    console.log("TikTok DTO Result:", JSON.stringify(result, null, 2));
     return result;
 
   } catch (error) {
