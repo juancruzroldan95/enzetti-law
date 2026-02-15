@@ -12,23 +12,26 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  noindex?: boolean;
 }
 
 const {
   title,
-  description = "Estudio Jurídico Enzetti. Asesoramiento legal integral, derecho civil, comercial y laboral. Abogados especialistas en Córdoba.",
-  image = "/og-image.jpg",
+  description = "Estudio Jurídico Enzetti. Asesoramiento legal integral en accidentes de trabajo, enfermedades profesionales y reclamos a ART en Buenos Aires.",
+  image = "/og-image.webp",
+  noindex = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const socialImageURL = new URL(image, Astro.url);
+const socialImageURL = new URL(image, Astro.site);
 
 const schema = {
   "@context": "https://schema.org",
   "@type": "LegalService",
   name: "Estudio Enzetti",
-  image: socialImageURL,
-  url: Astro.site,
+  image: socialImageURL.href,
+  logo: socialImageURL.href,
+  url: Astro.site?.toString(),
   telephone: "+5491143711602",
   address: {
     "@type": "PostalAddress",
@@ -44,6 +47,18 @@ const schema = {
     longitude: -58.39100636441745,
   },
   description: description,
+  priceRange: "$$",
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "09:00",
+    closes: "18:00",
+  },
+  areaServed: {
+    "@type": "City",
+    name: "Buenos Aires",
+  },
+  sameAs: [],
 };
 ---
 
@@ -51,29 +66,39 @@ const schema = {
 <html lang="es-AR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonicalURL} />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
-    <title>{title} | Estudio Enzetti</title>
+    <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
+    {noindex ? (
+      <meta name="robots" content="noindex, nofollow" />
+    ) : (
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    )}
+    <meta name="theme-color" content="#1a1a2e" />
 
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url} />
-    <meta property="og:title" content={`${title} | Estudio Enzetti`} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={socialImageURL} />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:alt" content="Estudio Enzetti - Abogados Laborales y ART" />
+    <meta property="og:site_name" content="Estudio Enzetti" />
+    <meta property="og:locale" content="es_AR" />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={Astro.url} />
-    <meta property="twitter:title" content={`${title} | Estudio Enzetti`} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={socialImageURL} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageURL} />
+    <meta name="twitter:image:alt" content="Estudio Enzetti - Abogados Laborales y ART" />
 
     <!-- Schema.org JSON-LD -->
     <script
