@@ -1,3 +1,5 @@
+import * as Sentry from "@sentry/astro";
+
 // Raw API Interfaces (What TikTok returns)
 interface TikTokUserAPIResponse {
   data: {
@@ -101,6 +103,13 @@ export const getTikTokData = async (): Promise<TikTokProfileDTO | null> => {
     ]);
 
     if (!userRes.ok || !videoRes.ok) {
+      const error = new Error(
+        `TikTok API HTTP Error: user=${userRes.status}, video=${videoRes.status}`
+      );
+      Sentry.captureException(error, {
+        tags: { service: "tiktok" },
+        extra: { userStatus: userRes.status, videoStatus: videoRes.status },
+      });
       console.error("TikTok API HTTP Error:", {
         userStatus: userRes.status,
         videoStatus: videoRes.status,
@@ -114,6 +123,13 @@ export const getTikTokData = async (): Promise<TikTokProfileDTO | null> => {
     ]);
 
     if (userData.error.code !== "ok" || videoData.error.code !== "ok") {
+      const error = new Error(
+        `TikTok API Logic Error: user=${userData.error.code}, video=${videoData.error.code}`
+      );
+      Sentry.captureException(error, {
+        tags: { service: "tiktok" },
+        extra: { userError: userData.error, videoError: videoData.error },
+      });
       console.error("TikTok API Logic Error:", userData.error, videoData.error);
       return null;
     }
@@ -142,6 +158,9 @@ export const getTikTokData = async (): Promise<TikTokProfileDTO | null> => {
     return result;
 
   } catch (error) {
+    Sentry.captureException(error, {
+      tags: { service: "tiktok" },
+    });
     console.error("Failed to fetch TikTok data:", error);
     return null;
   }

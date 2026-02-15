@@ -1,3 +1,5 @@
+import * as Sentry from "@sentry/astro";
+
 // Output DTOs (What our app uses)
 export interface ReviewDTO {
   id: string;
@@ -71,7 +73,14 @@ export async function getGoogleReviews(): Promise<GoogleReviewsDTO | null> {
     );
 
     if (!response.ok) {
-      throw new Error(`Google Places API error: ${response.statusText}`);
+      const error = new Error(
+        `Google Places API error: ${response.status} ${response.statusText}`
+      );
+      Sentry.captureException(error, {
+        tags: { service: "google" },
+        extra: { status: response.status, statusText: response.statusText },
+      });
+      throw error;
     }
 
     const data: GooglePlaceDetailsAPI = await response.json();
@@ -91,6 +100,9 @@ export async function getGoogleReviews(): Promise<GoogleReviewsDTO | null> {
       url: data.googleMapsUri,
     };
   } catch (error) {
+    Sentry.captureException(error, {
+      tags: { service: "google" },
+    });
     console.error("Error fetching Google Reviews:", error);
     return null;
   }

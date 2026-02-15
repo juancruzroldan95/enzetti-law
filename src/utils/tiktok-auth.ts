@@ -1,3 +1,5 @@
+import * as Sentry from "@sentry/astro";
+
 export const getTikTokAuthUrl = (state: string) => {
   const clientKey = import.meta.env.TIKTOK_CLIENT_KEY;
   const redirectUri = import.meta.env.TIKTOK_REDIRECT_URI;
@@ -84,13 +86,23 @@ export const refreshAccessToken = async (refreshToken: string): Promise<string> 
 
   if (!response.ok) {
     const errorText = await response.text();
-    throw new Error(`TikTok Refresh Token Error: ${errorText}`);
+    const error = new Error(`TikTok Refresh Token Error: ${errorText}`);
+    Sentry.captureException(error, {
+      tags: { service: "tiktok-auth" },
+      extra: { status: response.status, errorText },
+    });
+    throw error;
   }
 
   const data = await response.json();
   
   if (!data.access_token) {
-    throw new Error(`TikTok Refresh failed: ${JSON.stringify(data)}`);
+    const error = new Error(`TikTok Refresh failed: ${JSON.stringify(data)}`);
+    Sentry.captureException(error, {
+      tags: { service: "tiktok-auth" },
+      extra: { responseData: data },
+    });
+    throw error;
   }
 
   return data.access_token;

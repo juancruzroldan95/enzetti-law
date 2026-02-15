@@ -1,3 +1,5 @@
+import * as Sentry from "@sentry/astro";
+
 // Raw API Interfaces (What Instagram returns)
 interface InstagramUserAPI {
   biography: string;
@@ -69,11 +71,14 @@ export const getInstagramData = async (): Promise<InstagramProfileDTO | null> =>
     ]);
 
     if (!userRes.ok || !mediaRes.ok) {
-      console.error(
-        "Instagram API Error:",
-        await userRes.text(),
-        await mediaRes.text()
+      const error = new Error(
+        `Instagram API HTTP Error: user=${userRes.status}, media=${mediaRes.status}`
       );
+      Sentry.captureException(error, {
+        tags: { service: "instagram" },
+        extra: { userStatus: userRes.status, mediaStatus: mediaRes.status },
+      });
+      console.error("Instagram API Error:", userRes.status, mediaRes.status);
       return null;
     }
 
@@ -101,6 +106,9 @@ export const getInstagramData = async (): Promise<InstagramProfileDTO | null> =>
       })),
     };
   } catch (error) {
+    Sentry.captureException(error, {
+      tags: { service: "instagram" },
+    });
     console.error("Failed to fetch Instagram data:", error);
     return null;
   }
