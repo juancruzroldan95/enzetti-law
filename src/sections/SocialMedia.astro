@@ -60,22 +60,22 @@ const tiktokData = await getTikTokData();
           </div>
 
           {/* Stats */}
-          <div class="grid grid-cols-3 gap-4 mb-6 py-6 border-y border-gray-100">
+          <div id="ig-stats" class="grid grid-cols-3 gap-4 mb-6 py-6 border-y border-gray-100">
             <div class="text-center">
               <div class="text-2xl font-bold text-primary">
-                {instagramData.posts.toLocaleString()}
+                <span class="social-counter" data-target={instagramData.posts}>0</span>
               </div>
               <div class="text-sm text-gray-500">Posts</div>
             </div>
             <div class="text-center">
               <div class="text-2xl font-bold text-accent">
-                {instagramData.followers.toLocaleString()}
+                <span class="social-counter" data-target={instagramData.followers}>0</span>
               </div>
               <div class="text-sm text-gray-500">Seguidores</div>
             </div>
             <div class="text-center">
               <div class="text-2xl font-bold text-primary">
-                {instagramData.following.toLocaleString()}
+                <span class="social-counter" data-target={instagramData.following}>0</span>
               </div>
               <div class="text-sm text-gray-500">Siguiendo</div>
             </div>
@@ -156,22 +156,22 @@ const tiktokData = await getTikTokData();
           </div>
 
           {/* Stats */}
-          <div class="grid grid-cols-3 gap-4 mb-6 py-6 border-y border-gray-100">
+          <div id="tiktok-stats" class="grid grid-cols-3 gap-4 mb-6 py-6 border-y border-gray-100">
             <div class="text-center">
               <div class="text-2xl font-bold text-primary">
-                {tiktokData.videos.toLocaleString()}
+                <span class="social-counter" data-target={tiktokData.videos}>0</span>
               </div>
               <div class="text-sm text-gray-500">Videos</div>
             </div>
             <div class="text-center">
               <div class="text-2xl font-bold text-accent">
-                {tiktokData.followers.toLocaleString()}
+                <span class="social-counter" data-target={tiktokData.followers}>0</span>
               </div>
               <div class="text-sm text-gray-500">Seguidores</div>
             </div>
             <div class="text-center">
               <div class="text-2xl font-bold text-primary">
-                {tiktokData.likes.toLocaleString()}
+                <span class="social-counter" data-target={tiktokData.likes}>0</span>
               </div>
               <div class="text-sm text-gray-500">Me Gusta</div>
             </div>
@@ -226,3 +226,33 @@ const tiktokData = await getTikTokData();
     }
   </div>
 </div>
+
+<script>
+  import { animate, inView } from "motion";
+
+  function animateCounters(containerId: string) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    inView(container, () => {
+      const counters = container.querySelectorAll(".social-counter");
+      counters.forEach((counter) => {
+        const targetStr = counter.getAttribute("data-target");
+        if (!targetStr) return;
+        const target = parseFloat(targetStr);
+
+        // @ts-expect-error - Motion's type defs don't match this valid overload
+        animate(0, target, {
+          duration: 1.5,
+          easing: "ease-out",
+          onUpdate: (latest: number) => {
+            counter.textContent = Math.round(latest).toLocaleString();
+          },
+        });
+      });
+    });
+  }
+
+  animateCounters("ig-stats");
+  animateCounters("tiktok-stats");
+</script>
