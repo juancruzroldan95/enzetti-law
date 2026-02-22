@@ -158,38 +158,37 @@ import Check from "../icons/Check.astro";
         id="video-container"
         class="aspect-square rounded-2xl overflow-hidden shadow-2xl relative group cursor-pointer"
       >
+        {/* Poster — shown by default, zero video bytes loaded */}
+        <img
+          id="hero-poster"
+          src="/videos/poster-11.1.webp"
+          alt="Video del equipo Estudio Enzetti"
+          class="w-full h-full object-cover"
+        />
+
+        {/* Video — src injected on click */}
         <video
           id="hero-video"
-          src="/videos/11.1_small.mp4"
-          class="w-full h-full object-cover"
-          autoplay
+          class="w-full h-full object-cover absolute inset-0 hidden"
           loop
           muted
-          playsinline></video>
+          playsinline
+          controls
+        ></video>
 
-        {/* Custom Controls Overlay */}
+        {/* Play overlay — always visible over poster */}
         <div
           id="play-overlay"
-          class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center opacity-0 hover:opacity-100"
+          class="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-all duration-300 flex items-center justify-center"
         >
           <div
             id="play-button"
             class="w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300 scale-90 group-hover:scale-100"
           >
-            {/* Play Icon (Initial State: Hidden/Pause because it autoplays) */}
-            <svg
-              id="icon-pause"
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-8 h-8 text-primary"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"></path>
-            </svg>
             <svg
               id="icon-play"
               xmlns="http://www.w3.org/2000/svg"
-              class="w-8 h-8 text-primary hidden ml-1"
+              class="w-8 h-8 text-primary ml-1"
               viewBox="0 0 24 24"
               fill="currentColor"
             >
@@ -197,46 +196,6 @@ import Check from "../icons/Check.astro";
             </svg>
           </div>
         </div>
-
-        {/* Mute Button */}
-        <button
-          id="mute-button"
-          class="absolute bottom-4 right-4 p-2 bg-black/50 hover:bg-black/70 backdrop-blur-md rounded-full text-white transition-all duration-300 z-30"
-        >
-          {/* Muted Icon (Initial State) */}
-          <svg
-            id="icon-muted"
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-5 h-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
-            <line x1="23" y1="9" x2="17" y2="15"></line>
-            <line x1="17" y1="9" x2="23" y2="15"></line>
-          </svg>
-          {/* Sound On Icon */}
-          <svg
-            id="icon-sound"
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-5 h-5 hidden"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
-            <path
-              d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"
-            ></path>
-          </svg>
-        </button>
       </div>
     </div>
   </div>
@@ -364,73 +323,22 @@ import Check from "../icons/Check.astro";
     { duration: 1, delay: 0.5 },
   );
 
-  // Video Custom Controls Logic
-  const video = document.getElementById("hero-video") as HTMLVideoElement;
+  // Hero video: inject src only on first click — no bytes loaded until then
+  const heroVideo = document.getElementById("hero-video") as HTMLVideoElement;
+  const heroPoster = document.getElementById("hero-poster") as HTMLImageElement;
   const videoContainer = document.getElementById("video-container");
   const playOverlay = document.getElementById("play-overlay");
-  const muteButton = document.getElementById("mute-button");
 
-  const iconPlay = document.getElementById("icon-play");
-  const iconPause = document.getElementById("icon-pause");
-  const iconMuted = document.getElementById("icon-muted");
-  const iconSound = document.getElementById("icon-sound");
-
-  if (video && videoContainer && playOverlay && muteButton) {
-    // 1. Play/Pause Handler
-    const togglePlay = (e: MouseEvent) => {
-      // Don't toggle play if clicking mute button
-      if (muteButton.contains(e.target as Node)) return;
-
-      if (video.paused) {
-        video.play();
-        updatePlayIcon(true);
-      } else {
-        video.pause();
-        updatePlayIcon(false);
+  if (heroVideo && heroPoster && videoContainer && playOverlay) {
+    videoContainer.addEventListener("click", () => {
+      if (heroVideo.classList.contains("hidden")) {
+        heroVideo.src = "/videos/11.1_small.mp4";
+        heroPoster.classList.add("hidden");
+        playOverlay.classList.add("hidden");
+        heroVideo.classList.remove("hidden");
+        heroVideo.muted = false;
+        heroVideo.play();
       }
-    };
-
-    videoContainer.addEventListener("click", togglePlay);
-
-    // 2. Mute/Unmute Handler
-    muteButton.addEventListener("click", (e: MouseEvent) => {
-      e.stopPropagation(); // Prevent triggering play/pause
-      video.muted = !video.muted;
-      updateMuteIcon(video.muted);
-    });
-
-    // 3. UI Updaters
-    function updatePlayIcon(isPlaying: boolean) {
-      if (isPlaying) {
-        iconPlay?.classList.add("hidden");
-        iconPause?.classList.remove("hidden");
-        // When playing, overlay works on hover (default class behavior)
-        playOverlay?.classList.remove("opacity-100", "bg-black/30");
-        playOverlay?.classList.add("opacity-0", "hover:opacity-100");
-      } else {
-        iconPlay?.classList.remove("hidden");
-        iconPause?.classList.add("hidden");
-        // When paused, show overlay permanently
-        playOverlay?.classList.remove("opacity-0", "hover:opacity-100");
-        playOverlay?.classList.add("opacity-100", "bg-black/30");
-      }
-    }
-
-    function updateMuteIcon(isMuted: boolean) {
-      if (isMuted) {
-        iconMuted?.classList.remove("hidden");
-        iconSound?.classList.add("hidden");
-      } else {
-        iconMuted?.classList.add("hidden");
-        iconSound?.classList.remove("hidden");
-      }
-    }
-
-    // Initialize state
-    updateMuteIcon(video.muted);
-    // Add listener for video end to reset UI
-    video.addEventListener("ended", () => {
-      updatePlayIcon(false);
     });
   }
 </script>
