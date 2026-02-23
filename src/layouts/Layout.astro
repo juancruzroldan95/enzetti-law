@@ -7,6 +7,7 @@ import MobileMenu from "../components/MobileMenu.astro";
 import WhatsAppWidget from "../components/WhatsAppWidget.astro";
 import CookieBanner from "../components/CookieBanner.astro";
 import Analytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
 
 interface Props {
   title: string;
@@ -107,6 +108,7 @@ const schema = {
       set:html={JSON.stringify(schema)}
     />
     <Analytics />
+    <SpeedInsights />
   </head>
   <body
     class="antialiased text-primary selection:bg-accent selection:text-white"
