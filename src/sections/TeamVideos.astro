@@ -8,7 +8,7 @@ const VIDEOS = [
     poster: "/videos/poster-11.1.webp",
     duration: "0:22",
     author: "María - Secretaria",
-    video_url: "/videos/11.1_small.mp4",
+    video_url: "https://enzetti-law.b-cdn.net/11.1_small.mp4",
   },
   {
     id: 2,
@@ -16,7 +16,7 @@ const VIDEOS = [
     poster: "/videos/poster-11.5.webp",
     duration: "0:38",
     author: "Juan - Abogado",
-    video_url: "/videos/11.5_small.mp4",
+    video_url: "https://enzetti-law.b-cdn.net/11.5_small.mp4",
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ const VIDEOS = [
     poster: "/videos/poster-12.7.webp",
     duration: "0:25",
     author: "Laura - Coordinadora",
-    video_url: "/videos/12.7_small.mp4",
+    video_url: "https://enzetti-law.b-cdn.net/12.7_small.mp4",
   },
   {
     id: 4,
@@ -32,7 +32,7 @@ const VIDEOS = [
     poster: "/videos/poster-12.8.webp",
     duration: "0:25",
     author: "Ana - Asistente Legal",
-    video_url: "/videos/12.8_small.mp4",
+    video_url: "https://enzetti-law.b-cdn.net/12.8_small.mp4",
   },
 ];
 ---
@@ -55,10 +55,7 @@ const VIDEOS = [
   <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
     {
       VIDEOS.map((video) => (
-        <div
-          class="relative group cursor-pointer video-card"
-          data-video-url={video.video_url}
-        >
+        <div class="relative group cursor-pointer video-card">
           {/* Video Container - Instagram format (9:16 ratio) */}
           <div class="relative aspect-[9/16] rounded-2xl overflow-hidden shadow-lg bg-gray-900">
 
@@ -70,7 +67,7 @@ const VIDEOS = [
               loading="lazy"
             />
 
-            {/* Video element — src is empty until user clicks */}
+            {/* Video element — src injected on click */}
             <video
               class="video-player w-full h-full object-cover absolute inset-0 hidden"
               playsinline
@@ -79,7 +76,7 @@ const VIDEOS = [
               disableRemotePlayback
             />
 
-            {/* Overlay — visible while poster is shown, hidden when video plays */}
+            {/* Overlay — visible while poster is shown */}
             <div class="video-overlay absolute inset-0 transition-opacity duration-300">
               {/* Dark overlay */}
               <div class="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-300" />
@@ -115,9 +112,18 @@ const VIDEOS = [
     const poster = card.querySelector<HTMLImageElement>(".video-poster");
     const videoEl = card.querySelector<HTMLVideoElement>(".video-player");
     const overlay = card.querySelector<HTMLElement>(".video-overlay");
-    const videoUrl = card.dataset.videoUrl;
+    const videoUrl = (card.parentElement?.querySelector("[data-video-url]") as HTMLElement)?.dataset.videoUrl;
+    
+    // Get video URL from the VIDEOS data
+    const videoIndex = Array.from(card.parentElement?.children || []).indexOf(card);
+    const VIDEOS_DATA = [
+      "https://enzetti-law.b-cdn.net/11.1_small.mp4",
+      "https://enzetti-law.b-cdn.net/11.5_small.mp4",
+      "https://enzetti-law.b-cdn.net/12.7_small.mp4",
+      "https://enzetti-law.b-cdn.net/12.8_small.mp4",
+    ];
 
-    if (!poster || !videoEl || !overlay || !videoUrl) return;
+    if (!poster || !videoEl || !overlay) return;
 
     card.addEventListener("click", (e) => {
       // Don't intercept clicks on native video controls
@@ -125,7 +131,7 @@ const VIDEOS = [
 
       if (!poster.classList.contains("hidden")) {
         // First click: inject src and start playing
-        videoEl.src = videoUrl;
+        videoEl.src = VIDEOS_DATA[videoIndex];
         poster.classList.add("hidden");
         overlay.classList.add("hidden");
         videoEl.classList.remove("hidden");
