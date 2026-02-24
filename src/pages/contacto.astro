@@ -1,0 +1,248 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionContainer from "../components/SectionContainer.astro";
+import WhatsApp from "../icons/WhatsApp.astro";
+import Phone from "../icons/Phone.astro";
+import Mail from "../icons/Mail.astro";
+import MapPin from "../icons/MapPin.astro";
+import Clock from "../icons/Clock.astro";
+
+const title = "Contacto | Estudio Enzetti";
+const description =
+  "Contactá al Estudio Enzetti para una consulta gratuita sobre tu caso. Atendemos accidentes de trabajo, enfermedades profesionales y accidentes de tránsito.";
+
+const contactInfo = [
+  {
+    icon: Phone,
+    label: "WhatsApp / Teléfono",
+    value: "+54 9 11 4371-1602",
+    href: "https://wa.me/5491143711602",
+  },
+  {
+    icon: Mail,
+    label: "Email",
+    value: "estudioenzetti@gmail.com",
+    href: "mailto:estudioenzetti@gmail.com",
+  },
+  {
+    icon: MapPin,
+    label: "Dirección",
+    value: "Lavalle 1710, CABA, Buenos Aires",
+    href: "https://maps.google.com/?q=Lavalle+1710,+CABA,+Buenos+Aires",
+  },
+  {
+    icon: Clock,
+    label: "Horario de atención",
+    value: "Lunes a Viernes, 9:00 a 18:00",
+    href: null,
+  },
+];
+---
+
+<Layout title={title} description={description}>
+  <main>
+    <SectionContainer
+      id="contacto"
+      class="relative overflow-hidden bg-gradient-to-b from-white to-gray-50"
+      enableAnimation={false}
+    >
+      {/* Background pattern */}
+      <div
+        class="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"
+      >
+        <div
+          class="absolute inset-0 bg-white/40 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"
+        >
+        </div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-24">
+        {/* Breadcrumb */}
+        <nav class="mb-8 text-sm text-gray-500">
+          <a href="/" class="hover:text-accent transition-colors">Inicio</a>
+          <span class="mx-2">/</span>
+          <span class="text-primary font-medium">Contacto</span>
+        </nav>
+
+        {/* Header */}
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span
+            class="inline-block text-sm font-bold text-accent uppercase tracking-wider mb-4"
+          >
+            Estamos para ayudarte
+          </span>
+          <h1 class="text-5xl lg:text-6xl font-bold text-primary mb-6">
+            Contactanos
+          </h1>
+          <p class="text-xl text-gray-600 leading-relaxed">
+            Evaluamos tu caso sin cargo y sin compromiso. Tu consulta es
+            completamente confidencial.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 items-start">
+          {/* Left: Contact info + WhatsApp CTA */}
+          <div class="space-y-8">
+            {/* Highlighted WhatsApp card */}
+            <div
+              class="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-3xl p-8"
+            >
+              <h2 class="text-2xl font-bold text-primary mb-3">
+                ¿Preferís hablar por WhatsApp?
+              </h2>
+              <p class="text-gray-600 mb-6">
+                Es la forma más rápida de contactarnos. Respondemos en minutos
+                durante el horario de atención.
+              </p>
+              <a
+                href="https://wa.me/5491143711602"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
+              >
+                <WhatsApp class="w-6 h-6" />
+                Iniciar chat gratuito
+              </a>
+            </div>
+
+            {/* Contact info cards */}
+            <div class="grid sm:grid-cols-2 gap-4">
+              {
+                contactInfo.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 group">
+                      <div class="text-accent mb-3 group-hover:scale-110 transition-transform duration-300">
+                        <Icon class="w-8 h-8" />
+                      </div>
+                      <div class="text-sm font-semibold text-accent uppercase tracking-wider mb-1">
+                        {item.label}
+                      </div>
+                      {item.href ? (
+                        <a
+                          href={item.href}
+                          target={
+                            item.href.startsWith("http") ? "_blank" : undefined
+                          }
+                          rel={
+                            item.href.startsWith("http")
+                              ? "noopener noreferrer"
+                              : undefined
+                          }
+                          class="text-primary font-medium hover:text-accent transition-colors duration-300 group-hover:text-accent"
+                        >
+                          {item.value}
+                        </a>
+                      ) : (
+                        <p class="text-primary font-medium">{item.value}</p>
+                      )}
+                    </div>
+                  );
+                })
+              }
+            </div>
+
+            {/* Trust indicators */}
+            <div
+              class="bg-gradient-to-r from-primary-light to-primary-dark rounded-2xl p-6 text-white"
+            >
+              <h3 class="font-bold text-lg mb-4">¿Por qué elegirnos?</h3>
+              <ul class="space-y-2">
+                {
+                  [
+                    "Más de 30 años de experiencia en derecho laboral",
+                    "Sin honorarios hasta que cobres tu indemnización",
+                    "Más de 320 clientes satisfechos con calificación 5 estrellas",
+                    "Atención humanizada y cercana",
+                  ].map((item) => (
+                    <li class="flex items-start gap-3 text-sm">
+                      <span class="text-accent-light flex-shrink-0 mt-0.5">
+                        ✓
+                      </span>
+                      <span class="text-gray-200">{item}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </div>
+
+          {/* Right: Map + Address info */}
+          <div class="space-y-6">
+            <div
+              class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden"
+            >
+              <div class="p-6 border-b border-gray-100">
+                <h2 class="text-2xl font-bold text-primary mb-1">
+                  Nuestra ubicación
+                </h2>
+                <p class="text-gray-600">
+                  Lavalle 1710, Ciudad Autónoma de Buenos Aires
+                </p>
+              </div>
+              <div class="h-80 bg-gray-100 relative">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.6944780793407!2d-58.393394784792384!3d-34.60311248046135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccac93573aaab%3A0x14ba73cc39b76958!2sLavalle%201710%2C%20C1048%20CABA!5e0!3m2!1ses!2sar!4v1700000000000!5m2!1ses!2sar"
+                  width="100%"
+                  height="100%"
+                  style="border:0;"
+                  allowfullscreen={false}
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  title="Ubicación Estudio Enzetti - Lavalle 1710, CABA"
+                ></iframe>
+              </div>
+              <div class="p-6">
+                <a
+                  href="https://maps.google.com/?q=Lavalle+1710,+CABA,+Buenos+Aires"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 text-accent hover:text-accent-dark font-semibold transition-colors duration-300"
+                >
+                  Ver en Google Maps →
+                </a>
+              </div>
+            </div>
+
+            {/* Services quick links */}
+            <div
+              class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100"
+            >
+              <h3 class="font-bold text-primary mb-4">Nuestros servicios</h3>
+              <div class="space-y-3">
+                {
+                  [
+                    {
+                      label: "Accidentes de Trabajo",
+                      href: "/accidentes-de-trabajo",
+                    },
+                    {
+                      label: "Enfermedades Profesionales",
+                      href: "/enfermedades-profesionales",
+                    },
+                    {
+                      label: "Accidentes de Tránsito",
+                      href: "/accidentes-de-transito",
+                    },
+                  ].map((service) => (
+                    <a
+                      href={service.href}
+                      class="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 transition-colors duration-200 group"
+                    >
+                      <span class="text-primary font-medium group-hover:text-accent transition-colors duration-200">
+                        {service.label}
+                      </span>
+                      <span class="text-accent group-hover:translate-x-1 transition-transform duration-200">
+                        →
+                      </span>
+                    </a>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </SectionContainer>
+  </main>
+</Layout>

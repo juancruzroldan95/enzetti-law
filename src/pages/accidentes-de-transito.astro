@@ -1,0 +1,275 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionContainer from "../components/SectionContainer.astro";
+import FinalCTA from "../sections/FinalCTA.astro";
+import { Image } from "astro:assets";
+import accidenteTransito from "../assets/images/accidente-de-transito.jpg";
+import WhatsApp from "../icons/WhatsApp.astro";
+import Check from "../icons/Check.astro";
+import ArrowRight from "../icons/ArrowRight.astro";
+
+const title = "Accidentes de Tránsito | Estudio Enzetti";
+const description =
+  "Sufriste un accidente de tránsito? Reclamamos tu indemnización por lesiones, daños materiales y perjuicios. Abogados especializados en accidentes viales en Buenos Aires.";
+
+const benefits = [
+  "Reclamamos ante terceros responsables y compañías de seguro",
+  "Sin honorarios hasta que cobres tu indemnización",
+  "Gestionamos todos los trámites legales por vos",
+  "Asesoramiento en daños materiales y lesiones físicas",
+  "Experiencia en negociación con aseguradoras",
+];
+
+const faqItems = [
+  {
+    question: "¿Qué hago inmediatamente después del accidente?",
+    answer:
+      "Primero, asegurate de que todos estén bien y llamá al 107 si hay heridos. Luego: llamá a la policía para el acta, intercambiá datos con el otro conductor (nombre, DNI, patente, seguro), tomá fotos del lugar y los vehículos, y no firmes documentos de las aseguradoras sin consultar a un abogado.",
+  },
+  {
+    question: "¿Puedo reclamar aunque el accidente fue parcialmente culpa mía?",
+    answer:
+      "Sí. En muchos casos existe culpa compartida (concurrencia de culpas). En ese caso, la indemnización se reduce en proporción a tu responsabilidad, pero no la elimina completamente. Cada situación es única; te asesoramos para analizar tu caso.",
+  },
+  {
+    question: "¿Qué pasa si el otro conductor no tiene seguro?",
+    answer:
+      "Podés reclamar igualmente. Si el vehículo no tiene seguro o es desconocido, existe el Fondo de Garantía de Sustentabilidad administrado por la SSN. Además, si el propietario del vehículo es distinto al conductor, también puede ser responsable civil.",
+  },
+  {
+    question: "¿Cuánto tiempo tengo para iniciar el reclamo?",
+    answer:
+      "El plazo de prescripción para acciones de responsabilidad civil por accidentes de tránsito es de 3 años desde el hecho. Sin embargo, is recomendable actuar rápidamente para no perder pruebas clave.",
+  },
+  {
+    question: "¿La indemnización cubre los gastos médicos que ya pagué?",
+    answer:
+      "Sí. Podés reclamar todos los gastos médicos, de farmacia, transporte sanitario, kinesiología, y demás gastos que hayas tenido que afrontar como consecuencia del accidente, siempre con comprobantes.",
+  },
+];
+---
+
+<Layout title={title} description={description}>
+  <main>
+    {/* Hero Section */}
+    <SectionContainer
+      id="hero"
+      class="relative overflow-hidden bg-gradient-to-b from-white to-gray-50"
+      enableAnimation={false}
+    >
+      <div
+        class="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"
+      >
+        <div
+          class="absolute inset-0 bg-white/40 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"
+        >
+        </div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-24">
+        {/* Breadcrumb */}
+        <nav class="mb-8 text-sm text-gray-500">
+          <a href="/" class="hover:text-accent transition-colors">Inicio</a>
+          <span class="mx-2">/</span>
+          <span class="text-primary font-medium">Accidentes de Tránsito</span>
+        </nav>
+
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left: Content */}
+          <div class="space-y-8">
+            <div>
+              <span
+                class="inline-block text-sm font-bold text-accent uppercase tracking-wider mb-4"
+              >
+                Área de Práctica
+              </span>
+              <h1
+                class="text-5xl lg:text-6xl font-bold text-primary leading-tight mb-6"
+              >
+                Accidentes de <span class="text-accent">Tránsito</span>
+              </h1>
+              <p class="text-xl text-gray-600 leading-relaxed">
+                Gestionamos tu indemnización por lesiones, daños materiales y
+                perjuicios sufridos en cualquier accidente vial. Sin honorarios
+                hasta que cobres.
+              </p>
+            </div>
+
+            <ul class="space-y-3">
+              {
+                benefits.map((benefit) => (
+                  <li class="flex items-start gap-3 text-gray-700">
+                    <div class="text-accent flex-shrink-0 mt-0.5">
+                      <Check class="w-5 h-5" />
+                    </div>
+                    <span>{benefit}</span>
+                  </li>
+                ))
+              }
+            </ul>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a
+                href="https://wa.me/5491143711602"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full sm:w-auto"
+              >
+                <button
+                  class="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3 cursor-pointer whitespace-nowrap"
+                >
+                  <WhatsApp class="w-6 h-6" />
+                  Consulta sin cargo
+                </button>
+              </a>
+              <a href="/#servicios" class="w-full sm:w-auto">
+                <button
+                  class="w-full sm:w-auto border-2 border-primary text-primary hover:bg-primary hover:text-white font-bold text-lg px-8 py-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer whitespace-nowrap"
+                >
+                  Ver todos los servicios
+                  <ArrowRight />
+                </button>
+              </a>
+            </div>
+          </div>
+
+          {/* Right: Image */}
+          <div class="relative">
+            <div class="rounded-3xl overflow-hidden shadow-2xl">
+              <Image
+                src={accidenteTransito}
+                alt="Accidente de tránsito - Estudio Enzetti"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div
+              class="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-5 border border-gray-100"
+            >
+              <div class="text-3xl font-bold text-accent">30+</div>
+              <div class="text-sm text-gray-600">Años de experiencia</div>
+            </div>
+            <div
+              class="absolute -top-6 -right-6 bg-accent rounded-2xl shadow-xl p-5 text-white"
+            >
+              <div class="text-3xl font-bold">5.0 ★</div>
+              <div class="text-sm opacity-90">Calificación Google</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </SectionContainer>
+
+    {/* What we claim section */}
+    <!-- <SectionContainer id="que-reclamamos" class="bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2
+            class="text-sm font-bold text-accent uppercase tracking-wider mb-3"
+          >
+            ¿Qué podemos reclamar?
+          </h2>
+          <h3 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+            Rubros de indemnización
+          </h3>
+          <p class="text-lg text-gray-600">
+            En un accidente de tránsito podés reclamar múltiples daños
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {
+            [
+              {
+                title: "Daño físico y lesiones",
+                description:
+                  "Indemnización por todas las lesiones corporales sufridas, desde heridas leves hasta incapacitantes.",
+                icon: "🩹",
+              },
+              {
+                title: "Daño moral",
+                description:
+                  "Compensación por el sufrimiento, angustia y dolor psicológico consecuencia del accidente.",
+                icon: "💔",
+              },
+              {
+                title: "Daños materiales",
+                description:
+                  "Reparación o reemplazo del vehículo y otros bienes dañados en el accidente.",
+                icon: "🚗",
+              },
+              {
+                title: "Gastos médicos",
+                description:
+                  "Reembolso de todos los gastos médicos, farmacéuticos y de rehabilitación afrontados.",
+                icon: "🏥",
+              },
+              {
+                title: "Lucro cesante",
+                description:
+                  "Compensación por los ingresos que dejaste de percibir durante tu recuperación.",
+                icon: "💰",
+              },
+              {
+                title: "Incapacidad sobreviniente",
+                description:
+                  "Indemnización por las secuelas permanentes que afectan tu calidad de vida y capacidad laboral.",
+                icon: "⚖️",
+              },
+            ].map((item) => (
+              <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 group">
+                <div class="text-4xl mb-4">{item.icon}</div>
+                <h4 class="text-xl font-bold text-primary mb-3 group-hover:text-accent transition-colors duration-300">
+                  {item.title}
+                </h4>
+                <p class="text-gray-600 leading-relaxed">{item.description}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </SectionContainer> -->
+
+    {/* FAQ Section */}
+    <SectionContainer
+      id="preguntas-frecuentes"
+      class="bg-gradient-to-b from-gray-50 to-white"
+    >
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2
+            class="text-sm font-bold text-accent uppercase tracking-wider mb-3"
+          >
+            Preguntas Frecuentes
+          </h2>
+          <h3 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+            Dudas comunes
+          </h3>
+        </div>
+
+        <div class="space-y-4">
+          {
+            faqItems.map((item) => (
+              <details class="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                  <span class="font-semibold text-primary text-lg group-open:text-accent transition-colors duration-300">
+                    {item.question}
+                  </span>
+                  <span class="ml-4 text-accent font-bold text-2xl transition-transform duration-300 group-open:rotate-45 flex-shrink-0">
+                    +
+                  </span>
+                </summary>
+                <div class="px-6 pb-6">
+                  <p class="text-gray-600 leading-relaxed">{item.answer}</p>
+                </div>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </SectionContainer>
+
+    <SectionContainer id="final-cta" class="bg-white">
+      <FinalCTA />
+    </SectionContainer>
+  </main>
+</Layout>

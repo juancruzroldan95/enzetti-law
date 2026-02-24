@@ -1,0 +1,278 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionContainer from "../components/SectionContainer.astro";
+import FinalCTA from "../sections/FinalCTA.astro";
+import { Image } from "astro:assets";
+import enfermedadesProfesionales from "../assets/images/enfermedades-profesionales.jpg";
+import WhatsApp from "../icons/WhatsApp.astro";
+import Check from "../icons/Check.astro";
+import ArrowRight from "../icons/ArrowRight.astro";
+
+const title = "Enfermedades Profesionales | Estudio Enzetti";
+const description =
+  "¿Padecés hernias, tendinitis u otras enfermedades por tu trabajo? Te ayudamos a obtener la indemnización que te corresponde. Abogados especializados en enfermedades profesionales.";
+
+const benefits = [
+  "Evaluamos si tu enfermedad tiene origen laboral sin cargo",
+  "Sin honorarios hasta que cobres tu indemnización",
+  "Experiencia en enfermedades de difícil diagnóstico ocupacional",
+  "Acompañamiento médico y legal durante todo el proceso",
+  "Reclamamos ante la ART y en sede judicial si es necesario",
+];
+
+const faqItems = [
+  {
+    question: "¿Qué es una enfermedad profesional?",
+    answer:
+      'Es aquella contraída como consecuencia directa del trabajo o de las condiciones del ambiente laboral. La Ley 24.557 (LRT) establece un listado de enfermedades profesionales reconocidas. Sin embargo, también es posible reclamar enfermedades no listadas si se prueba el nexo causal con el trabajo (enfermedades "no listadas").',
+  },
+  {
+    question: "¿Cómo sé si mi enfermedad es de origen laboral?",
+    answer:
+      "Generalmente exige que exista una relación causal entre la actividad que realizás y la patología que padecés. Un médico especialista puede certificar esta relación. Nosotros te asesoramos y coordinamos las pericias necesarias para demostrar el origen laboral de tu enfermedad.",
+  },
+  {
+    question: "¿La hernia discal se considera enfermedad profesional?",
+    answer:
+      "Las hernias de disco lumbar están incluidas en el listado de enfermedades profesionales cuando el trabajador realiza tareas que implican posiciones forzadas, vibración, o levantamiento manual de cargas. Si tu caso cumple estas condiciones, podés reclamar.",
+  },
+  {
+    question: "¿Qué pasa si la ART rechaza mi enfermedad?",
+    answer:
+      "Si la ART rechaza o no reconoce tu enfermedad profesional, tenés derecho a impugnar esa decisión ante la Comisión Médica y, en última instancia, ante la Justicia. Nuestro estudio tiene amplia experiencia en estas situaciones.",
+  },
+  {
+    question: "¿Puedo reclamar si ya estoy jubilado o desocupado?",
+    answer:
+      "En algunos casos sí, dependiendo de cuándo se manifestó la enfermedad y si hay relación con la actividad laboral previa. El plazo de prescripción y los requisitos varían. Te recomendamos consultar a un abogado para analizar tu caso particular.",
+  },
+];
+---
+
+<Layout title={title} description={description}>
+  <main>
+    {/* Hero Section */}
+    <SectionContainer
+      id="hero"
+      class="relative overflow-hidden bg-gradient-to-b from-white to-gray-50"
+      enableAnimation={false}
+    >
+      <div
+        class="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"
+      >
+        <div
+          class="absolute inset-0 bg-white/40 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"
+        >
+        </div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-24">
+        {/* Breadcrumb */}
+        <nav class="mb-8 text-sm text-gray-500">
+          <a href="/" class="hover:text-accent transition-colors">Inicio</a>
+          <span class="mx-2">/</span>
+          <span class="text-primary font-medium"
+            >Enfermedades Profesionales</span
+          >
+        </nav>
+
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left: Content */}
+          <div class="space-y-8">
+            <div>
+              <span
+                class="inline-block text-sm font-bold text-accent uppercase tracking-wider mb-4"
+              >
+                Área de Práctica
+              </span>
+              <h1
+                class="text-5xl lg:text-6xl font-bold text-primary leading-tight mb-6"
+              >
+                Enfermedades <span class="text-accent">Profesionales</span>
+              </h1>
+              <p class="text-xl text-gray-600 leading-relaxed">
+                Te ayudamos a obtener lo justo por dolencias como hernias,
+                tendinitis u otras lesiones relacionadas al esfuerzo laboral.
+                Sin honorarios hasta que cobres.
+              </p>
+            </div>
+
+            <ul class="space-y-3">
+              {
+                benefits.map((benefit) => (
+                  <li class="flex items-start gap-3 text-gray-700">
+                    <div class="text-accent flex-shrink-0 mt-0.5">
+                      <Check class="w-5 h-5" />
+                    </div>
+                    <span>{benefit}</span>
+                  </li>
+                ))
+              }
+            </ul>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a
+                href="https://wa.me/5491143711602"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full sm:w-auto"
+              >
+                <button
+                  class="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3 cursor-pointer whitespace-nowrap"
+                >
+                  <WhatsApp class="w-6 h-6" />
+                  Consulta sin cargo
+                </button>
+              </a>
+              <a href="/#servicios" class="w-full sm:w-auto">
+                <button
+                  class="w-full sm:w-auto border-2 border-primary text-primary hover:bg-primary hover:text-white font-bold text-lg px-8 py-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer whitespace-nowrap"
+                >
+                  Ver todos los servicios
+                  <ArrowRight />
+                </button>
+              </a>
+            </div>
+          </div>
+
+          {/* Right: Image */}
+          <div class="relative">
+            <div class="rounded-3xl overflow-hidden shadow-2xl">
+              <Image
+                src={enfermedadesProfesionales}
+                alt="Enfermedades profesionales - Estudio Enzetti"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div
+              class="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-5 border border-gray-100"
+            >
+              <div class="text-3xl font-bold text-accent">30+</div>
+              <div class="text-sm text-gray-600">Años de experiencia</div>
+            </div>
+            <div
+              class="absolute -top-6 -right-6 bg-accent rounded-2xl shadow-xl p-5 text-white"
+            >
+              <div class="text-3xl font-bold">5.0 ★</div>
+              <div class="text-sm opacity-90">Calificación Google</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </SectionContainer>
+
+    {/* Disease types section */}
+    <!-- <SectionContainer id="tipo-enfermedades" class="bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2
+            class="text-sm font-bold text-accent uppercase tracking-wider mb-3"
+          >
+            ¿Qué enfermedades cubrimos?
+          </h2>
+          <h3 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+            Patologías más frecuentes
+          </h3>
+          <p class="text-lg text-gray-600">
+            Estas son algunas de las enfermedades en las que tenemos mayor
+            experiencia
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {
+            [
+              {
+                title: "Hernias de disco",
+                description:
+                  "Lumbares o cervicales causadas por el levantamiento de cargas, posiciones forzadas o vibraciones repetitivas.",
+                icon: "🦴",
+              },
+              {
+                title: "Tendinitis y bursitis",
+                description:
+                  "Inflamación de tendones y bolsas sinoviales por movimientos repetitivos en el trabajo.",
+                icon: "💪",
+              },
+              {
+                title: "Hipoacusia laboral",
+                description:
+                  "Pérdida auditiva por exposición prolongada a ruido excesivo en el ambiente de trabajo.",
+                icon: "👂",
+              },
+              {
+                title: "Enfermedades respiratorias",
+                description:
+                  "Silicosis, asbestosis y otras enfermedades pulmonares por exposición a polvos o sustancias tóxicas.",
+                icon: "🫁",
+              },
+              {
+                title: "Síndrome del túnel carpiano",
+                description:
+                  "Compresión del nervio mediano causada por movimientos repetitivos de la muñeca en el trabajo.",
+                icon: "🖐️",
+              },
+              {
+                title: "Estrés laboral crónico",
+                description:
+                  "Enfermedades psicológicas o cardiovasculares derivadas de condiciones de trabajo desfavorables.",
+                icon: "🧠",
+              },
+            ].map((item) => (
+              <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 group">
+                <div class="text-4xl mb-4">{item.icon}</div>
+                <h4 class="text-xl font-bold text-primary mb-3 group-hover:text-accent transition-colors duration-300">
+                  {item.title}
+                </h4>
+                <p class="text-gray-600 leading-relaxed">{item.description}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </SectionContainer> -->
+
+    {/* FAQ Section */}
+    <SectionContainer
+      id="preguntas-frecuentes"
+      class="bg-gradient-to-b from-gray-50 to-white"
+    >
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2
+            class="text-sm font-bold text-accent uppercase tracking-wider mb-3"
+          >
+            Preguntas Frecuentes
+          </h2>
+          <h3 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+            Dudas comunes
+          </h3>
+        </div>
+
+        <div class="space-y-4">
+          {
+            faqItems.map((item) => (
+              <details class="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                  <span class="font-semibold text-primary text-lg group-open:text-accent transition-colors duration-300">
+                    {item.question}
+                  </span>
+                  <span class="ml-4 text-accent font-bold text-2xl transition-transform duration-300 group-open:rotate-45 flex-shrink-0">
+                    +
+                  </span>
+                </summary>
+                <div class="px-6 pb-6">
+                  <p class="text-gray-600 leading-relaxed">{item.answer}</p>
+                </div>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </SectionContainer>
+
+    <SectionContainer id="final-cta" class="bg-white">
+      <FinalCTA />
+    </SectionContainer>
+  </main>
+</Layout>
