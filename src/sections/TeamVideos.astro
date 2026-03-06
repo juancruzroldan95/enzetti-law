@@ -1,40 +1,6 @@
 ---
 import PlayerPlay from "../icons/PlayerPlay.astro";
-
-const VIDEOS = [
-  {
-    id: 1,
-    title: "Derechos laborales",
-    poster: "/videos/poster-11.1.webp",
-    duration: "0:22",
-    author: "María - Secretaria",
-    video_url: "https://enzetti-law.b-cdn.net/11.1_small.mp4",
-  },
-  {
-    id: 2,
-    title: "Denunciar correctamente",
-    poster: "/videos/poster-11.5.webp",
-    duration: "0:38",
-    author: "Juan - Abogado",
-    video_url: "https://enzetti-law.b-cdn.net/11.5_small.mp4",
-  },
-  {
-    id: 3,
-    title: "Iniciar un reclamo",
-    poster: "/videos/poster-12.7.webp",
-    duration: "0:25",
-    author: "Laura - Coordinadora",
-    video_url: "https://enzetti-law.b-cdn.net/12.7_small.mp4",
-  },
-  {
-    id: 4,
-    title: "Accidente in itinere",
-    poster: "/videos/poster-12.8.webp",
-    duration: "0:25",
-    author: "Ana - Asistente Legal",
-    video_url: "https://enzetti-law.b-cdn.net/12.8_small.mp4",
-  },
-];
+import { VIDEOS, muxThumbnail } from "../consts/videos";
 ---
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
@@ -58,22 +24,24 @@ const VIDEOS = [
         <div class="relative group cursor-pointer video-card">
           {/* Video Container - Instagram format (9:16 ratio) */}
           <div class="relative aspect-[9/16] rounded-2xl overflow-hidden shadow-lg bg-gray-900">
-
-            {/* Poster image — shown by default, no video bytes loaded */}
+            {/* Poster image — first frame via Mux Image API */}
             <img
-              src={video.poster}
+              src={muxThumbnail(video.playbackId)}
               alt={video.title}
               class="video-poster w-full h-full object-cover"
               loading="lazy"
             />
 
-            {/* Video element — src injected on click */}
-            <video
+            {/* Mux video element — playback-id injected on click */}
+            <mux-video
               class="video-player w-full h-full object-cover absolute inset-0 hidden"
+              data-playback-id={video.playbackId}
+              poster={muxThumbnail(video.playbackId)}
+              metadata-video-title={video.title}
               playsinline
               controls
               disablepictureinpicture
-              disableRemotePlayback
+              disable-tracking
             />
 
             {/* Overlay — visible while poster is shown */}
@@ -99,7 +67,6 @@ const VIDEOS = [
                 <p class="text-white/80 text-xs">{video.author}</p>
               </div>
             </div>
-
           </div>
         </div>
       ))
@@ -108,40 +75,40 @@ const VIDEOS = [
 </div>
 
 <script>
+  import "@mux/mux-video";
+
   document.querySelectorAll<HTMLElement>(".video-card").forEach((card) => {
     const poster = card.querySelector<HTMLImageElement>(".video-poster");
-    const videoEl = card.querySelector<HTMLVideoElement>(".video-player");
+    const videoEl = card.querySelector<HTMLElement>(".video-player");
     const overlay = card.querySelector<HTMLElement>(".video-overlay");
-    const videoUrl = (card.parentElement?.querySelector("[data-video-url]") as HTMLElement)?.dataset.videoUrl;
-    
-    // Get video URL from the VIDEOS data
-    const videoIndex = Array.from(card.parentElement?.children || []).indexOf(card);
-    const VIDEOS_DATA = [
-      "https://enzetti-law.b-cdn.net/11.1_small.mp4",
-      "https://enzetti-law.b-cdn.net/11.5_small.mp4",
-      "https://enzetti-law.b-cdn.net/12.7_small.mp4",
-      "https://enzetti-law.b-cdn.net/12.8_small.mp4",
-    ];
 
     if (!poster || !videoEl || !overlay) return;
 
     card.addEventListener("click", (e) => {
       // Don't intercept clicks on native video controls
-      if ((e.target as HTMLElement).closest("video")) return;
+      if ((e.target as HTMLElement).closest("mux-video")) return;
 
       if (!poster.classList.contains("hidden")) {
-        // First click: inject src and start playing
-        videoEl.src = VIDEOS_DATA[videoIndex];
+        // First click: set the playback-id and start playing
+        const playbackId = videoEl.dataset.playbackId;
+        if (playbackId) {
+          videoEl.setAttribute("playback-id", playbackId);
+        }
         poster.classList.add("hidden");
         overlay.classList.add("hidden");
         videoEl.classList.remove("hidden");
-        videoEl.play();
+        // Defer play() until canplay to avoid AbortError:
+        // setAttribute("playback-id") starts a new load, and calling play()
+        // immediately races against that load, causing the browser to abort.
+        videoEl.addEventListener("canplay", () => (videoEl as any).play(), {
+          once: true,
+        });
       } else {
         // Subsequent clicks on the overlay: toggle play/pause
-        if (videoEl.paused) {
-          videoEl.play();
+        if ((videoEl as any).paused) {
+          (videoEl as any).play();
         } else {
-          videoEl.pause();
+          (videoEl as any).pause();
         }
       }
     });

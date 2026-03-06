@@ -3,6 +3,9 @@ import ArrowRight from "../icons/ArrowRight.astro";
 import Shield from "../icons/Shield.astro";
 import WhatsApp from "../icons/WhatsApp.astro";
 import Check from "../icons/Check.astro";
+import { VIDEOS, muxThumbnail } from "../consts/videos";
+
+const heroVideo = VIDEOS[0];
 ---
 
 {/* Background with subtle pattern */}
@@ -159,22 +162,27 @@ import Check from "../icons/Check.astro";
         id="video-container"
         class="aspect-square rounded-2xl overflow-hidden shadow-2xl relative group cursor-pointer"
       >
-        {/* Poster — shown by default, zero video bytes loaded */}
+        {/* Poster — first frame via Mux Image API */}
         <img
           id="hero-poster"
-          src="/videos/poster-11.1.webp"
-          alt="Video del equipo Estudio Enzetti"
+          src={muxThumbnail(heroVideo.playbackId)}
+          alt={`Video del equipo Estudio Enzetti — ${heroVideo.title}`}
           class="w-full h-full object-cover"
         />
 
-        {/* Video — src injected on click */}
-        <video
+        {
+          /* Mux video — playback-id injected on click, no bytes loaded until then */
+        }
+        <mux-video
           id="hero-video"
-          class="w-full h-full object-cover absolute inset-0 hidden"
+          class="w-full h-full absolute inset-0 hidden"
+          data-playback-id={heroVideo.playbackId}
+          metadata-video-title={heroVideo.title}
+          poster={muxThumbnail(heroVideo.playbackId)}
           loop
-          muted
           playsinline
-          controls></video>
+          controls
+          disable-tracking></mux-video>
 
         {/* Play overlay — always visible over poster */}
         <div
@@ -202,6 +210,7 @@ import Check from "../icons/Check.astro";
 </div>
 
 <script>
+  import "@mux/mux-video";
   import { animate, stagger, inView } from "motion";
 
   // Sequence of animations
@@ -323,21 +332,48 @@ import Check from "../icons/Check.astro";
     { duration: 1, delay: 0.5 },
   );
 
-  // Hero video: inject src only on first click — no bytes loaded until then
-  const heroVideo = document.getElementById("hero-video") as HTMLVideoElement;
+  // Hero video: inject playback-id only on first click — no bytes loaded until then
+  const heroVideoEl = document.getElementById("hero-video") as HTMLElement;
   const heroPoster = document.getElementById("hero-poster") as HTMLImageElement;
   const videoContainer = document.getElementById("video-container");
   const playOverlay = document.getElementById("play-overlay");
 
-  if (heroVideo && heroPoster && videoContainer && playOverlay) {
+  if (heroVideoEl && heroPoster && videoContainer && playOverlay) {
+    /**
+     * Force object-fit: cover on the real <video> inside mux-video's Shadow DOM.
+     * CSS ::part() doesn't work reliably here because Astro scopes <style> blocks,
+     * which breaks the selector. Direct shadow DOM access is the only sure fix.
+     */
+    const patchInternalVideo = () => {
+      const internal = heroVideoEl.shadowRoot?.querySelector("video");
+      if (internal) {
+        internal.style.width = "100%";
+        internal.style.height = "100%";
+        internal.style.objectFit = "cover";
+        internal.style.objectPosition = "center center";
+      }
+    };
+
     videoContainer.addEventListener("click", () => {
-      if (heroVideo.classList.contains("hidden")) {
-        heroVideo.src = "https://enzetti-law.b-cdn.net/11.1_small.mp4";
+      if (heroVideoEl.classList.contains("hidden")) {
+        const playbackId = heroVideoEl.dataset.playbackId;
+        if (playbackId) {
+          heroVideoEl.setAttribute("playback-id", playbackId);
+        }
         heroPoster.classList.add("hidden");
         playOverlay.classList.add("hidden");
-        heroVideo.classList.remove("hidden");
-        heroVideo.muted = false;
-        heroVideo.play();
+        heroVideoEl.classList.remove("hidden");
+        // Patch immediately (shadow root may already exist) and again on canplay
+        // (guarantees styles are applied once the internal <video> is fully ready).
+        patchInternalVideo();
+        heroVideoEl.addEventListener(
+          "canplay",
+          () => {
+            patchInternalVideo();
+            (heroVideoEl as any).play();
+          },
+          { once: true },
+        );
       }
     });
   }
