@@ -1,6 +1,5 @@
 ---
-import { Image } from "astro:assets";
-import logo from "../assets/logo.webp";
+import LogoMark from "./LogoMark.astro";
 import Phone from "../icons/Phone.astro";
 import WhatsApp from "../icons/WhatsApp.astro";
 import Mail from "../icons/Mail.astro";
@@ -11,94 +10,85 @@ import TikTok from "../icons/TikTok.astro";
 const currentYear = new Date().getFullYear();
 ---
 
-<footer id="contacto" class="bg-white text-zinc-900 border-t border-zinc-200">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+<footer id="contacto" class="bg-white text-zinc-700 border-t border-zinc-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+
       {/* Brand Column */}
-      <div class="space-y-6">
-        <Image
-          src={logo}
-          alt="Estudio Enzetti"
-          class="h-12 w-auto"
-          quality="max"
-        />
-        <p class="text-zinc-600 text-sm leading-relaxed max-w-xs">
+      <div class="space-y-5">
+        <LogoMark size="md" />
+        <p class="text-zinc-400 text-sm leading-relaxed max-w-xs">
           Excelencia jurídica con más de 30 años de trayectoria defendiendo los
           derechos de los trabajadores en todo el país.
         </p>
+        <div class="w-8 h-0.5 bg-accent/40 rounded-full" />
       </div>
 
       {/* Contact Section */}
-      <div class="space-y-6">
-        <h4 class="text-zinc-900 font-bold text-lg flex items-center gap-2">
+      <div class="space-y-5">
+        <h4 class="text-zinc-800 font-bold text-sm tracking-widest uppercase font-sans">
           Contacto
-          <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
         </h4>
-        <div class="space-y-4">
+        <div class="space-y-3">
           <a
             href="tel:+541143711602"
-            class="group flex items-center gap-4 text-zinc-600 hover:text-zinc-900 transition-colors duration-300"
+            class="group flex items-center gap-3 text-zinc-500 hover:text-zinc-800 transition-colors duration-300"
           >
             <div
-              class="w-10 h-10 rounded-lg bg-zinc-100 flex items-center justify-center group-hover:bg-accent/10 group-hover:text-accent transition-all"
+              class="w-9 h-9 rounded-lg bg-zinc-100 flex items-center justify-center group-hover:bg-accent/10 group-hover:text-accent transition-all"
             >
-              <Phone class="w-5 h-5" />
+              <Phone class="w-4 h-4" />
             </div>
-            <div class="text-sm">
-              <p>(011) 4371-1602</p>
-            </div>
+            <span class="text-sm">(011) 4371-1602</span>
           </a>
           <a
             href="https://wa.me/5491143711602"
             target="_blank"
-            class="group flex items-center gap-4 text-zinc-600 hover:text-zinc-900 transition-colors duration-300"
+            class="group flex items-center gap-3 text-zinc-500 hover:text-zinc-800 transition-colors duration-300"
           >
             <div
-              class="w-10 h-10 rounded-lg bg-zinc-100 flex items-center justify-center group-hover:bg-green-500/10 group-hover:text-green-500 transition-all"
+              class="w-9 h-9 rounded-lg bg-zinc-100 flex items-center justify-center group-hover:bg-green-500/10 group-hover:text-green-600 transition-all"
             >
-              <WhatsApp class="w-5 h-5" />
+              <WhatsApp class="w-4 h-4" />
             </div>
-            <div class="text-sm">
-              <p>+54 9 11 4371-1602</p>
-            </div>
+            <span class="text-sm">+54 9 11 4371-1602</span>
           </a>
           <a
             href="mailto:ple@estudioenzetti.com.ar"
-            class="group flex items-center gap-4 text-zinc-600 hover:text-zinc-900 transition-colors duration-300"
+            class="group flex items-center gap-3 text-zinc-500 hover:text-zinc-800 transition-colors duration-300"
           >
             <div
-              class="w-10 h-10 rounded-lg bg-zinc-100 flex items-center justify-center group-hover:bg-accent/10 group-hover:text-accent transition-all"
+              class="w-9 h-9 rounded-lg bg-zinc-100 flex items-center justify-center group-hover:bg-accent/10 group-hover:text-accent transition-all"
             >
-              <Mail class="w-5 h-5" />
+              <Mail class="w-4 h-4" />
             </div>
-            <div class="text-sm">ple@estudioenzetti.com.ar</div>
+            <span class="text-sm truncate">ple@estudioenzetti.com.ar</span>
           </a>
         </div>
       </div>
 
       {/* Location Section */}
-      <div class="space-y-6">
-        <h4 class="text-zinc-900 font-bold text-lg flex items-center gap-2">
+      <div class="space-y-5">
+        <h4 class="text-zinc-800 font-bold text-sm tracking-widest uppercase font-sans">
           Ubicación
-          <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
         </h4>
         <div class="space-y-4">
-          <div class="flex items-start gap-4">
+          <div class="flex items-start gap-3">
             <div
-              class="w-10 h-10 rounded-lg bg-zinc-100 flex items-center justify-center text-accent"
+              class="w-9 h-9 rounded-lg bg-zinc-100 flex items-center justify-center text-accent flex-shrink-0 mt-0.5"
             >
-              <MapPin class="w-5 h-5" />
+              <MapPin class="w-4 h-4" />
             </div>
-            <div class="text-sm text-zinc-600 leading-relaxed">
-              <p class="text-zinc-900 font-medium">CABA, Buenos Aires</p>
+            <div class="text-sm text-zinc-500 leading-relaxed">
+              <p class="text-zinc-700 font-medium">CABA, Buenos Aires</p>
               <p>Lavalle 1710 - Piso 2 Of. 3</p>
-              <p class="text-zinc-500 text-xs mt-1">
-                Lunes a Viernes: 09:00 - 18:00 hs
+              <p class="text-zinc-400 text-xs mt-1">
+                Lunes a Viernes · 09:00–18:00 hs
               </p>
             </div>
           </div>
           <div
-            class="w-full h-32 rounded-lg overflow-hidden border border-zinc-200 relative group mt-2"
+            class="w-full h-28 rounded-xl overflow-hidden border border-zinc-200 relative mt-2"
           >
             <iframe
               width="100%"
@@ -117,7 +107,7 @@ const currentYear = new Date().getFullYear();
           <a
             href="https://maps.app.goo.gl/smhz7Kh8ek3pAky67"
             target="_blank"
-            class="inline-block text-accent hover:text-accent-light text-sm font-semibold transition-colors pt-2"
+            class="inline-flex items-center gap-1 text-accent hover:text-red-700 text-xs font-semibold transition-colors"
           >
             Cómo llegar →
           </a>
@@ -125,35 +115,40 @@ const currentYear = new Date().getFullYear();
       </div>
 
       {/* Social Media Section */}
-      <div class="space-y-6">
-        <h4 class="text-zinc-900 font-bold text-lg flex items-center gap-2">
+      <div class="space-y-5">
+        <h4 class="text-zinc-800 font-bold text-sm tracking-widest uppercase font-sans">
           Redes Sociales
-          <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
         </h4>
         <div class="flex flex-col gap-3">
           <a
             href="https://www.instagram.com/abogadosart_/"
             target="_blank"
-            class="group flex items-center gap-3 text-zinc-600 hover:text-zinc-900 transition-all duration-300"
+            class="group flex items-center gap-3 text-zinc-500 hover:text-zinc-800 transition-all duration-300"
           >
             <div
-              class="w-10 h-10 rounded-lg bg-zinc-100 border border-zinc-200 flex items-center justify-center group-hover:bg-gradient-to-tr group-hover:from-purple-600 group-hover:to-orange-500 group-hover:border-transparent transition-all"
+              class="w-9 h-9 rounded-lg bg-zinc-100 border border-zinc-200 flex items-center justify-center group-hover:bg-gradient-to-tr group-hover:from-purple-600 group-hover:to-orange-500 group-hover:border-transparent transition-all"
             >
-              <Instagram class="w-5 h-5 text-zinc-600 group-hover:text-white" />
+              <Instagram class="w-4 h-4 group-hover:text-white" />
             </div>
-            <span class="text-sm font-medium">Instagram</span>
+            <div>
+              <span class="text-sm font-medium block">Instagram</span>
+              <span class="text-xs text-zinc-400">@abogadosart_</span>
+            </div>
           </a>
           <a
             href="https://www.tiktok.com/@abogadosart_"
             target="_blank"
-            class="group flex items-center gap-3 text-zinc-600 hover:text-zinc-900 transition-all duration-300"
+            class="group flex items-center gap-3 text-zinc-500 hover:text-zinc-800 transition-all duration-300"
           >
             <div
-              class="w-10 h-10 rounded-lg bg-zinc-100 border border-zinc-200 flex items-center justify-center group-hover:bg-black group-hover:text-white group-hover:border-transparent transition-all"
+              class="w-9 h-9 rounded-lg bg-zinc-100 border border-zinc-200 flex items-center justify-center group-hover:bg-black group-hover:text-white group-hover:border-transparent transition-all"
             >
-              <TikTok class="w-5 h-5" />
+              <TikTok class="w-4 h-4" />
             </div>
-            <span class="text-sm font-medium">TikTok</span>
+            <div>
+              <span class="text-sm font-medium block">TikTok</span>
+              <span class="text-xs text-zinc-400">@abogadosart_</span>
+            </div>
           </a>
         </div>
       </div>
@@ -161,28 +156,28 @@ const currentYear = new Date().getFullYear();
 
     {/* Bottom Bar */}
     <div
-      class="mt-20 pt-8 border-t border-zinc-200 flex flex-col md:flex-row justify-between items-center gap-4"
+      class="mt-14 pt-6 border-t border-zinc-100 flex flex-col md:flex-row justify-between items-center gap-4"
     >
       <div class="flex flex-col md:flex-row gap-4 items-center">
-        <p class="text-zinc-500 text-xs text-center md:text-left">
+        <p class="text-zinc-400 text-xs text-center md:text-left">
           © {currentYear} Estudio Jurídico Enzetti
         </p>
-        <div class="hidden md:block w-1 h-1 rounded-full bg-zinc-300"></div>
-        <div class="flex gap-4 text-xs text-zinc-500">
+        <div class="hidden md:block w-px h-3 bg-zinc-200" />
+        <div class="flex gap-5 text-xs text-zinc-400">
           <a
             href="/terminos-y-condiciones"
-            class="hover:text-zinc-900 transition-colors"
+            class="hover:text-zinc-700 transition-colors"
             >Términos y Condiciones</a
           >
           <a
             href="/politica-de-privacidad"
-            class="hover:text-zinc-900 transition-colors"
+            class="hover:text-zinc-700 transition-colors"
             >Política de Privacidad</a
           >
         </div>
       </div>
 
-      <p class="text-zinc-500 text-xs text-center">
+      <p class="text-zinc-400 text-xs text-center">
         Hecho por
         <a
           href="https://jcroldan.dev"

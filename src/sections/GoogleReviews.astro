@@ -1,6 +1,5 @@
 ---
 import StarFilled from "../icons/StarFilled.astro";
-import WhatsApp from "../icons/WhatsApp.astro";
 import { getGoogleReviews } from "../services/google";
 
 const googleReviews = await getGoogleReviews();
@@ -11,57 +10,53 @@ const googleReviews = await getGoogleReviews();
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
       {/* Header */}
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <h2 class="text-sm font-bold text-accent uppercase tracking-wider mb-3">
-          Reseñas de Clientes
-        </h2>
-        <h3 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+        <div class="accent-rule mb-4">
+          <span>Reseñas de Clientes</span>
+        </div>
+        <h2 class="text-5xl md:text-6xl font-bold text-primary mb-6">
           Lo que dicen nuestros clientes
-        </h3>
+        </h2>
 
-        {/* Google rating badge */}
-        <div class="inline-flex items-center space-x-4 bg-white border-2 border-gray-200 rounded-full px-6 py-3 shadow-lg">
+        {/* Google rating badge — responsive, won't overflow on mobile */}
+        <div class="inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-2 bg-white border border-zinc-200 rounded-2xl px-5 py-3 shadow-sm mx-auto">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
             alt="Google"
-            class="h-6"
+            class="h-5 flex-shrink-0"
           />
-          <div class="flex items-center space-x-2">
-            <span class="text-3xl font-bold text-primary">
+          <div class="flex items-center gap-2">
+            <span class="text-2xl font-bold text-primary leading-none">
               {googleReviews.rating}
             </span>
-            <div class="flex text-yellow-400">
+            <div class="flex text-yellow-400 gap-0.5">
               {Array.from({ length: 5 }).map(() => (
-                <span>
-                  <StarFilled />
-                </span>
+                <span><StarFilled /></span>
               ))}
             </div>
           </div>
-          <div class="text-sm text-gray-600 border-l pl-4 text-left">
-            <div class="font-bold text-primary">
-              {googleReviews.total_reviews}
-            </div>
-            <div>reseñas</div>
+          <div class="text-sm text-zinc-500 border-l border-zinc-200 pl-4 text-left flex-shrink-0">
+            <span class="font-bold text-primary">{googleReviews.total_reviews}</span>
+            {" "}reseñas
           </div>
         </div>
       </div>
 
       {/* Reviews Grid */}
-      <div class="flex flex-wrap justify-center gap-8">
+      <div class="flex flex-wrap gap-6 justify-center">
         {googleReviews.reviews.map((review) => (
           <a
             href={review.author_url}
             target="_blank"
             rel="noopener noreferrer"
-            class="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)] bg-white border-2 border-gray-100 rounded-2xl p-6 hover:border-accent/30 hover:shadow-xl transition-all duration-300 group flex flex-col review-card block relative"
+            class="w-full md:w-[calc(50%_-_12px)] lg:w-[calc(33.333%_-_16px)] bg-white border border-zinc-100 rounded-2xl p-6 hover:border-accent/30 hover:shadow-xl hover:shadow-primary/8 transition-all duration-300 group flex flex-col review-card relative"
             title="Ver reseña en Google Maps"
           >
-            {/* External Link Icon (Subtle) */}
-            <div class="absolute top-4 right-4 text-gray-300 group-hover:text-accent transition-colors">
+            {/* External link icon */}
+            <div class="absolute top-4 right-4 text-zinc-300 group-hover:text-accent transition-colors">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
+                width="14"
+                height="14"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -76,31 +71,29 @@ const googleReviews = await getGoogleReviews();
             </div>
 
             {/* Stars */}
-            <div class="flex mb-4 text-yellow-400">
+            <div class="flex mb-4 text-yellow-400 gap-0.5">
               {Array.from({ length: review.rating }).map(() => (
-                <span>
-                  <StarFilled />
-                </span>
+                <span><StarFilled /></span>
               ))}
             </div>
 
             {/* Review text */}
-            <p class="text-gray-700 leading-relaxed mb-6 flex-grow">
+            <p class="text-zinc-600 text-sm leading-relaxed mb-6 flex-grow">
               "{review.text}"
             </p>
 
-            {/* Author info */}
-            <div class="flex items-center space-x-3 pt-4 border-t border-gray-100">
+            {/* Author */}
+            <div class="flex items-center gap-3 pt-4 border-t border-zinc-100">
               <img
                 src={review.avatar}
                 alt={review.author}
-                class="w-12 h-12 rounded-full object-cover"
+                class="w-10 h-10 rounded-full object-cover flex-shrink-0"
               />
-              <div class="text-left">
-                <div class="font-bold text-primary group-hover:text-accent transition-colors">
+              <div>
+                <div class="font-semibold text-sm text-primary group-hover:text-accent transition-colors">
                   {review.author}
                 </div>
-                <div class="text-sm text-gray-500">{review.date}</div>
+                <div class="text-xs text-zinc-400">{review.date}</div>
               </div>
             </div>
           </a>

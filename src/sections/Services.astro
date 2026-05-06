@@ -12,6 +12,7 @@ const SERVICES = [
       "Reclamamos la indemnización que merecés tras lesiones sufridas en el ámbito laboral. Te asistimos en cada etapa del proceso.",
     image: accidenteTrabajo,
     slug: "accidentes-de-trabajo",
+    number: "01",
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ const SERVICES = [
       "Te ayudamos a obtener lo justo por dolencias como hernias, tendinitis u otras lesiones relacionadas al esfuerzo laboral.",
     image: enfermedadesProfesionales,
     slug: "enfermedades-profesionales",
+    number: "02",
   },
   {
     id: 3,
@@ -28,6 +30,7 @@ const SERVICES = [
       "Gestionamos tu indemnización por lesiones, daños materiales y perjuicios sufridos en cualquier accidente vial.",
     image: accidenteTransito,
     slug: "accidentes-de-transito",
+    number: "03",
   },
 ];
 ---
@@ -35,57 +38,65 @@ const SERVICES = [
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
   {/* Header */}
   <div class="text-center max-w-3xl mx-auto mb-16">
+    <div class="accent-rule mb-4">
+      <span>Abogados Especialistas</span>
+    </div>
     <h2
-      class="text-sm font-bold text-accent uppercase tracking-wider mb-3"
+      class="text-5xl md:text-6xl font-bold text-primary mb-5 leading-tight"
       id="calculadora-de-indemnizacion"
     >
-      Abogados Especialistas en ART
+      Calculá tu indemnización
     </h2>
-    <h3 class="text-4xl md:text-5xl font-bold text-primary mb-6">
-      Calculadora de indemnización y Reclamos
-    </h3>
-    <p class="text-lg text-gray-600">
-      Descubrí cuánto te corresponde por ART. Gestionamos tu <strong
-        >indemnización por accidente de trabajo</strong
-      > o enfermedad profesional para que cobres lo justo.
+    <p class="text-base text-primary/60 leading-relaxed max-w-xl mx-auto">
+      Descubrí cuánto te corresponde por ART. Gestionamos tu reclamo para que cobres
+      la <strong class="text-primary/80">máxima indemnización posible</strong>.
     </p>
   </div>
 
   {/* Services Grid */}
-  <div class="grid md:grid-cols-3 gap-8">
+  <div class="grid md:grid-cols-3 gap-6">
     {
       SERVICES.map((service) => {
         return (
           <a
             href={`/${service.slug}`}
-            class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden service-card block"
+            class="group relative bg-white rounded-2xl overflow-hidden service-card block border border-stone-100 hover:border-transparent transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1"
           >
             {/* Image */}
-            <div class="relative h-56 overflow-hidden">
+            <div class="relative h-52 overflow-hidden">
               <Image
                 src={service.image}
                 alt={service.title}
-                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              {/* Gradient overlay */}
+              <div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/20 to-transparent" />
+
+              {/* Service number — editorial treatment */}
+              <div class="absolute top-4 left-4">
+                <span class="text-white/30 font-bold text-5xl leading-none select-none" style="font-family: var(--font-serif);">
+                  {service.number}
+                </span>
+              </div>
+
+              {/* Accent bar at bottom of image */}
+              <div class="absolute bottom-0 left-0 w-0 group-hover:w-full h-0.5 bg-accent transition-all duration-500" />
             </div>
 
             {/* Content */}
-            <div class="p-6 space-y-4">
-              <h4 class="text-2xl font-bold text-primary group-hover:text-accent transition-colors duration-300">
+            <div class="p-6 space-y-3">
+              <h3
+                class="text-2xl font-bold text-primary group-hover:text-accent transition-colors duration-300"
+                style="font-family: var(--font-serif);"
+              >
                 {service.title}
-              </h4>
-              <p class="text-gray-600 leading-relaxed">{service.description}</p>
-              <span class="inline-flex items-center text-accent font-semibold transition-colors group/btn">
-                Conocer más
-                <span class="ml-2 group-hover:translate-x-1 transition-transform">
-                  →
-                </span>
-              </span>
+              </h3>
+              <p class="text-sm text-primary/60 leading-relaxed">{service.description}</p>
+              <div class="pt-2 flex items-center gap-2 text-accent font-semibold text-sm">
+                <span>Conocer más</span>
+                <span class="group-hover:translate-x-1.5 transition-transform duration-300">→</span>
+              </div>
             </div>
-
-            {/* Hover border effect */}
-            <div class="absolute inset-0 border-2 border-transparent group-hover:border-accent/20 rounded-2xl transition-colors duration-300" />
           </a>
         );
       })
