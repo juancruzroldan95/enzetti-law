@@ -38,3 +38,11 @@ If you are an AI agent or using AI coding tools, please refer to [AGENTS.md](./A
 ## 👀 Learn More
 
 Check [Astro documentation](https://docs.astro.build) or [AGENTS.md](./AGENTS.md) for development details.
+
+## ⚖️ License & Usage
+
+**This repository is public for portfolio and transparency purposes only.**
+
+All source code, design, and associated files are the proprietary property of Juan Cruz Roldan and are protected under copyright law. Viewing is permitted; copying, modifying, distributing, or using any part of this code — commercially or otherwise — is **strictly prohibited** without express written permission.
+
+See the [LICENSE](./LICENSE) file for full terms.

@@ -1,37 +1,32 @@
 ---
-import Zoom from "../icons/Zoom.astro";
-import FileDescription from "../icons/FileDescription.astro";
-import ClipboardCheck from "../icons/ClipboardCheck.astro";
-import Trophy from "../icons/Trophy.astro";
-
 const PROCESS_STEPS = [
   {
     id: 1,
+    numeral: "I",
     title: "Evaluación Inicial del Caso",
     description:
       "En menos de 24 horas, analizamos tu situación y definimos la mejor estrategia legal para garantizar el máximo resultado.",
-    icon: Zoom,
   },
   {
     id: 2,
+    numeral: "II",
     title: "Recolección de Documentación",
     description:
       "Reunimos y organizamos toda la información necesaria para construir un reclamo sólido, respaldado por argumentos legales y pruebas contundentes.",
-    icon: FileDescription,
   },
   {
     id: 3,
+    numeral: "III",
     title: "Seguimiento Médico y Legal",
     description:
       "Supervisamos tu tratamiento médico y gestionamos los trámites legales con dedicación absoluta, manteniéndote informado en cada paso.",
-    icon: ClipboardCheck,
   },
   {
     id: 4,
+    numeral: "IV",
     title: "Resolución Exitosa",
     description:
       "Negociamos o litigamos hasta alcanzar el mejor resultado posible. Vos no pagás nada hasta que recibís tu indemnización.",
-    icon: Trophy,
   },
 ];
 ---
@@ -39,48 +34,64 @@ const PROCESS_STEPS = [
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
   {/* Header */}
   <div class="text-center max-w-3xl mx-auto mb-16">
-    <h2 class="text-sm font-bold text-accent uppercase tracking-wider mb-3">
-      Nuestro Método
-    </h2>
-    <h3 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+    <div class="accent-rule mb-4">
+      <span>Nuestro Método</span>
+    </div>
+    <h2 class="text-5xl md:text-6xl font-bold text-primary mb-5">
       ¿Cómo trabajamos?
-    </h3>
-    <p class="text-lg text-gray-600">
+    </h2>
+    <p class="text-base text-primary/60 leading-relaxed">
       Un proceso simple y transparente para obtener tu indemnización
     </p>
   </div>
 
   {/* Process steps */}
-  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
     {
-      PROCESS_STEPS.map((step, index) => {
-        const Icon = step.icon;
-        return (
-          <div class="relative">
-            {/* Connector line (hidden on last item) */}
-            {index < PROCESS_STEPS.length - 1 && (
-              <div class="hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r from-accent to-gray-200 -z-10" />
-            )}
+      PROCESS_STEPS.map((step, index) => (
+        <div class="relative group">
+          {/* Connecting dotted line */}
+          {index < PROCESS_STEPS.length - 1 && (
+            <div class="hidden lg:block absolute top-8 left-[calc(50%+2rem)] right-[-50%] h-px border-t border-dashed border-accent/25 -z-10" />
+          )}
 
-            <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group h-full text-center card">
-              {/* Step number badge */}
-              <div class="flex items-center justify-center mb-6">
-                <div class="w-14 h-14 bg-accent text-white rounded-full flex items-center justify-center font-bold text-xl group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-accent/20">
-                  {step.id}
-                </div>
-              </div>
+          <div class="card h-full flex flex-col gap-5 bg-white border border-stone-100 rounded-2xl p-7 hover:border-accent/20 hover:shadow-xl hover:shadow-primary/8 transition-all duration-300 hover:-translate-y-1">
+            {/* Roman numeral */}
+            <span
+              class="text-5xl font-bold text-accent/15 leading-none select-none group-hover:text-accent/30 transition-colors duration-300"
+              style="font-family: var(--font-serif);"
+            >
+              {step.numeral}
+            </span>
 
-              {/* Content */}
-              <h4 class="text-xl font-bold text-primary mb-3 group-hover:text-accent transition-colors duration-300">
+            {/* Content */}
+            <div class="space-y-2.5">
+              <h3
+                class="text-xl font-bold text-primary group-hover:text-accent transition-colors duration-300 leading-tight"
+                style="font-family: var(--font-serif);"
+              >
                 {step.title}
-              </h4>
-              <p class="text-gray-600 leading-relaxed text-sm">
+              </h3>
+              <p class="text-sm text-primary/55 leading-relaxed">
                 {step.description}
               </p>
             </div>
+
+            {/* Step progress indicator */}
+            <div class="mt-auto pt-4 border-t border-stone-100">
+              <div class="flex items-center gap-1.5">
+                {PROCESS_STEPS.map((_, i) => (
+                  <div
+                    class={`h-1 rounded-full transition-all ${
+                      i <= index ? "bg-accent" : "bg-stone-200"
+                    } ${i === index ? "flex-1" : "w-4"}`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
-        );
-      })
+        </div>
+      ))
     }
   </div>
 </div>

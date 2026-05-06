@@ -1,6 +1,5 @@
 ---
-import { Image } from "astro:assets";
-import logo from "../assets/logo.webp";
+import LogoMark from "./LogoMark.astro";
 import WhatsApp from "../icons/WhatsApp.astro";
 import Menu from "../icons/Menu.astro";
 
@@ -17,20 +16,18 @@ const navItems = [
 ];
 ---
 
-<header class="bg-white backdrop-blur-md shadow-sm sticky top-0 z-50">
+<header
+  id="site-header"
+  class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-zinc-100/80 transition-all duration-300"
+>
   <div
-    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center"
+    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16 md:h-[70px]"
   >
-    <a href="/" class="flex items-center">
-      <Image
-        src={logo}
-        alt="Estudio Enzetti"
-        class="h-20 md:h-15 w-auto"
-        quality={85}
-      />
+    <a href="/" aria-label="Estudio Enzetti — inicio">
+      <LogoMark size="lg" />
     </a>
 
-    <nav class="hidden md:flex space-x-6 lg:space-x-8">
+    <nav class="hidden lg:flex items-center space-x-1 lg:space-x-2">
       {
         navItems.map((item) => {
           const href =
@@ -40,16 +37,17 @@ const navItems = [
           return (
             <a
               href={href}
-              class="text-primary hover:text-accent transition-colors font-medium text-sm lg:text-base"
+              class="relative px-3 py-2 text-primary/70 hover:text-primary text-sm font-medium tracking-wide transition-colors duration-200 group font-sans"
             >
               {item.name}
+              <span class="absolute bottom-0 left-3 right-3 h-px bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
             </a>
           );
         })
       }
     </nav>
 
-    <div class="flex items-center space-x-4">
+    <div class="flex items-center gap-3">
       <a
         href="https://wa.me/5491143711602"
         target="_blank"
@@ -57,21 +55,33 @@ const navItems = [
         class="hidden sm:block"
       >
         <button
-          class="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 text-sm lg:text-base flex items-center gap-2 cursor-pointer"
+          class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:shadow-md hover:shadow-green-500/25 text-sm flex items-center gap-2 cursor-pointer font-sans"
         >
-          <WhatsApp class="w-5 h-5" />
+          <WhatsApp class="w-4 h-4" />
           Consulta Gratuita
         </button>
       </a>
 
-      <!-- Mobile Menu Button -->
       <button
         id="open-menu"
-        class="md:hidden text-primary p-2 cursor-pointer relative z-10"
-        aria-label="Menu"
+        class="lg:hidden text-primary/70 hover:text-primary p-2 cursor-pointer relative z-10 transition-colors"
+        aria-label="Abrir menú"
       >
         <Menu />
       </button>
     </div>
   </div>
 </header>
+
+<script>
+  const header = document.getElementById("site-header");
+  if (header) {
+    window.addEventListener(
+      "scroll",
+      () => {
+        header.classList.toggle("shadow-sm", window.scrollY > 16);
+      },
+      { passive: true },
+    );
+  }
+</script>

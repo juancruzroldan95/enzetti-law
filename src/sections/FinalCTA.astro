@@ -2,24 +2,71 @@
 import WhatsApp from "../icons/WhatsApp.astro";
 ---
 
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-  <div
-    class="bg-gradient-to-r from-primary-light to-primary-dark rounded-3xl p-12 text-center text-white shadow-2xl"
-  >
-    <h4 class="text-3xl font-bold mb-4">
-      No pagás nada hasta que cobres tu indemnización
-    </h4>
-    <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-      Trabajamos con honorarios de resultado. Tu éxito es nuestro éxito.
-    </p>
-    <a
-      href="https://wa.me/5491143711602"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold px-10 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg text-lg"
-    >
-      <WhatsApp />
-      Empezar mi caso
-    </a>
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+  <div class="relative overflow-hidden rounded-2xl md:rounded-3xl">
+    {/* Background */}
+    <div class="absolute inset-0 bg-primary" />
+
+    {/* Subtle texture */}
+    <div class="absolute inset-0 texture-plus-light" />
+
+    {/* Crimson glow */}
+    <div
+      class="absolute top-0 right-0 w-72 h-72 bg-accent/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/4"
+    />
+    <div
+      class="absolute bottom-0 left-1/4 w-48 h-48 bg-accent/10 rounded-full blur-[60px] translate-y-1/3"
+    />
+
+    {/* Top rule */}
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
+
+    <div class="relative z-10 px-6 sm:px-10 md:px-16 py-10 md:py-16 text-center">
+      {/* Eyebrow */}
+      <p class="text-accent text-xs font-bold tracking-[0.2em] uppercase mb-4">
+        ✦ Sin honorarios previos ✦
+      </p>
+
+      {/* Headline */}
+      <h2
+        class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 md:mb-6 max-w-2xl mx-auto"
+      >
+        No pagás nada hasta que
+        <em class="text-accent not-italic"> cobres tu indemnización</em>
+      </h2>
+
+      {/* Sub */}
+      <p class="text-white/55 text-sm md:text-base mb-7 md:mb-10 max-w-lg mx-auto leading-relaxed font-sans">
+        Trabajamos con honorarios de resultado. Tu éxito es nuestro éxito.
+        Consultá ahora y empezá tu reclamo sin riesgos.
+      </p>
+
+      {/* CTA Button */}
+      <a
+        href="https://wa.me/5491143711602"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center gap-3 bg-green-500 hover:bg-green-400 text-white font-bold px-8 md:px-10 py-3.5 md:py-4 rounded-xl transition-all duration-300 hover:scale-105 shadow-xl shadow-green-900/40 text-base md:text-lg group"
+      >
+        <WhatsApp class="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+        Empezar mi caso gratis
+      </a>
+
+      {/* Trust badges */}
+      <div class="flex items-center justify-center gap-5 md:gap-8 mt-6 md:mt-10 flex-wrap">
+        {
+          [
+            "30+ años de experiencia",
+            "Consulta 100% gratuita",
+            "Honorarios de resultado",
+          ].map((badge) => (
+            <div class="flex items-center gap-1.5 text-white/40 text-xs font-medium">
+              <span class="text-accent">✓</span>
+              <span>{badge}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
   </div>
 </section>

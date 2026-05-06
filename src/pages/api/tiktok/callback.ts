@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { getTikTokAccessToken } from "@utils/tiktok-auth";
+import { getTikTokAccessToken } from "@services/tiktok";
 
 export const GET: APIRoute = async ({ request }) => {
   // Provide a base URL in case request.url is relative (common in some serverless environments)

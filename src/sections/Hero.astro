@@ -8,91 +8,73 @@ import { VIDEOS, muxThumbnail } from "../consts/videos";
 const heroVideo = VIDEOS[0];
 ---
 
-{/* Background with subtle pattern */}
-<div
-  class="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"
->
-  <div
-    class="absolute inset-0 bg-white/40 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"
-  >
-  </div>
-</div>
-
-{/* Decorative elements */}
-<div
-  class="absolute top-40 right-10 w-72 h-72 bg-accent/5 rounded-full blur-3xl opacity-0 animate-blob"
->
-</div>
-<div
-  class="absolute bottom-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl opacity-0 animate-blob animation-delay-2000"
->
+{/* Warm parchment background with fine grain */}
+<div class="absolute inset-0 -z-10 h-full w-full bg-background">
+  {/* Subtle cross-hatch texture */}
+  <div class="absolute inset-0 texture-crosshatch" />
+  {/* Warm gradient overlay */}
+  <div class="absolute inset-0 bg-gradient-to-br from-background via-background to-amber-50/40" />
+  {/* Crimson glow top-right */}
+  <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[120px]" />
+  {/* Navy glow bottom-left */}
+  <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px]" />
 </div>
 
 <div
-  class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 pt-10 lg:pb-20"
+  class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 pt-10 lg:pb-24"
 >
   <div class="grid lg:grid-cols-2 gap-12 items-center">
     {/* Left Content */}
-    <div class="relative z-10 space-y-8 text-center lg:text-left">
+    <div class="relative z-10 space-y-7 text-center lg:text-left">
+
+      {/* Badge */}
       <div
-        class="inline-flex items-center space-x-1.5 md:space-x-2 bg-accent/10 text-accent ring-1 ring-accent px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold opacity-0 translate-y-4 hero-badge"
+        class="inline-flex items-center gap-2 border border-accent/30 bg-accent/5 text-accent px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase opacity-0 translate-y-4 hero-badge"
       >
-        <Shield class="w-3.5 h-3.5 md:w-4 md:h-4" />
+        <Shield class="w-3.5 h-3.5" />
         <span>Abogados Especialistas en ART</span>
       </div>
 
+      {/* Heading with serif display font */}
       <h1
-        class="text-4xl md:text-5xl lg:text-6xl font-bold text-primary leading-tight opacity-0 translate-y-4 hero-title"
+        class="text-6xl md:text-6xl lg:text-7xl font-bold text-primary leading-[1.05] opacity-0 translate-y-4 hero-title"
+        style="font-family: var(--font-serif);"
       >
-        ¿Tuviste un <span class="text-accent">accidente de trabajo</span>?
+        ¿Tuviste un
+        <br />
+        <em class="text-accent not-italic">accidente</em>
+        <br />
+        <span class="text-accent">de trabajo</span>?
       </h1>
 
-      <div class="space-y-4">
+      <div class="space-y-5">
         <p
-          class="text-lg md:text-2xl lg:text-3xl font-semibold text-primary opacity-0 translate-y-4 hero-desc-1"
+          class="text-xl md:text-2xl font-semibold text-primary/80 opacity-0 translate-y-4 hero-desc-1 leading-snug"
         >
-          Descubrí <strong>cuánto te corresponde por ART</strong> y reclamá lo que
-          te corresponde
+          Descubrí <strong class="text-primary">cuánto te corresponde</strong> por ART
         </p>
 
-        <div class="space-y-3 max-w-xl mx-auto lg:mx-0">
-          <p
-            class="text-lg text-gray-600 leading-relaxed opacity-0 translate-y-4 hero-desc-2"
-          >
-            Somos especialistas en:
-          </p>
-          <ul class="space-y-2">
-            <li
-              class="flex items-center justify-center lg:justify-start gap-3 text-lg text-gray-600 opacity-0 translate-y-4 hero-list-item"
-            >
-              <div class="text-red-600 flex-shrink-0">
-                <Check class="w-6 h-6" />
-              </div>
-              <span>Accidentes de Trabajo</span>
-            </li>
-            <li
-              class="flex items-center justify-center lg:justify-start gap-3 text-lg text-gray-600 opacity-0 translate-y-4 hero-list-item"
-            >
-              <div class="text-red-600 flex-shrink-0">
-                <Check class="w-6 h-6" />
-              </div>
-              <span>Accidentes de Tránsito</span>
-            </li>
-            <li
-              class="flex items-center justify-center lg:justify-start gap-3 text-lg text-gray-600 opacity-0 translate-y-4 hero-list-item"
-            >
-              <div class="text-red-600 flex-shrink-0">
-                <Check class="w-6 h-6" />
-              </div>
-              <span>Enfermedades Profesionales</span>
-            </li>
-          </ul>
-        </div>
+        <ul class="space-y-2.5 max-w-sm mx-auto lg:mx-0">
+          {
+            [
+              "Accidentes de Trabajo",
+              "Accidentes de Tránsito",
+              "Enfermedades Profesionales",
+            ].map((item) => (
+              <li class="flex items-center justify-center lg:justify-start gap-3 text-base text-primary/70 opacity-0 translate-y-4 hero-list-item">
+                <div class="w-5 h-5 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                  <Check class="w-3 h-3 text-accent" />
+                </div>
+                <span>{item}</span>
+              </li>
+            ))
+          }
+        </ul>
       </div>
 
-      {/* CTA Buttons */}
+      {/* CTAs */}
       <div
-        class="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start"
+        class="flex flex-col sm:flex-row gap-3 pt-2 justify-center lg:justify-start"
       >
         <a
           href="https://wa.me/5491143711602"
@@ -101,10 +83,10 @@ const heroVideo = VIDEOS[0];
           class="w-full sm:w-auto opacity-0 translate-y-4 hero-btn-1"
         >
           <button
-            class="w-full md:w-[320px] h-[64px] bg-green-500 hover:bg-green-600 border-2 border-transparent text-white font-bold text-lg px-6 rounded-xl shadow-md hover:shadow-[#25D366]/20 hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3 cursor-pointer group"
+            class="w-full md:w-[310px] h-[60px] bg-green-500 hover:bg-green-600 text-white font-bold text-base px-6 rounded-xl shadow-lg shadow-green-500/20 hover:shadow-green-500/40 transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-3 cursor-pointer group"
           >
             <WhatsApp
-              class="w-6 h-6 group-hover:rotate-12 transition-transform"
+              class="w-5 h-5 group-hover:rotate-12 transition-transform duration-300"
             />
             Calculá tu indemnización
           </button>
@@ -114,10 +96,10 @@ const heroVideo = VIDEOS[0];
           class="w-full sm:w-auto opacity-0 translate-y-4 hero-btn-2"
         >
           <button
-            class="w-full md:w-[260px] h-[64px] border-2 border-primary text-primary hover:bg-primary-dark hover:text-white font-bold text-lg px-6 rounded-xl shadow-md hover:shadow-primary/10 hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3 text-center cursor-pointer group"
+            class="w-full md:w-[240px] h-[60px] border border-primary/30 bg-white/70 backdrop-blur-sm text-primary hover:bg-primary hover:text-white font-semibold text-base px-6 rounded-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer group"
           >
             Nuestros servicios
-            <ArrowRight />
+            <ArrowRight class="group-hover:translate-x-1 transition-transform" />
           </button>
         </a>
       </div>
@@ -125,44 +107,38 @@ const heroVideo = VIDEOS[0];
       {/* Stats */}
       <div
         id="hero-stats"
-        class="grid grid-cols-3 gap-6 pt-8 border-t border-gray-200"
+        class="grid grid-cols-3 gap-4 pt-6 border-t border-primary/10"
       >
-        <div class="opacity-0 translate-y-4 hero-stat">
-          <div
-            class="text-3xl font-bold text-accent flex items-center justify-center lg:justify-start"
-          >
-            <span class="counter-value" data-target="30">0</span>
-            <span>+</span>
-          </div>
-          <div class="text-sm text-gray-600 mt-1">Años de experiencia</div>
-        </div>
-        <div class="opacity-0 translate-y-4 hero-stat">
-          <div
-            class="text-3xl font-bold text-accent flex items-center justify-center lg:justify-start"
-          >
-            <span class="counter-value" data-target="5.0">0.0</span>
-          </div>
-          <div class="text-sm text-gray-600 mt-1">Calificación Google</div>
-        </div>
-        <div class="opacity-0 translate-y-4 hero-stat">
-          <div
-            class="text-3xl font-bold text-accent flex items-center justify-center lg:justify-start"
-          >
-            <span class="counter-value" data-target="320">0</span>
-            <span>+</span>
-          </div>
-          <div class="text-sm text-gray-600 mt-1">Reseñas positivas</div>
-        </div>
+        {
+          [
+            { target: "30", suffix: "+", label: "Años de experiencia" },
+            { target: "5.0", suffix: "", label: "Calificación Google" },
+            { target: "320", suffix: "+", label: "Reseñas positivas" },
+          ].map((stat, i) => (
+            <div class={`opacity-0 translate-y-4 hero-stat text-center lg:text-left`}>
+              <div class="text-3xl font-bold text-accent flex items-baseline gap-0.5 justify-center lg:justify-start" style="font-family: var(--font-serif);">
+                <span class="counter-value" data-target={stat.target} data-float={stat.target.includes(".") ? "true" : "false"}>
+                  {stat.target.includes(".") ? "0.0" : "0"}
+                </span>
+                {stat.suffix && <span>{stat.suffix}</span>}
+              </div>
+              <div class="text-xs text-primary/50 mt-0.5 font-medium tracking-wide">{stat.label}</div>
+            </div>
+          ))
+        }
       </div>
     </div>
 
-    {/* Right Column (Video) */}
-    <div class="relative z-20 opacity-0 scale-95 hero-image mt-8 lg:mt-0">
+    {/* Right Column — Video */}
+    <div class="relative z-20 opacity-0 scale-95 hero-image mt-6 lg:mt-0">
+      {/* Decorative frame */}
+      <div class="absolute -inset-3 rounded-3xl border border-accent/10 -z-10"></div>
+      <div class="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-accent/5 to-transparent -z-20"></div>
+
       <div
         id="video-container"
-        class="aspect-square rounded-2xl overflow-hidden shadow-2xl relative group cursor-pointer"
+        class="aspect-square rounded-2xl overflow-hidden shadow-2xl shadow-primary/20 relative group cursor-pointer ring-1 ring-primary/10"
       >
-        {/* Poster — first frame via Mux Image API */}
         <img
           id="hero-poster"
           src={muxThumbnail(heroVideo.playbackId)}
@@ -170,9 +146,6 @@ const heroVideo = VIDEOS[0];
           class="w-full h-full object-cover"
         />
 
-        {
-          /* Mux video — playback-id injected on click, no bytes loaded until then */
-        }
         <mux-video
           id="hero-video"
           class="w-full h-full absolute inset-0 hidden"
@@ -182,26 +155,33 @@ const heroVideo = VIDEOS[0];
           loop
           playsinline
           controls
-          disable-tracking></mux-video>
+          disable-tracking
+        ></mux-video>
 
-        {/* Play overlay — always visible over poster */}
+        {/* Play overlay */}
         <div
           id="play-overlay"
-          class="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-all duration-300 flex items-center justify-center"
+          class="absolute inset-0 bg-gradient-to-t from-primary/50 via-transparent to-transparent group-hover:from-primary/60 transition-all duration-300 flex items-end justify-start p-6"
         >
-          <div
-            id="play-button"
-            class="w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg transform transition-all duration-300 scale-90 group-hover:scale-100"
-          >
-            <svg
-              id="icon-play"
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-8 h-8 text-primary ml-1"
-              viewBox="0 0 24 24"
-              fill="currentColor"
+          <div class="flex items-center gap-4">
+            <div
+              id="play-button"
+              class="w-14 h-14 bg-white/95 rounded-full flex items-center justify-center shadow-lg shadow-primary/30 transform transition-all duration-300 scale-90 group-hover:scale-100"
             >
-              <path d="M8 5v14l11-7z"></path>
-            </svg>
+              <svg
+                id="icon-play"
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-6 h-6 text-primary ml-0.5"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M8 5v14l11-7z"></path>
+              </svg>
+            </div>
+            <div class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <p class="text-sm font-semibold">{heroVideo.title}</p>
+              <p class="text-xs text-white/70">Ver video</p>
+            </div>
           </div>
         </div>
       </div>
@@ -213,137 +193,84 @@ const heroVideo = VIDEOS[0];
   import "@mux/mux-video";
   import { animate, stagger, inView } from "motion";
 
-  // Sequence of animations
-  const sequence = [
-    // 1. Badge & Title
-    [
-      ".hero-badge, .hero-title",
-      { opacity: [0, 1], y: [20, 0] },
-      { duration: 0.8 },
-    ],
-    // 2. Paragraphs (staggered)
-    [
-      ".hero-desc-1, .hero-desc-2",
-      { opacity: [0, 1], y: [20, 0] },
-      { duration: 0.6, at: "-0.4", delay: stagger(0.2) },
-    ],
-    // 3. Buttons (staggered spring)
-    [
-      ".hero-btn-1, .hero-btn-2",
-      { opacity: [0, 1], y: [20, 0] },
-      { type: "spring", stiffness: 100, at: "-0.3", delay: stagger(0.1) },
-    ],
-    // 4. Stats (staggered)
-    [
-      ".hero-stat",
-      { opacity: [0, 1], y: [20, 0] },
-      { duration: 0.5, at: "-0.2", delay: stagger(0.1) },
-    ],
-    // 5. Image & Blobs
-    [
-      ".hero-image, .animate-blob",
-      { opacity: [0, 1], scale: [0.95, 1] },
-      { duration: 1.2, at: "-0.8" },
-    ],
-  ];
-
-  // We check if the section is the hero (likely initially in view)
-  // But strictly, we can just run this animation immediately as it's the hero
-  // Using timeline for complex sequences isn't directly exposed in the mini 'animate' function
-  // So we use standard animate chaining or just delays.
-  // Let's use simple separate animate calls with delays for simplicity and robustness.
-
   animate(
     ".hero-badge",
-    { opacity: [0, 1], y: [20, 0] },
-    { duration: 0.6, delay: 0.2 },
+    { opacity: [0, 1], y: [16, 0] },
+    { duration: 0.5, delay: 0.2 },
   );
 
   animate(
     ".hero-title",
-    { opacity: [0, 1], y: [20, 0] },
-    { duration: 0.8, delay: 0.4 },
+    { opacity: [0, 1], y: [24, 0] },
+    { duration: 0.7, delay: 0.35 },
   );
 
   animate(
     ".hero-desc-1",
-    { opacity: [0, 1], y: [20, 0] },
-    { duration: 0.6, delay: 0.6 },
-  );
-
-  animate(
-    ".hero-desc-2",
-    { opacity: [0, 1], y: [20, 0] },
-    { duration: 0.6, delay: 0.8 },
+    { opacity: [0, 1], y: [16, 0] },
+    { duration: 0.6, delay: 0.55 },
   );
 
   animate(
     ".hero-list-item",
-    { opacity: [0, 1], y: [20, 0] },
-    { delay: stagger(0.1, { startDelay: 1.0 }), duration: 0.5 },
+    { opacity: [0, 1], y: [12, 0] },
+    { delay: stagger(0.08, { startDelay: 0.75 }), duration: 0.45 },
   );
 
   animate(
     ".hero-btn-1",
-    { opacity: [0, 1], y: [20, 0] },
-    { type: "spring", delay: 1.4 },
+    { opacity: [0, 1], y: [16, 0] },
+    { type: "spring", delay: 1.05 },
   );
 
   animate(
     ".hero-btn-2",
-    { opacity: [0, 1], y: [20, 0] },
-    { type: "spring", delay: 1.6 },
+    { opacity: [0, 1], y: [16, 0] },
+    { type: "spring", delay: 1.2 },
   );
 
   animate(
     ".hero-stat",
-    { opacity: [0, 1], y: [20, 0] },
-    { delay: stagger(0.2, { startDelay: 1.8 }), duration: 0.5 },
+    { opacity: [0, 1], y: [16, 0] },
+    { delay: stagger(0.12, { startDelay: 1.35 }), duration: 0.45 },
   );
 
-  // Stats Counter Animation
+  animate(
+    ".hero-image",
+    { opacity: [0, 1], scale: [0.96, 1] },
+    { duration: 1, delay: 0.4 },
+  );
+
+  // Stats counter
   const counterStats = document.querySelectorAll(".counter-value");
   inView("#hero-stats", () => {
     counterStats.forEach((counter) => {
       const targetStr = counter.getAttribute("data-target");
+      const isFloat = counter.getAttribute("data-float") === "true";
       if (!targetStr) return;
       const target = parseFloat(targetStr);
-      const isFloat = targetStr.includes(".");
 
-      // @ts-expect-error - Motion's type defs don't match this valid overload
+      // @ts-expect-error - Motion overload
       animate(0, target, {
-        duration: 1.5,
-        delay: 1.5, // Match the visual appearance delay
+        duration: 1.6,
+        delay: 1.4,
         easing: "ease-out",
-        onUpdate: (latest) => {
-          if (isFloat) {
-            counter.textContent = latest.toFixed(1);
-          } else {
-            counter.textContent = Math.round(latest).toString();
-          }
+        onUpdate: (latest: number) => {
+          counter.textContent = isFloat
+            ? latest.toFixed(1)
+            : Math.round(latest).toString();
         },
       });
     });
   });
 
-  animate(
-    ".hero-image",
-    { opacity: [0, 1], scale: [0.95, 1] },
-    { duration: 1, delay: 0.5 },
-  );
-
-  // Hero video: inject playback-id only on first click — no bytes loaded until then
+  // Video player
   const heroVideoEl = document.getElementById("hero-video") as HTMLElement;
   const heroPoster = document.getElementById("hero-poster") as HTMLImageElement;
   const videoContainer = document.getElementById("video-container");
   const playOverlay = document.getElementById("play-overlay");
 
   if (heroVideoEl && heroPoster && videoContainer && playOverlay) {
-    /**
-     * Force object-fit: cover on the real <video> inside mux-video's Shadow DOM.
-     * CSS ::part() doesn't work reliably here because Astro scopes <style> blocks,
-     * which breaks the selector. Direct shadow DOM access is the only sure fix.
-     */
     const patchInternalVideo = () => {
       const internal = heroVideoEl.shadowRoot?.querySelector("video");
       if (internal) {
@@ -357,14 +284,10 @@ const heroVideo = VIDEOS[0];
     videoContainer.addEventListener("click", () => {
       if (heroVideoEl.classList.contains("hidden")) {
         const playbackId = heroVideoEl.dataset.playbackId;
-        if (playbackId) {
-          heroVideoEl.setAttribute("playback-id", playbackId);
-        }
+        if (playbackId) heroVideoEl.setAttribute("playback-id", playbackId);
         heroPoster.classList.add("hidden");
         playOverlay.classList.add("hidden");
         heroVideoEl.classList.remove("hidden");
-        // Patch immediately (shadow root may already exist) and again on canplay
-        // (guarantees styles are applied once the internal <video> is fully ready).
         patchInternalVideo();
         heroVideoEl.addEventListener(
           "canplay",
