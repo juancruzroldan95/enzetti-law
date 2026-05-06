@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { getTikTokAuthUrl } from "@utils/tiktok-auth";
+import { getTikTokAuthUrl } from "@services/tiktok";
 
 export const GET: APIRoute = async ({ redirect }) => {
   const state = Math.random().toString(36).substring(7);
