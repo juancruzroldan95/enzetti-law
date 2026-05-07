@@ -15,9 +15,9 @@ const heroVideo = VIDEOS[0];
   {/* Warm gradient overlay */}
   <div class="absolute inset-0 bg-gradient-to-br from-background via-background to-amber-50/40" />
   {/* Crimson glow top-right */}
-  <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[120px]" />
+  <div class="absolute top-0 right-0 w-[600px] h-[600px]" style="background: radial-gradient(circle, color-mix(in srgb, var(--color-accent) 5%, transparent) 0%, transparent 70%);" />
   {/* Navy glow bottom-left */}
-  <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px]" />
+  <div class="absolute bottom-0 left-0 w-[500px] h-[500px]" style="background: radial-gradient(circle, color-mix(in srgb, var(--color-primary) 5%, transparent) 0%, transparent 70%);" />
 </div>
 
 <div
@@ -37,14 +37,9 @@ const heroVideo = VIDEOS[0];
 
       {/* Heading with serif display font */}
       <h1
-        class="text-6xl md:text-6xl lg:text-7xl font-bold text-primary leading-[1.05] opacity-0 translate-y-4 hero-title"
-        style="font-family: var(--font-serif);"
+        class="text-5xl md:text-6xl lg:text-7xl font-bold text-primary leading-[1.05] opacity-0 translate-y-4 hero-title"
       >
-        ¿Tuviste un
-        <br />
-        <em class="text-accent not-italic">accidente</em>
-        <br />
-        <span class="text-accent">de trabajo</span>?
+        ¿Tuviste un <em class="text-accent not-italic">accidente</em> <span class="text-accent">de trabajo</span>?
       </h1>
 
       <div class="space-y-5">
@@ -242,8 +237,17 @@ const heroVideo = VIDEOS[0];
   );
 
   // Stats counter
+  // The hero-stat elements animate in starting at ~1.35s from page load.
+  // On desktop the stats are in-viewport on load, so we need a delay to sync.
+  // On mobile the user scrolls to the stats later — by then the delay has
+  // already elapsed, so we clamp it to 0 to avoid a frozen-counter flash.
   const counterStats = document.querySelectorAll(".counter-value");
+  const scriptStartTime = performance.now();
+
   inView("#hero-stats", () => {
+    const elapsed = (performance.now() - scriptStartTime) / 1000;
+    const delay = Math.max(0, 1.4 - elapsed);
+
     counterStats.forEach((counter) => {
       const targetStr = counter.getAttribute("data-target");
       const isFloat = counter.getAttribute("data-float") === "true";
@@ -253,7 +257,7 @@ const heroVideo = VIDEOS[0];
       // @ts-expect-error - Motion overload
       animate(0, target, {
         duration: 1.6,
-        delay: 1.4,
+        delay,
         easing: "ease-out",
         onUpdate: (latest: number) => {
           counter.textContent = isFloat

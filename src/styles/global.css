@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+@import '@fontsource-variable/lora';
 @import "tailwindcss";
 
 @theme {
@@ -20,7 +23,11 @@
 
   /* Fonts */
   --font-sans: "Plus Jakarta Sans", sans-serif;
-  --font-serif: "Cormorant Garamond", serif;
+
+  /* Serif options — swap the active one to compare */
+  --font-serif: "Lora Variable", serif;
+  /* --font-serif: "Merriweather", serif; */
+  /* --font-serif: "Cormorant Garamond", serif; */
 }
 
 @layer base {

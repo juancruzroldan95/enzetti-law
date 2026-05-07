@@ -7,6 +7,13 @@ import accidenteTransito from "../assets/images/accidente-de-transito.jpg";
 import WhatsApp from "../icons/WhatsApp.astro";
 import Check from "../icons/Check.astro";
 import ArrowRight from "../icons/ArrowRight.astro";
+import Plus from "../icons/Plus.astro";
+import HeartBroken from "../icons/HeartBroken.astro";
+import Brain from "../icons/Brain.astro";
+import Shield from "../icons/Shield.astro";
+import BuildingHospital from "../icons/BuildingHospital.astro";
+import PigMoney from "../icons/PigMoney.astro";
+import Scale from "../icons/Scale.astro";
 
 const title = "Accidentes de Tránsito | Estudio Enzetti";
 const description =
@@ -45,6 +52,39 @@ const faqItems = [
     question: "¿La indemnización cubre los gastos médicos que ya pagué?",
     answer:
       "Sí. Podés reclamar todos los gastos médicos, de farmacia, transporte sanitario, kinesiología, y demás gastos que hayas tenido que afrontar como consecuencia del accidente, siempre con comprobantes.",
+  },
+];
+
+const claimItems = [
+  {
+    title: "Daño físico y lesiones",
+    description: "Indemnización por todas las lesiones corporales sufridas, desde heridas leves hasta incapacitantes.",
+    icon: HeartBroken,
+  },
+  {
+    title: "Daño moral",
+    description: "Compensación por el sufrimiento, angustia y dolor psicológico consecuencia del accidente.",
+    icon: Brain,
+  },
+  {
+    title: "Daños materiales",
+    description: "Reparación o reemplazo del vehículo y otros bienes dañados en el accidente.",
+    icon: Shield,
+  },
+  {
+    title: "Gastos médicos",
+    description: "Reembolso de todos los gastos médicos, farmacéuticos y de rehabilitación afrontados.",
+    icon: BuildingHospital,
+  },
+  {
+    title: "Lucro cesante",
+    description: "Compensación por los ingresos que dejaste de percibir durante tu recuperación.",
+    icon: PigMoney,
+  },
+  {
+    title: "Incapacidad sobreviniente",
+    description: "Indemnización por las secuelas permanentes que afectan tu calidad de vida y capacidad laboral.",
+    icon: Scale,
   },
 ];
 ---
@@ -101,8 +141,8 @@ const faqItems = [
               {
                 benefits.map((benefit) => (
                   <li class="flex items-start gap-3 text-gray-700">
-                    <div class="text-accent flex-shrink-0 mt-0.5">
-                      <Check class="w-5 h-5" />
+                    <div class="w-5 h-5 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Check class="w-3 h-3 text-accent" />
                     </div>
                     <span>{benefit}</span>
                   </li>
@@ -164,114 +204,43 @@ const faqItems = [
     </SectionContainer>
 
     <script>
-      import { animate } from "motion";
-
-      animate(
-        ".service-breadcrumb",
-        { opacity: [0, 1] },
-        { duration: 0.5, delay: 0.1 },
-      );
-      animate(
-        ".service-badge",
-        { opacity: [0, 1], y: [16, 0] },
-        { duration: 0.5, delay: 0.2 },
-      );
-      animate(
-        ".service-title",
-        { opacity: [0, 1], y: [16, 0] },
-        { duration: 0.7, delay: 0.35 },
-      );
-      animate(
-        ".service-desc",
-        { opacity: [0, 1], y: [16, 0] },
-        { duration: 0.6, delay: 0.55 },
-      );
-      animate(
-        ".service-benefits",
-        { opacity: [0, 1], y: [16, 0] },
-        { duration: 0.6, delay: 0.7 },
-      );
-      animate(
-        ".service-btns",
-        { opacity: [0, 1], y: [16, 0] },
-        { type: "spring", stiffness: 100, delay: 0.85 },
-      );
-      animate(
-        ".service-image",
-        { opacity: [0, 1], scale: [0.95, 1] },
-        { duration: 0.9, delay: 0.4 },
-      );
+      import "../scripts/service-animations.js";
     </script>
 
     {/* What we claim section */}
-    <!-- <SectionContainer id="que-reclamamos" class="bg-white">
+    <SectionContainer id="que-reclamamos" class="bg-zinc-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div class="text-center max-w-3xl mx-auto mb-16">
-          <h2
-            class="text-sm font-bold text-accent uppercase tracking-wider mb-3"
-          >
-            ¿Qué podemos reclamar?
-          </h2>
-          <h3 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+          <p class="accent-rule mb-5">¿Qué podemos reclamar?</p>
+          <h3 class="text-4xl md:text-5xl font-bold text-primary mb-4">
             Rubros de indemnización
           </h3>
-          <p class="text-lg text-gray-600">
+          <p class="text-lg text-zinc-500 leading-relaxed">
             En un accidente de tránsito podés reclamar múltiples daños
           </p>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {
-            [
-              {
-                title: "Daño físico y lesiones",
-                description:
-                  "Indemnización por todas las lesiones corporales sufridas, desde heridas leves hasta incapacitantes.",
-                icon: "🩹",
-              },
-              {
-                title: "Daño moral",
-                description:
-                  "Compensación por el sufrimiento, angustia y dolor psicológico consecuencia del accidente.",
-                icon: "💔",
-              },
-              {
-                title: "Daños materiales",
-                description:
-                  "Reparación o reemplazo del vehículo y otros bienes dañados en el accidente.",
-                icon: "🚗",
-              },
-              {
-                title: "Gastos médicos",
-                description:
-                  "Reembolso de todos los gastos médicos, farmacéuticos y de rehabilitación afrontados.",
-                icon: "🏥",
-              },
-              {
-                title: "Lucro cesante",
-                description:
-                  "Compensación por los ingresos que dejaste de percibir durante tu recuperación.",
-                icon: "💰",
-              },
-              {
-                title: "Incapacidad sobreviniente",
-                description:
-                  "Indemnización por las secuelas permanentes que afectan tu calidad de vida y capacidad laboral.",
-                icon: "⚖️",
-              },
-            ].map((item) => (
-              <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 group">
-                <div class="text-4xl mb-4">{item.icon}</div>
-                <h4 class="text-xl font-bold text-primary mb-3 group-hover:text-accent transition-colors duration-300">
-                  {item.title}
+            claimItems.map(({ title, description, icon: Icon }, index) => (
+              <div class="relative bg-white border border-zinc-100 rounded-xl p-6 overflow-hidden group hover:-translate-y-0.5 hover:shadow-md hover:border-zinc-200 transition-all duration-300">
+                <div class="absolute left-0 inset-y-0 w-[3px] bg-accent origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-300 rounded-r-full" />
+                <span class="absolute top-4 right-5 font-serif text-3xl font-bold leading-none select-none text-zinc-100 group-hover:text-accent/20 transition-colors duration-300">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div class="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center text-accent mb-5 group-hover:bg-accent/15 transition-colors duration-300">
+                  <Icon class="w-5 h-5" />
+                </div>
+                <h4 class="font-serif text-base font-bold text-primary mb-2 leading-snug pr-8 group-hover:text-accent transition-colors duration-300">
+                  {title}
                 </h4>
-                <p class="text-gray-600 leading-relaxed">{item.description}</p>
+                <p class="text-sm text-zinc-500 leading-relaxed">{description}</p>
               </div>
             ))
           }
         </div>
       </div>
-    </SectionContainer> -->
+    </SectionContainer>
 
     {/* FAQ Section */}
     <SectionContainer
@@ -293,16 +262,14 @@ const faqItems = [
         <div class="space-y-4">
           {
             faqItems.map((item) => (
-              <details class="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+              <details class="faq-item opacity-0 group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                 <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
                   <span class="font-semibold text-primary text-lg group-open:text-accent transition-colors duration-300">
                     {item.question}
                   </span>
-                  <span class="ml-4 text-accent font-bold text-2xl transition-transform duration-300 group-open:rotate-45 flex-shrink-0">
-                    +
-                  </span>
+                  <Plus class="ml-4 w-5 h-5 text-accent flex-shrink-0 transition-transform duration-300 group-open:rotate-45" />
                 </summary>
-                <div class="px-6 pb-6">
+                <div class="faq-content px-6 pb-6">
                   <p class="text-gray-600 leading-relaxed">{item.answer}</p>
                 </div>
               </details>
