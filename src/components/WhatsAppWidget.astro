@@ -1,5 +1,11 @@
 ---
 import WhatsApp from "../icons/WhatsApp.astro";
+import IconX from "../icons/IconX.astro";
+
+// ← Swap these lines to A/B test copy
+const bubbleHeadline = "¿Te rechazó la ART?";
+const bubbleSubline = "Te ayudamos a reclamar lo que te corresponde.";
+const BUBBLE_DELAY_MS = 3500;
 ---
 
 <a
@@ -10,18 +16,83 @@ import WhatsApp from "../icons/WhatsApp.astro";
   aria-label="Contactar por WhatsApp"
 >
   <div class="relative flex items-center justify-center">
-    {/* Main Button */}
+
+    {/* ── Chat Bubble ──────────────────────────────────────────── */}
+    <div
+      id="wa-bubble"
+      class="absolute bottom-full right-0 mb-4 w-56 opacity-0 translate-y-3 pointer-events-none transition-all duration-300 ease-out"
+    >
+      {/* Bubble body */}
+      <div class="relative bg-white rounded-xl shadow-lg border border-zinc-100 overflow-hidden">
+        {/* Green top stripe */}
+        <div class="h-1 bg-green-500 w-full" />
+
+        {/* Message */}
+        <div class="p-4 pr-8">
+          <p class="text-sm font-bold text-primary leading-snug">
+            {bubbleHeadline}
+          </p>
+          <p class="text-xs text-zinc-500 mt-1 leading-relaxed">
+            {bubbleSubline}
+          </p>
+        </div>
+
+        {/* Close button */}
+        <button
+          id="wa-bubble-close"
+          class="absolute top-2.5 right-2.5 w-5 h-5 flex items-center justify-center text-zinc-300 hover:text-zinc-600 transition-colors rounded-full cursor-pointer"
+          aria-label="Cerrar"
+        >
+          <IconX class="w-3.5 h-3.5" />
+        </button>
+      </div>
+
+      {/* Tail pointing toward the WhatsApp button */}
+      <div class="absolute -bottom-[6px] right-5 w-3 h-3 bg-white border-r border-b border-zinc-100 rotate-45" />
+    </div>
+
+    {/* ── Hover tooltip — only visible when bubble is not active ── */}
+    <span
+      id="wa-tooltip"
+      class="absolute right-full mr-4 bg-white text-gray-800 px-3 py-1.5 rounded-lg text-sm font-semibold shadow-lg opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none hidden"
+    >
+    Evaluamos tu caso sin costo.
+    </span>
+
+    {/* ── Main Button ──────────────────────────────────────────── */}
     <button
       class="relative w-14 h-14 bg-green-500 hover:bg-green-600 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center transform hover:-translate-y-1 hover:scale-110"
     >
       <WhatsApp class="w-8 h-8 text-white" />
     </button>
-
-    {/* Tooltip (optional, hidden on mobile for cleaner look) */}
-    <span
-      class="absolute right-full mr-4 bg-white text-gray-800 px-3 py-1.5 rounded-lg text-sm font-semibold shadow-lg opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none"
-    >
-      ¡Hablemos!
-    </span>
   </div>
 </a>
+
+<script define:vars={{ BUBBLE_DELAY_MS }}>
+  const bubble = document.getElementById("wa-bubble");
+  const closeBtn = document.getElementById("wa-bubble-close");
+  const tooltip = document.getElementById("wa-tooltip");
+
+  const dismissed = sessionStorage.getItem("wa-bubble-dismissed");
+
+  if (dismissed) {
+    // Bubble already dismissed — show the hover tooltip instead
+    tooltip?.classList.remove("hidden");
+  } else if (bubble) {
+    setTimeout(() => {
+      bubble.classList.remove("opacity-0", "translate-y-3", "pointer-events-none");
+    }, BUBBLE_DELAY_MS);
+  }
+
+  closeBtn?.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const b = document.getElementById("wa-bubble");
+    if (b) {
+      b.classList.add("opacity-0", "translate-y-3", "pointer-events-none");
+    }
+    sessionStorage.setItem("wa-bubble-dismissed", "1");
+    // Reveal the tooltip now that bubble is gone
+    tooltip?.classList.remove("hidden");
+  });
+</script>
