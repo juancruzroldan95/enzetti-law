@@ -9,7 +9,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  site: "https://estudioenzetti.com",
+  site: "https://www.estudioenzetti.com",
   integrations: [
     sitemap(),
     sentry({
