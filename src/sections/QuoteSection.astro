@@ -77,9 +77,11 @@
 
   async function typeWriter(text: string, element: HTMLElement, speed = 38) {
     if (!element) return;
+    let currentText = element.textContent || "";
     for (const char of text) {
       if (!document.body.contains(element)) return;
-      element.textContent += char;
+      currentText += char;
+      element.textContent = currentText;
       const randomSpeed = speed + Math.random() * 18 - 9;
       await new Promise((resolve) => setTimeout(resolve, randomSpeed));
     }
