@@ -9,8 +9,8 @@ import type {
 export type { InstagramProfileDTO, InstagramPostDTO };
 
 export const getInstagramData = async (): Promise<InstagramProfileDTO | null> => {
-  const accessToken = import.meta.env.INSTAGRAM_ACCESS_TOKEN;
-  const igUserId = import.meta.env.INSTAGRAM_USER_ID;
+  const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN || import.meta.env.INSTAGRAM_ACCESS_TOKEN;
+  const igUserId = process.env.INSTAGRAM_USER_ID || import.meta.env.INSTAGRAM_USER_ID;
 
   if (!accessToken || !igUserId) {
     console.warn("Instagram credentials not found.");
@@ -65,9 +65,9 @@ export const getInstagramData = async (): Promise<InstagramProfileDTO | null> =>
 };
 
 export const refreshInstagramToken = async (): Promise<string> => {
-  const currentToken = import.meta.env.INSTAGRAM_ACCESS_TOKEN;
-  const appId = import.meta.env.META_APP_ID;
-  const appSecret = import.meta.env.META_APP_SECRET;
+  const currentToken = process.env.INSTAGRAM_ACCESS_TOKEN || import.meta.env.INSTAGRAM_ACCESS_TOKEN;
+  const appId = process.env.META_APP_ID || import.meta.env.META_APP_ID;
+  const appSecret = process.env.META_APP_SECRET || import.meta.env.META_APP_SECRET;
 
   if (!currentToken || !appId || !appSecret) {
     throw new Error("Missing Instagram token refresh credentials in environment variables");
