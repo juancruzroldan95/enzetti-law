@@ -1,7 +1,7 @@
 import { captureException } from "@services/sentry";
 
-const vercelToken = () => import.meta.env.VERCEL_TOKEN;
-const projectId = () => import.meta.env.VERCEL_PROJECT_ID;
+const vercelToken = () => process.env.VERCEL_TOKEN || import.meta.env.VERCEL_TOKEN;
+const projectId = () => process.env.VERCEL_PROJECT_ID || import.meta.env.VERCEL_PROJECT_ID;
 
 export async function updateEnvVar(envId: string, value: string): Promise<void> {
   const res = await fetch(

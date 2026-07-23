@@ -5,7 +5,7 @@ import WhatsApp from "../icons/WhatsApp.astro";
 import Check from "../icons/Check.astro";
 import { VIDEOS, muxThumbnail } from "../consts/videos";
 
-const heroVideo = VIDEOS[0];
+const heroVideo = VIDEOS[3];
 ---
 
 {/* Warm parchment background with fine grain */}
@@ -138,7 +138,7 @@ const heroVideo = VIDEOS[0];
           id="hero-poster"
           src={muxThumbnail(heroVideo.playbackId)}
           alt={`Video del equipo Estudio Enzetti — ${heroVideo.title}`}
-          class="w-full h-full object-cover"
+          class="w-full h-full object-cover object-[center_30%]"
         />
 
         <mux-video
@@ -281,7 +281,7 @@ const heroVideo = VIDEOS[0];
         internal.style.width = "100%";
         internal.style.height = "100%";
         internal.style.objectFit = "cover";
-        internal.style.objectPosition = "center center";
+        internal.style.objectPosition = "center 30%";
       }
     };
 

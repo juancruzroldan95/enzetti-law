@@ -25,7 +25,7 @@ export default defineConfig({
     },
     isr: {
       expiration: 60 * 60 * 24,
-      exclude: ["/api/tiktok/login", "/api/tiktok/callback"],
+      exclude: ["/api/tiktok/login", "/api/tiktok/callback", "/api/refresh-instagram-token"],
     },
   })
 });
