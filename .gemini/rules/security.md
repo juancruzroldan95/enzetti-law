@@ -7,7 +7,22 @@ This document describes the security protocols, configuration rules, and environ
 ## 1. Environment Variables Safety
 
 - **Server vs Client**:
-  - Private environment variables (e.g. `VERCEL_TOKEN`, `META_APP_SECRET`, `TIKTOK_CLIENT_SECRET`, `SENTRY_AUTH_TOKEN`, `CRON_SECRET`) are only accessible on the server side.
+  - Private environment variables are only accessible on the server side. The full list of environment variables used in the project includes:
+    - `CRON_SECRET`
+    - `GOOGLE_PLACES_API_KEY`
+    - `GOOGLE_PLACE_ID`
+    - `INSTAGRAM_ACCESS_TOKEN`
+    - `INSTAGRAM_USER_ID`
+    - `META_APP_ID`
+    - `META_APP_SECRET`
+    - `SENTRY_AUTH_TOKEN`
+    - `TIKTOK_CLIENT_KEY`
+    - `TIKTOK_CLIENT_SECRET`
+    - `TIKTOK_REDIRECT_URI`
+    - `TIKTOK_REFRESH_TOKEN`
+    - `VERCEL_INSTAGRAM_ENV_ID`
+    - `VERCEL_PROJECT_ID`
+    - `VERCEL_TOKEN`
   - Never reference private environment variables inside client-side `<script>` blocks embedded in `.astro` components, as these run directly in user browsers.
 - **Safety Validations**:
   - Always verify variable availability in frontmatter or service functions before initiating third-party calls.
