@@ -1,15 +1,19 @@
 import type { APIRoute } from "astro";
 import { getTikTokAccessToken } from "@services/tiktok";
 
-export const GET: APIRoute = async ({ request }) => {
+export const GET: APIRoute = async ({ request, cookies }) => {
   // Provide a base URL in case request.url is relative (common in some serverless environments)
   const url = new URL(request.url, "http://localhost");
   const code = url.searchParams.get("code");
   const error = url.searchParams.get("error");
+  const state = url.searchParams.get("state");
 
-  console.log("Raw Request URL:", request.url);
-  console.log("Parsed Search Params:", Object.fromEntries(url.searchParams));
-  console.log("TikTok Callback received:", { code, error });
+  const storedState = cookies.get("tiktok_oauth_state")?.value;
+
+  if (!state || !storedState || state !== storedState) {
+    console.error("CSRF warning: state mismatch");
+    return new Response("Invalid state parameter (CSRF)", { status: 400 });
+  }
 
   if (error) {
     console.error("TikTok Error:", error);
@@ -22,20 +26,16 @@ export const GET: APIRoute = async ({ request }) => {
   }
 
   try {
-    console.log("Exchanging code for token...");
     const data = await getTikTokAccessToken(code);
-    console.log("Token exchange successful:", data);
     
-    // Display the token to the user
+    // Display a sanitized response to the user without exposing the raw token fully
     return new Response(
       `<html>
         <head><title>TikTok Token</title></head>
         <body style="font-family: system-ui, sans-serif; padding: 2rem;">
-          <h1>TikTok Access Token</h1>
-          <p>Add this to your .env file as <code>TIKTOK_ACCESS_TOKEN</code></p>
-          <pre style="background: #f4f4f4; padding: 1rem; border-radius: 4px; overflow-x: auto;">${data.access_token}</pre>
-          <h3>Full Response:</h3>
-          <pre style="background: #f4f4f4; padding: 1rem; border-radius: 4px; overflow-x: auto;">${JSON.stringify(data, null, 2)}</pre>
+          <h1>TikTok Access Token Generated</h1>
+          <p>The token has been generated successfully. Please check your secure backend to retrieve it.</p>
+          <p>Token preview: <code>${data.access_token.substring(0, 10)}...</code></p>
         </body>
       </html>`,
       {
