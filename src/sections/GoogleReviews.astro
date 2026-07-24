@@ -3,6 +3,7 @@ import StarFilled from "../icons/StarFilled.astro";
 import { getGoogleReviews } from "../services/google";
 
 const googleReviews = await getGoogleReviews();
+const STARS = [1, 2, 3, 4, 5];
 ---
 
 {
@@ -29,7 +30,7 @@ const googleReviews = await getGoogleReviews();
               {googleReviews.rating}
             </span>
             <div class="flex text-yellow-400 gap-0.5">
-              {Array.from({ length: 5 }).map(() => (
+              {STARS.map(() => (
                 <span><StarFilled /></span>
               ))}
             </div>
@@ -72,7 +73,7 @@ const googleReviews = await getGoogleReviews();
 
             {/* Stars */}
             <div class="flex mb-4 text-yellow-400 gap-0.5">
-              {Array.from({ length: review.rating }).map(() => (
+              {STARS.slice(0, review.rating).map(() => (
                 <span><StarFilled /></span>
               ))}
             </div>
