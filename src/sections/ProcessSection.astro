@@ -29,6 +29,17 @@ const PROCESS_STEPS = [
       "Negociamos o litigamos hasta alcanzar el mejor resultado posible. Vos no pagás nada hasta que recibís tu indemnización.",
   },
 ];
+
+// Pre-calculate step indicators classes to avoid O(N^2) inner loop allocations during render
+const INDICATORS_CLASSES = PROCESS_STEPS.map((_, index) =>
+  PROCESS_STEPS.map((_, i) =>
+    i < index
+      ? "h-1 rounded-full transition-all bg-accent w-4"
+      : i === index
+        ? "h-1 rounded-full transition-all bg-accent flex-1"
+        : "h-1 rounded-full transition-all bg-stone-200 w-4"
+  )
+);
 ---
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
@@ -80,12 +91,8 @@ const PROCESS_STEPS = [
             {/* Step progress indicator */}
             <div class="mt-auto pt-4 border-t border-stone-100">
               <div class="flex items-center gap-1.5">
-                {PROCESS_STEPS.map((_, i) => (
-                  <div
-                    class={`h-1 rounded-full transition-all ${
-                      i <= index ? "bg-accent" : "bg-stone-200"
-                    } ${i === index ? "flex-1" : "w-4"}`}
-                  />
+                {INDICATORS_CLASSES[index].map((className) => (
+                  <div class={className} />
                 ))}
               </div>
             </div>
