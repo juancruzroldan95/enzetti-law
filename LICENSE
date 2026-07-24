@@ -1,23 +1,11 @@
 Copyright (c) 2026 Juan Cruz Roldan. All Rights Reserved.
 
-This software, including all source code, design, and associated files, is the
-proprietary and confidential property of Juan Cruz Roldan.
+This repository contains source code for Estudio Enzetti, made public for portfolio, educational, and community reference purposes.
 
-TERMS AND CONDITIONS:
+COMMUNITY & EDUCATIONAL USE:
+Developers are welcome to inspect, study, and take architectural or implementation ideas from this repository for educational purposes. 
 
-1. VIEWING: This source code is made publicly available for portfolio and
-   transparency purposes only. You may view and read the code.
+RESERVATIONS:
+Direct re-hosting, exact full-site cloning, or commercial redistribution of this exact codebase, design, or client brand assets (Estudio Enzetti) without express written permission is prohibited.
 
-2. PROHIBITION: Unauthorized copying, reproduction, modification, distribution,
-   sublicensing, or use of this software — in whole or in part — for any purpose
-   (commercial or non-commercial) is strictly prohibited without the express
-   prior written permission of the copyright holder.
-
-3. NO LICENSE GRANTED: Nothing in this repository grants you any rights to use,
-   copy, modify, or distribute the software. The public availability of this
-   repository does not constitute a license of any kind.
-
-4. CLIENT CONFIDENTIALITY: This project was developed for Estudio Enzetti.
-   All design decisions, business logic, and content are confidential.
-
-For permissions or inquiries, contact: juancruz.roldan19@gmail.com
+For inquiries or permissions: juancruz.roldan19@gmail.com

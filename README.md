@@ -54,8 +54,4 @@ Si vas a realizar tareas de desarrollo o estás usando un agente de IA en este p
 
 ---
 
-## Licencia y Propiedad Intelectual
-
-**Este repositorio es público exclusivamente con fines de portfolio y transparencia.**
-
-Todos los derechos de código fuente, diseño visual, textos y archivos asociados son propiedad de Juan Cruz Roldan. Queda prohibida la copia, distribución o uso (comercial o de cualquier otra índole) sin autorización expresa por escrito del propietario.
+**Note for developers**: Feel free to explore the code, study the Astro setup, and use the structural patterns as inspiration for your own projects!
