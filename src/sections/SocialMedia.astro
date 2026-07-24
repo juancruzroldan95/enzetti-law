@@ -9,8 +9,10 @@ import Users from "../icons/Users.astro";
 import { getInstagramData } from "../services/instagram";
 import { getTikTokData } from "../services/tiktok";
 
-const instagramData = await getInstagramData();
-const tiktokData = await getTikTokData();
+const [instagramData, tiktokData] = await Promise.all([
+  getInstagramData(),
+  getTikTokData(),
+]);
 ---
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
