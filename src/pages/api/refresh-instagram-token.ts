@@ -1,8 +1,10 @@
 import type { APIRoute } from "astro";
-import { captureException } from "@services/sentry";
+import { captureException, withCronMonitor } from "@services/sentry";
 import { refreshInstagramToken } from "@services/instagram";
 import { updateEnvVar, redeployLatestProduction } from "@services/vercel";
 import { withRetry } from "@utils/retry";
+
+const CRON_SCHEDULE = "0 13 * * 1"; // Every Monday at 13:00 UTC (matches vercel.json)
 
 export const prerender = false;
 
@@ -27,17 +29,21 @@ export const GET: APIRoute = async ({ request }) => {
       return new Response("Missing VERCEL_INSTAGRAM_ENV_ID", { status: 500 });
     }
 
-    // Step 1: Refresh the Instagram long-lived token (with 3 retries)
-    const newToken = await withRetry(() => refreshInstagramToken(), 3, 2000);
-    console.log("Instagram token refreshed successfully");
+    // Wrap the three-step logic in a Sentry Cron Monitor.
+    // checkinMargin defaults to 90 min to cover Vercel Hobby plan's ±1h execution imprecision.
+    await withCronMonitor("refresh-instagram-token", CRON_SCHEDULE, async () => {
+      // Step 1: Refresh the Instagram long-lived token (with 3 retries)
+      const newToken = await withRetry(() => refreshInstagramToken(), 3, 2000);
+      console.log("Instagram token refreshed successfully");
 
-    // Step 2: Update the token in Vercel (with 3 retries)
-    await withRetry(() => updateEnvVar(envId, newToken), 3, 2000);
-    console.log("Vercel INSTAGRAM_ACCESS_TOKEN updated successfully");
+      // Step 2: Update the token in Vercel (with 3 retries)
+      await withRetry(() => updateEnvVar(envId, newToken), 3, 2000);
+      console.log("Vercel INSTAGRAM_ACCESS_TOKEN updated successfully");
 
-    // Step 3: Redeploy to pick up the new token (with 3 retries)
-    await withRetry(() => redeployLatestProduction(), 3, 2000);
-    console.log("Vercel redeploy triggered successfully");
+      // Step 3: Redeploy to pick up the new token (with 3 retries)
+      await withRetry(() => redeployLatestProduction(), 3, 2000);
+      console.log("Vercel redeploy triggered successfully");
+    });
 
     return new Response(
       JSON.stringify({
