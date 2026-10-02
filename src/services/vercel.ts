@@ -32,6 +32,13 @@ export async function redeployLatestProduction(): Promise<void> {
   );
 
   const deploymentsData = await deploymentsRes.json();
+
+  if (!deploymentsRes.ok) {
+    const error = new Error(`Vercel deployment lookup failed: HTTP ${deploymentsRes.status}`);
+    captureException(error);
+    throw error;
+  }
+
   const latestDeployment = deploymentsData.deployments?.[0];
 
   if (!latestDeployment?.uid || !latestDeployment?.name) {
@@ -49,6 +56,7 @@ export async function redeployLatestProduction(): Promise<void> {
     body: JSON.stringify({
       deploymentId: latestDeployment.uid,
       name: latestDeployment.name,
+      target: "production",
     }),
   });
 

@@ -49,8 +49,8 @@ Este proyecto fue desarrollado bajo una arquitectura orientada al rendimiento, l
 
 Si vas a realizar tareas de desarrollo o estás usando un agente de IA en este proyecto:
 
-- Podés consultar los comandos de inicio rápido y la configuración del entorno en [GEMINI.md](./GEMINI.md).
-- Los lineamientos de arquitectura, estilo de código y seguridad detallados están disponibles en la carpeta `.gemini/rules/`.
+- Podés consultar las instrucciones para Codex, los comandos de inicio rápido y la configuración del entorno en [AGENTS.md](./AGENTS.md).
+- Los lineamientos de arquitectura, estilo de código y seguridad detallados están disponibles en la carpeta `.agents/rules/`.
 
 ---
 
