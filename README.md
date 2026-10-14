@@ -51,6 +51,7 @@ Si vas a realizar tareas de desarrollo o estás usando un agente de IA en este p
 
 - Podés consultar las instrucciones para Codex, los comandos de inicio rápido y la configuración del entorno en [AGENTS.md](./AGENTS.md).
 - Los lineamientos de arquitectura, estilo de código y seguridad detallados están disponibles en la carpeta `.agents/rules/`.
+- La configuración de Instagram Login y la renovación automática están documentadas en [docs/instagram.md](./docs/instagram.md).
 
 ---
 

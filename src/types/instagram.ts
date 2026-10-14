@@ -1,4 +1,23 @@
 // Raw API Interfaces (What Instagram returns)
+export interface InstagramTokenResponseAPI {
+  access_token?: string;
+  expires_in?: number;
+}
+
+export interface FacebookTokenDebugAPI {
+  data?: {
+    is_valid: boolean;
+    app_id: string;
+    expires_at: number;
+  };
+}
+
+export interface InstagramTokenRefreshResult {
+  accessToken: string;
+  expiresAt: string;
+  expiresIn: number;
+}
+
 export interface InstagramUserAPI {
   biography: string;
   followers_count: number;
