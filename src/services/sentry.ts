@@ -1,5 +1,18 @@
 import * as Sentry from "@sentry/astro";
 
+export type LogAttributes = Record<string, string | number | boolean>;
+
+// Use explicit attributes instead of forwarding console output or API bodies.
+export const logger = Sentry.logger;
+
+export async function flushTelemetry(): Promise<void> {
+  try {
+    await Sentry.flush(2000);
+  } catch {
+    // Telemetry transport failures must not interrupt token renewal.
+  }
+}
+
 interface CaptureContext {
   tags?: Record<string, string>;
   extra?: Record<string, unknown>;
